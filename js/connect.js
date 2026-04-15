@@ -54,11 +54,11 @@ function refreshgridboard(gridboard) {
     for (var row = 0; row < 6; row++) {
         for (var col = 0; col < 7; col++) {
             if (gridboard[row][col] == 0) {
-                document.getElementById("" + row + col).style.setProperty("background-color", "#FFFFFF");
+                document.getElementById("" + row + col).style.setProperty("background-color", "#dbeafe");
             } else if (gridboard[row][col] == 1) {
-                document.getElementById("" + row + col).style.setProperty("background-color", "#FFFF00");
+                document.getElementById("" + row + col).style.setProperty("background-color", "#fbbf24");
             } else if (gridboard[row][col] == 2) {
-                document.getElementById("" + row + col).style.setProperty("background-color", "#FF0000");
+                document.getElementById("" + row + col).style.setProperty("background-color", "#ef4444");
             }
         }
     }
