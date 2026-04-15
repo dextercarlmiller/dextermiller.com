@@ -21,6 +21,7 @@ function startTicTacToe() {
     //buttons
     for (var i = 0; i < 9; i++) {
         cells[i].innerText = '';
+        cells[i].dataset.mark = '';
         cells[i].style.removeProperty('background-color');
         cells[i].addEventListener('click', playerturn, true);
     }
@@ -68,6 +69,7 @@ function playerturn(box) {
 function turn(boxId, player) {
     board[boxId] = player;
     document.getElementById(boxId).innerText = player;
+    document.getElementById(boxId).dataset.mark = player;
     document.getElementById(boxId).removeEventListener('click', playerturn, true)
     SwitchPlayer(player);
     if(turnValue == 1){
