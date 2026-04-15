@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projects — Dexter Miller</title>
-  <meta name="description" content="Senior project: Tic-Tac-Toe and Connect Four with MinMax AI, built by Dexter Miller at Indiana Tech.">
+  <meta name="description" content="Projects by Dexter Miller — automation workflows built in Rewst, Grafana dashboards, and AI-powered games from his Indiana Tech senior project.">
   <link rel="icon" href="images/stickerlogo.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,20 +30,170 @@
   <!-- ── Page Hero ── -->
   <header class="page-hero">
     <div class="page-hero-inner">
-      <p class="page-hero-label">Senior Project &mdash; Indiana Tech</p>
-      <h1 class="page-hero-title">AI Game Suite</h1>
+      <p class="page-hero-label">Applied Technology Group &amp; Indiana Tech</p>
+      <h1 class="page-hero-title">Projects</h1>
       <p class="page-hero-desc">
-        Two classic strategy games powered by the MinMax algorithm. Play against a computer opponent that thinks several moves ahead &mdash; the same technique used in professional chess engines and game-playing AI.
+        Automation workflows that save real time, dashboards that surface the right data, and an AI game suite that started it all. These are the projects that define how I think about technology.
       </p>
     </div>
   </header>
 
-  <!-- ── Games ── -->
+  <!-- ── Automation & Workflow ── -->
+  <section class="section" id="automation">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Rewst Automation</p>
+        <h2 class="section-title">Automation &amp; Workflow</h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="projects-section-intro">
+        <p>
+          These workflows were built in <strong>Rewst</strong>, a managed service automation platform. Each one targets a specific repetitive process — eliminating manual work, improving accuracy, and freeing engineers to focus on higher-value tasks.
+        </p>
+      </div>
+
+      <div class="project-cards-grid">
+
+        <div class="project-card">
+          <div class="project-card-header">
+            <div class="project-card-icon">AD</div>
+            <div class="project-card-title-wrap">
+              <p class="project-card-title">Auto Dispatch — Emailed Tickets</p>
+              <div class="tech-tags">
+                <span class="tech-tag rewst">Rewst</span>
+              </div>
+            </div>
+          </div>
+          <p class="project-card-desc">
+            The most complex automation in production. When a ticket arrives by email, this workflow parses the content, determines priority and category, and assigns it to the correct engineer automatically — no manual triage required.
+          </p>
+          <span class="project-card-stat">Handles 60–100 tickets per week</span>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card-header">
+            <div class="project-card-icon">TA</div>
+            <div class="project-card-title-wrap">
+              <p class="project-card-title">Timesheet Audit</p>
+              <div class="tech-tags">
+                <span class="tech-tag rewst">Rewst</span>
+                <span class="tech-tag python">Python (original)</span>
+              </div>
+            </div>
+          </div>
+          <p class="project-card-desc">
+            Originally built as a Python script that emailed engineers directly, this tool was later migrated to Rewst. It reviews engineer time entries, flags discrepancies, and sends targeted notifications — improving accuracy without anyone having to chase down corrections manually.
+          </p>
+          <span class="project-card-stat">Saves ~1 hour per week in reviews</span>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card-header">
+            <div class="project-card-icon">TE</div>
+            <div class="project-card-title-wrap">
+              <p class="project-card-title">Ticket Auto Escalation</p>
+              <div class="tech-tags">
+                <span class="tech-tag rewst">Rewst</span>
+              </div>
+            </div>
+          </div>
+          <p class="project-card-desc">
+            When a ticket needs to move up the stack, this workflow automatically identifies the correct engineer to escalate to based on issue type and team structure. Removes ambiguity from the escalation process and ensures the right person gets the ticket immediately.
+          </p>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card-header">
+            <div class="project-card-icon">AR</div>
+            <div class="project-card-title-wrap">
+              <p class="project-card-title">Attendance Reporter</p>
+              <div class="tech-tags">
+                <span class="tech-tag rewst">Rewst</span>
+              </div>
+            </div>
+          </div>
+          <p class="project-card-desc">
+            Generates attendance reports by pulling entry log data from the company's security system. Used during performance reviews to provide a factual, timestamped record of attendance and punctuality — removing subjectivity from the process.
+          </p>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card-header">
+            <div class="project-card-icon">TO</div>
+            <div class="project-card-title-wrap">
+              <p class="project-card-title">Time Off Report</p>
+              <div class="tech-tags">
+                <span class="tech-tag rewst">Rewst</span>
+              </div>
+            </div>
+          </div>
+          <p class="project-card-desc">
+            Automatically emails each employee a personalized summary of how much vacation time they've used and when their days reset. Eliminates recurring questions to management and keeps every employee self-informed on their balance.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Data & Visualization ── -->
+  <section class="section section-alt" id="dashboards">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Grafana</p>
+        <h2 class="section-title">Data &amp; Visualization</h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="projects-section-intro">
+        <p>
+          Built a suite of <strong>Grafana dashboards</strong> to surface operational metrics that previously required manual investigation. These dashboards give the team real-time visibility into call queue performance and backup system health.
+        </p>
+      </div>
+
+      <div class="grafana-grid">
+
+        <div class="grafana-card">
+          <span class="grafana-label">Call Queue</span>
+          <h3>Queue Performance Dashboards</h3>
+          <p>Three dashboards covering every angle of call queue activity:</p>
+          <ul>
+            <li>Individual engineer metrics within the queue</li>
+            <li>Overall queue stats including call volume and received calls over time</li>
+            <li>Call arrival heatmap — visualizes when calls peak by hour and day</li>
+            <li>Missed call heatmap — shows patterns in calls that go unanswered</li>
+          </ul>
+        </div>
+
+        <div class="grafana-card">
+          <span class="grafana-label">Infrastructure</span>
+          <h3>Backup System Dashboard</h3>
+          <p>
+            A monitoring dashboard that surfaces failed backup jobs across all managed client systems and devices. Previously, finding failed backups required manual checks across multiple systems — now they're visible at a glance.
+          </p>
+          <p>
+            Gives engineers an immediate starting point each morning and ensures nothing slips through unnoticed.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Senior Project: AI Games ── -->
   <section class="section" id="games">
     <div class="container">
       <div class="section-header">
-        <h2 class="section-title">Play the Games</h2>
+        <p class="section-label">Senior Project &mdash; Indiana Tech</p>
+        <h2 class="section-title">AI Game Suite</h2>
         <div class="section-divider"></div>
+      </div>
+
+      <div class="projects-section-intro">
+        <p>
+          Two classic strategy games powered by the MinMax algorithm — built as my senior project at Indiana Tech. The AI doesn't guess; it runs a recursive search algorithm that evaluates every possible future game state to find the optimal move.
+        </p>
       </div>
 
       <div class="games-grid">
@@ -151,7 +301,7 @@
           </div>
         </div>
 
-      </div><!-- .games-grid -->
+      </div>
     </div>
   </section>
 
@@ -159,13 +309,14 @@
   <section class="section section-dark" id="algorithm">
     <div class="container">
       <div class="section-header">
+        <p class="section-label">The Theory</p>
         <h2 class="section-title">How the AI Works</h2>
         <div class="section-divider"></div>
       </div>
 
-      <div class="algo-intro">
+      <div class="projects-section-intro">
         <p>
-          These games were my senior project at Indiana Tech. The "AI Move" button doesn't guess &mdash; it runs a search algorithm that evaluates every possible future game state to find the mathematically optimal move. Here's the theory behind it.
+          The "AI Move" button doesn't guess &mdash; it runs a search algorithm that evaluates every possible future game state to find the mathematically optimal move.
         </p>
       </div>
 

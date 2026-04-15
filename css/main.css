@@ -932,6 +932,386 @@ ul {
   text-align: center;
 }
 
+/* ================================================================
+   ADDITIONS — Profile photo, Career path, Projects, Community
+   ================================================================ */
+
+/* --- Hero: two-column layout with photo ------------------------- */
+.hero-inner {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+}
+
+.hero-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.hero-photo-wrap {
+  flex-shrink: 0;
+}
+
+.hero-photo-frame {
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid rgba(191, 219, 254, 0.3);
+  box-shadow: 0 0 0 10px rgba(59, 130, 246, 0.08), 0 24px 56px rgba(0, 0, 0, 0.4);
+}
+
+.hero-photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 12%;
+}
+
+/* --- Career progression path ------------------------------------ */
+.career-path {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 10px 0 14px;
+}
+
+.career-path-step {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: 3px 10px;
+  background: #f1f5f9;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+.career-path-step.current {
+  color: var(--blue);
+  background: #eff6ff;
+  border-color: #bfdbfe;
+  font-weight: 700;
+}
+
+.career-path-arrow {
+  font-size: 0.75rem;
+  color: #cbd5e1;
+}
+
+/* --- Community Section ------------------------------------------ */
+.community-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.community-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  box-shadow: var(--shadow);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.community-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.community-card h3 {
+  font-family: var(--font-head);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+
+.community-role {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--gold);
+  margin-bottom: 12px;
+  display: block;
+}
+
+.community-card p {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* --- Interest icons (SVG) --------------------------------------- */
+.interest-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #eff6ff;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue);
+}
+
+.interest-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* --- Projects page: section label ------------------------------- */
+.section-label {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 8px;
+  padding: 4px 10px;
+  background: #eff6ff;
+  border-radius: 4px;
+  border: 1px solid #bfdbfe;
+}
+
+.section-dark .section-label {
+  color: #93c5fd;
+  background: rgba(59, 130, 246, 0.12);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+/* --- Projects page: intro text --------------------------------- */
+.projects-section-intro {
+  max-width: 680px;
+  margin: 0 auto 48px;
+  text-align: center;
+}
+
+.projects-section-intro p {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.section-dark .projects-section-intro p {
+  color: rgba(226, 232, 240, 0.75);
+}
+
+/* --- Project cards grid ---------------------------------------- */
+.project-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+.project-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 22px;
+  box-shadow: var(--shadow);
+  transition: transform var(--transition), box-shadow var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.project-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.project-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.project-card-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: #eff6ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--blue);
+  flex-shrink: 0;
+  letter-spacing: -0.02em;
+}
+
+.project-card-title-wrap {
+  flex: 1;
+  min-width: 0;
+}
+
+.project-card-title {
+  font-family: var(--font-head);
+  font-size: 0.975rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+
+.project-card-desc {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.72;
+}
+
+.project-card-stat {
+  font-size: 0.775rem;
+  font-weight: 600;
+  color: var(--blue);
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 6px;
+  padding: 5px 11px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  align-self: flex-start;
+}
+
+.project-card-stat::before {
+  content: '↑';
+}
+
+.tech-tags {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-top: 2px;
+}
+
+.tech-tag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: #f1f5f9;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.tech-tag.rewst {
+  background: #f0fdf4;
+  color: #15803d;
+  border-color: #bbf7d0;
+}
+
+.tech-tag.python {
+  background: #fefce8;
+  color: #a16207;
+  border-color: #fde68a;
+}
+
+.tech-tag.grafana {
+  background: #fff7ed;
+  color: #c2410c;
+  border-color: #fed7aa;
+}
+
+/* --- Grafana / Visualization cards ------------------------------ */
+.grafana-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.grafana-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-top: 3px solid #f97316;
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  box-shadow: var(--shadow);
+}
+
+.grafana-card h3 {
+  font-family: var(--font-head);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 12px;
+}
+
+.grafana-card p {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.72;
+  margin-bottom: 12px;
+}
+
+.grafana-card p:last-child {
+  margin-bottom: 0;
+}
+
+.grafana-card ul {
+  margin-top: 4px;
+}
+
+.grafana-card ul li {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  padding: 4px 0 4px 16px;
+  position: relative;
+}
+
+.grafana-card ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 5px;
+  background: #f97316;
+  border-radius: 50%;
+}
+
+.grafana-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #f97316;
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 4px;
+  padding: 3px 9px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+/* --- Fix footer bottom text contrast ---------------------------- */
+.footer-bottom p {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
 /* --- Responsive -------------------------------------------- */
 @media (max-width: 900px) {
   .about-grid {
@@ -955,6 +1335,47 @@ ul {
   .algo-image-grid {
     grid-template-columns: 1fr;
     max-width: 500px;
+  }
+
+  .hero-inner {
+    flex-direction: column-reverse;
+    gap: 32px;
+    text-align: center;
+  }
+
+  .hero-photo-frame {
+    width: 160px;
+    height: 160px;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-values {
+    justify-content: center;
+  }
+
+  .hero-tagline {
+    max-width: 100%;
+  }
+
+  .career-path {
+    justify-content: center;
+  }
+
+  .project-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .grafana-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+  }
+
+  .community-grid {
+    grid-template-columns: 1fr;
+    max-width: 440px;
   }
 }
 
