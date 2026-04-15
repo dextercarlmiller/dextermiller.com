@@ -1,111 +1,288 @@
-<!doctype html> 
-<html> 
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Games</title>
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" type="text/css" href="css/tictactoe.css">
-    <link rel="stylesheet" type="text/css" href="css/connect.css">
-    <script type="text/javascript" src="js/project.js" defer></script>
-    <script type="text/javascript" src="js/connect.js" defer></script>
-    <!-- <link rel="stylesheet" href="css/foundation.min.css"> -->
-    <link rel="stylesheet" href="css/wireframe-theme.min.css">
-
-    <link rel="icon" href="images/stickerlogo.png" type="image/icon">
-</head> 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tic-Tac-Toe and Connect Four — fully playable games with MinMax AI by Dexter Miller.">
+  <title>Game AI — Dexter Miller</title>
+  <link rel="icon" href="images/stickerlogo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/games.css">
+  <script src="js/project.js" defer></script>
+  <script src="js/connect.js" defer></script>
+</head>
 <body>
-        <div class="container nav-wrapper">
-          <a class="link-text nav-button" href=dextermiller.com>About Me</a>
-          <a class="link-text nav-button" href="#">Projects</a>
-          <a class="link-text nav-button" href="Methodology/method.html">Information</a>
-          <!-- <a class="link-text nav-button" href="Products/products.html">Products</a> -->
-        </div>    
-<section class="TicTacToe">
-    <h1 id="TicTacTitle">Tic-Tac-Toe</h1>
-    <h1 id="AlertWinner">Player Turn: X</h1>
-    <table class="boardTable">
-        <tr> 
-            <td class="celltictac" id="0"></td>
-            <td class="celltictac" id="1"></td>
-            <td class="celltictac" id="2"></td>
-        </tr>
-        <tr> 
-            <td class="celltictac" id="3"></td>
-            <td class="celltictac" id="4"></td>
-            <td class="celltictac" id="5"></td>
-        </tr>
-        <tr> 
-            <td class="celltictac" id="6"></td>
-            <td class="celltictac" id="7"></td>
-            <td class="celltictac" id="8"></td>
-        </tr>
-    </table>
-    <button class="TicTacButton" onClick="startTicTacToe()">Replay</button>
-    <button class="TicTacComp" onClick="CompTurn()">Computer Turn</button>
 
-</section> 
-<section class="Connect4">
-    <h1 id="Connect4Title">Connect 4</h1>
-    <h1 id="AlertConnectWinner">Player Turn: Yellow</h1>
-    <table class="connecTable">
-        <tr class="row">
-            <td class="connectcell" id="00"></td>
-            <td class="connectcell" id="01"></td>
-            <td class="connectcell" id="02"></td>
-            <td class="connectcell" id="03"></td>
-            <td class="connectcell" id="04"></td>
-            <td class="connectcell" id="05"></td>
-            <td class="connectcell" id="06"></td>
-        </tr>
-        <tr class="row">
-            <td class="connectcell" id="10"></td>
-            <td class="connectcell" id="11"></td>
-            <td class="connectcell" id="12"></td>
-            <td class="connectcell" id="13"></td>
-            <td class="connectcell" id="14"></td>
-            <td class="connectcell" id="15"></td>
-            <td class="connectcell" id="16"></td>
-        </tr>
-        <tr class="row">
-            <td class="connectcell" id="20"></td>
-            <td class="connectcell" id="21"></td>
-            <td class="connectcell" id="22"></td>
-            <td class="connectcell" id="23"></td>
-            <td class="connectcell" id="24"></td>
-            <td class="connectcell" id="25"></td>
-            <td class="connectcell" id="26"></td>
-        </tr>
-        <tr class="row">
-            <td class="connectcell" id="30"></td>
-            <td class="connectcell" id="31"></td>
-            <td class="connectcell" id="32"></td>
-            <td class="connectcell" id="33"></td>
-            <td class="connectcell" id="34"></td>
-            <td class="connectcell" id="35"></td>
-            <td class="connectcell" id="36"></td>
-        </tr>
-        <tr class="row">
-            <td class="connectcell" id="40"></td>
-            <td class="connectcell" id="41"></td>
-            <td class="connectcell" id="42"></td>
-            <td class="connectcell" id="43"></td>
-            <td class="connectcell" id="44"></td>
-            <td class="connectcell" id="45"></td>
-            <td class="connectcell" id="46"></td>
-        </tr>
-        <tr class="row">
-            <td class="connectcell" id="50"></td>
-            <td class="connectcell" id="51"></td>
-            <td class="connectcell" id="52"></td>
-            <td class="connectcell" id="53"></td>
-            <td class="connectcell" id="54"></td>
-            <td class="connectcell" id="55"></td>
-            <td class="connectcell" id="56"></td>
-        </tr>
-    </table> 
-    <button class="ConnectButton" onClick="startconnect()">Replay</button>
-    <button class="ConnectComp" onClick="ConnectComp()">Computer Turn</button>    
-</section>
- </body> 
-</html> 
+  <!-- ===================== Navigation ===================== -->
+  <nav class="nav nav--dark" id="nav">
+    <div class="nav__container">
+      <a href="/" class="nav__logo">DM</a>
+      <ul class="nav__links" id="navLinks">
+        <li><a href="/">Home</a></li>
+        <li><a href="/#about">About</a></li>
+        <li><a href="/#experience">Experience</a></li>
+        <li><a href="/#projects">Projects</a></li>
+        <li><a href="#" class="nav__cta">Playing Games</a></li>
+      </ul>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===================== Page Header ===================== -->
+  <header class="page-header">
+    <div class="container">
+      <span class="section__label">Senior Project</span>
+      <h1>Game AI Showcase</h1>
+      <p>
+        Two classic strategy games — both powered by the <strong style="color:rgba(255,255,255,0.85)">MinMax algorithm</strong>
+        with alpha-beta pruning. Click a cell to play, or hit <em style="color:rgba(255,255,255,0.75)">Computer Turn</em>
+        to watch the AI move.
+      </p>
+    </div>
+  </header>
+
+  <!-- ===================== Games ===================== -->
+  <main class="games-page">
+    <div class="container">
+
+      <!-- ─── Tic-Tac-Toe ─── -->
+      <section class="game-section">
+
+        <div class="game-info">
+          <div class="game-info__tag">MinMax + Alpha-Beta</div>
+          <h2>Tic-Tac-Toe</h2>
+          <p>
+            The classic 3×3 game — first to get three in a row wins. Play as
+            <strong>X</strong> against a friend, or challenge the AI as <strong>O</strong>.
+          </p>
+          <p>
+            Click any open square to place your mark, or press <strong>Computer Turn</strong>
+            to let the AI make a move. The AI plays as the current player's turn.
+            Press <strong>Replay</strong> to start a new game at any time.
+          </p>
+          <div class="algo-note">
+            <strong>Algorithm:</strong> The computer uses MinMax with alpha-beta pruning —
+            a recursive search that explores every possible future game state, pruning
+            branches that can't improve the outcome. It always plays optimally.
+          </div>
+        </div>
+
+        <div class="game-board">
+          <div class="game-status" id="AlertWinner">Player Turn: X</div>
+
+          <table class="boardTable" aria-label="Tic-Tac-Toe board">
+            <tr>
+              <td class="celltictac" id="0" role="gridcell" aria-label="Row 1, Column 1"></td>
+              <td class="celltictac" id="1" role="gridcell" aria-label="Row 1, Column 2"></td>
+              <td class="celltictac" id="2" role="gridcell" aria-label="Row 1, Column 3"></td>
+            </tr>
+            <tr>
+              <td class="celltictac" id="3" role="gridcell" aria-label="Row 2, Column 1"></td>
+              <td class="celltictac" id="4" role="gridcell" aria-label="Row 2, Column 2"></td>
+              <td class="celltictac" id="5" role="gridcell" aria-label="Row 2, Column 3"></td>
+            </tr>
+            <tr>
+              <td class="celltictac" id="6" role="gridcell" aria-label="Row 3, Column 1"></td>
+              <td class="celltictac" id="7" role="gridcell" aria-label="Row 3, Column 2"></td>
+              <td class="celltictac" id="8" role="gridcell" aria-label="Row 3, Column 3"></td>
+            </tr>
+          </table>
+
+          <div class="game-actions">
+            <button class="game-btn game-btn--replay" onclick="startTicTacToe()">
+              ↺ Replay
+            </button>
+            <button class="game-btn game-btn--ai" onclick="CompTurn()">
+              🤖 Computer Turn
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ─── Connect Four ─── -->
+      <section class="game-section game-section--flip">
+
+        <div class="game-info">
+          <div class="game-info__tag">Alpha-Beta Depth 6</div>
+          <h2>Connect Four</h2>
+          <p>
+            Drop pieces into the 6×7 grid. First player to connect four in a row —
+            horizontally, vertically, or diagonally — wins.
+            <strong>Yellow</strong> always goes first.
+          </p>
+          <p>
+            Click any cell in a column to drop your piece, or press <strong>Computer Turn</strong>
+            to let the AI decide. The AI analyzes board position, center control, and
+            opponent threats before every move.
+          </p>
+          <div class="algo-note">
+            <strong>Algorithm:</strong> Alpha-beta pruning at depth 6. The AI scores
+            every 4-cell window on the board — rewarding three-in-a-row opportunities
+            and penalizing opponent threats. Center column pieces are weighted higher,
+            matching optimal Connect Four strategy.
+          </div>
+        </div>
+
+        <div class="game-board">
+          <div class="game-status" id="AlertConnectWinner">Player Turn: Yellow</div>
+
+          <table class="connecTable" aria-label="Connect Four board">
+            <tr class="row">
+              <td class="connectcell" id="00" role="gridcell"></td>
+              <td class="connectcell" id="01" role="gridcell"></td>
+              <td class="connectcell" id="02" role="gridcell"></td>
+              <td class="connectcell" id="03" role="gridcell"></td>
+              <td class="connectcell" id="04" role="gridcell"></td>
+              <td class="connectcell" id="05" role="gridcell"></td>
+              <td class="connectcell" id="06" role="gridcell"></td>
+            </tr>
+            <tr class="row">
+              <td class="connectcell" id="10" role="gridcell"></td>
+              <td class="connectcell" id="11" role="gridcell"></td>
+              <td class="connectcell" id="12" role="gridcell"></td>
+              <td class="connectcell" id="13" role="gridcell"></td>
+              <td class="connectcell" id="14" role="gridcell"></td>
+              <td class="connectcell" id="15" role="gridcell"></td>
+              <td class="connectcell" id="16" role="gridcell"></td>
+            </tr>
+            <tr class="row">
+              <td class="connectcell" id="20" role="gridcell"></td>
+              <td class="connectcell" id="21" role="gridcell"></td>
+              <td class="connectcell" id="22" role="gridcell"></td>
+              <td class="connectcell" id="23" role="gridcell"></td>
+              <td class="connectcell" id="24" role="gridcell"></td>
+              <td class="connectcell" id="25" role="gridcell"></td>
+              <td class="connectcell" id="26" role="gridcell"></td>
+            </tr>
+            <tr class="row">
+              <td class="connectcell" id="30" role="gridcell"></td>
+              <td class="connectcell" id="31" role="gridcell"></td>
+              <td class="connectcell" id="32" role="gridcell"></td>
+              <td class="connectcell" id="33" role="gridcell"></td>
+              <td class="connectcell" id="34" role="gridcell"></td>
+              <td class="connectcell" id="35" role="gridcell"></td>
+              <td class="connectcell" id="36" role="gridcell"></td>
+            </tr>
+            <tr class="row">
+              <td class="connectcell" id="40" role="gridcell"></td>
+              <td class="connectcell" id="41" role="gridcell"></td>
+              <td class="connectcell" id="42" role="gridcell"></td>
+              <td class="connectcell" id="43" role="gridcell"></td>
+              <td class="connectcell" id="44" role="gridcell"></td>
+              <td class="connectcell" id="45" role="gridcell"></td>
+              <td class="connectcell" id="46" role="gridcell"></td>
+            </tr>
+            <tr class="row">
+              <td class="connectcell" id="50" role="gridcell"></td>
+              <td class="connectcell" id="51" role="gridcell"></td>
+              <td class="connectcell" id="52" role="gridcell"></td>
+              <td class="connectcell" id="53" role="gridcell"></td>
+              <td class="connectcell" id="54" role="gridcell"></td>
+              <td class="connectcell" id="55" role="gridcell"></td>
+              <td class="connectcell" id="56" role="gridcell"></td>
+            </tr>
+          </table>
+
+          <div class="game-actions">
+            <button class="game-btn game-btn--replay" onclick="startconnect()">
+              ↺ Replay
+            </button>
+            <button class="game-btn game-btn--ai" onclick="ConnectComp()">
+              🤖 Computer Turn
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ===================== Footer ===================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+
+        <div class="footer__brand">
+          <span class="footer__logo">DM</span>
+          <p>IT Manager · Developer · Community Builder</p>
+        </div>
+
+        <div class="footer__col">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/#about">About</a></li>
+            <li><a href="/#experience">Experience</a></li>
+            <li><a href="/#projects">Projects</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <h4>Connect</h4>
+          <ul>
+            <li>
+              <a href="https://www.linkedin.com/in/dextermiller2020" target="_blank" rel="noopener noreferrer">
+                LinkedIn
+              </a>
+            </li>
+            <li>
+              <a href="https://twitter.com/dexymills" target="_blank" rel="noopener noreferrer">
+                Twitter / X
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer__bottom">
+        <p>© 2024 Dexter Miller. Built with purpose.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== Scripts ===================== -->
+  <script>
+    // ── Nav: dark → solid white on scroll ───────────────────
+    const nav = document.getElementById('nav');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 80) {
+        nav.classList.remove('nav--dark');
+        nav.classList.add('nav--scrolled');
+      } else {
+        nav.classList.remove('nav--scrolled');
+        nav.classList.add('nav--dark');
+      }
+    }, { passive: true });
+
+    // ── Mobile hamburger ─────────────────────────────────────
+    const toggle   = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    toggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('nav__links--open');
+      toggle.classList.toggle('nav__toggle--open', isOpen);
+      toggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('nav__links--open');
+        toggle.classList.remove('nav__toggle--open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
+
+</body>
+</html>
