@@ -5,13 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projects — Dexter Miller</title>
   <meta name="description" content="Projects by Dexter Miller — automation workflows built in Rewst, Grafana dashboards, and AI-powered games from his Indiana Tech senior project.">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://dextermiller.com/project.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://dextermiller.com/project.html">
+  <meta property="og:title" content="Projects — Dexter Miller">
+  <meta property="og:description" content="Projects by Dexter Miller — automation workflows built in Rewst, Grafana dashboards, and AI-powered games from his Indiana Tech senior project.">
+  <meta property="og:image" content="https://dextermiller.com/images/profile.jpg">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@dexymills">
+  <meta name="twitter:title" content="Projects — Dexter Miller">
+  <meta name="twitter:description" content="Projects by Dexter Miller — automation workflows built in Rewst, Grafana dashboards, and AI-powered games from his Indiana Tech senior project.">
+  <meta name="twitter:image" content="https://dextermiller.com/images/profile.jpg">
+
+  <!-- Favicon -->
   <link rel="icon" href="images/stickerlogo.png" type="image/png">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/tictactoe.css">
   <link rel="stylesheet" href="css/connect.css">
+
+  <!-- Apply saved theme before page renders to prevent flash -->
+  <script>
+    (function () {
+      if (localStorage.getItem('theme') === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    }());
+  </script>
 </head>
 <body>
 
@@ -23,6 +54,11 @@
         <a class="nav-link" href="index.html">About</a>
         <a class="nav-link active" href="project.html">Projects</a>
         <a class="nav-link" href="https://www.linkedin.com/in/dextermiller2020" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="nav-link" href="mailto:dextercarlmiller+website@gmail.com">Contact</a>
+        <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Switch to dark mode" title="Toggle dark mode">
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
       </div>
     </div>
   </nav>
@@ -202,10 +238,10 @@
         <div class="game-panel">
           <h2 class="game-panel-title">Tic-Tac-Toe</h2>
           <p class="game-subtitle">MinMax Algorithm</p>
-          <p id="AlertWinner" class="game-status-bar">Player Turn: X</p>
+          <p id="AlertWinner" class="game-status-bar" aria-live="polite" aria-atomic="true">Player Turn: X</p>
 
           <div class="TicTacToe">
-            <table class="boardTable" aria-label="Tic-Tac-Toe board">
+            <table class="boardTable" aria-label="Tic-Tac-Toe board" role="grid">
               <tr>
                 <td class="celltictac" id="0"></td>
                 <td class="celltictac" id="1"></td>
@@ -234,10 +270,10 @@
         <div class="game-panel">
           <h2 class="game-panel-title">Connect Four</h2>
           <p class="game-subtitle">Alpha-Beta Pruning</p>
-          <p id="AlertConnectWinner" class="game-status-bar">Player Turn: Yellow</p>
+          <p id="AlertConnectWinner" class="game-status-bar" aria-live="polite" aria-atomic="true">Player Turn: Yellow</p>
 
           <div class="Connect4">
-            <table class="connecTable" aria-label="Connect Four board">
+            <table class="connecTable" aria-label="Connect Four board" role="grid">
               <tr class="row">
                 <td class="connectcell" id="00"></td>
                 <td class="connectcell" id="01"></td>
@@ -383,6 +419,7 @@
           <a href="project.html">Projects</a>
           <a href="https://www.linkedin.com/in/dextermiller2020" target="_blank" rel="noopener">LinkedIn</a>
           <a href="https://twitter.com/dexymills" target="_blank" rel="noopener">Twitter</a>
+          <a href="mailto:dextercarlmiller+website@gmail.com">Contact</a>
         </nav>
       </div>
       <div class="footer-bottom">
@@ -393,6 +430,7 @@
 
   <script src="js/project.js" defer></script>
   <script src="js/connect.js" defer></script>
+  <script src="js/theme.js" defer></script>
 
 </body>
 </html>

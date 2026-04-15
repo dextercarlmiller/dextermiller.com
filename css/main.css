@@ -1417,6 +1417,140 @@ ul {
   }
 }
 
+/* --- Dark Mode Toggle Button -------------------------------- */
+.dark-mode-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.75);
+  cursor: pointer;
+  transition: all var(--transition);
+  margin-left: 8px;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.dark-mode-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.dark-mode-toggle svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Show moon in light mode, sun in dark mode */
+.dark-mode-toggle .icon-sun { display: none; }
+.dark-mode-toggle .icon-moon { display: block; }
+[data-theme="dark"] .dark-mode-toggle .icon-sun { display: block; }
+[data-theme="dark"] .dark-mode-toggle .icon-moon { display: none; }
+
+/* --- Dark Mode ------------------------------------------------ */
+[data-theme="dark"] {
+  --bg:        #0d1117;
+  --bg-alt:    #161b22;
+  --bg-card:   #1c2333;
+  --text:      #e6edf3;
+  --text-muted: #8b949e;
+  --border:    #30363d;
+  --shadow:    0 2px 12px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 6px 28px rgba(0, 0, 0, 0.4);
+}
+
+/* Heading colors in dark mode */
+[data-theme="dark"] .section-title,
+[data-theme="dark"] .value-card h3,
+[data-theme="dark"] .timeline-header h3,
+[data-theme="dark"] .education-info h3,
+[data-theme="dark"] .skill-category h3,
+[data-theme="dark"] .interest-card h3,
+[data-theme="dark"] .game-panel-title,
+[data-theme="dark"] .community-card h3,
+[data-theme="dark"] .project-card-title,
+[data-theme="dark"] .grafana-card h3 {
+  color: #f0f6fc;
+}
+
+[data-theme="dark"] .about-text strong {
+  color: #f0f6fc;
+}
+
+/* Badges and tag overrides */
+[data-theme="dark"] .career-path-step {
+  background: #1c2333;
+  border-color: #30363d;
+  color: #8b949e;
+}
+
+[data-theme="dark"] .career-path-step.current {
+  background: rgba(37, 99, 235, 0.2);
+  border-color: rgba(59, 130, 246, 0.5);
+  color: #93c5fd;
+}
+
+[data-theme="dark"] .skill-list li {
+  border-bottom-color: #21262d;
+}
+
+[data-theme="dark"] .game-status-bar {
+  background: rgba(37, 99, 235, 0.15);
+  border-color: rgba(59, 130, 246, 0.3);
+  color: #93c5fd;
+}
+
+[data-theme="dark"] .section-label {
+  background: rgba(37, 99, 235, 0.15);
+  border-color: rgba(59, 130, 246, 0.3);
+  color: #93c5fd;
+}
+
+[data-theme="dark"] .project-card-stat {
+  background: rgba(37, 99, 235, 0.15);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+[data-theme="dark"] .project-card-icon {
+  background: rgba(37, 99, 235, 0.15);
+}
+
+[data-theme="dark"] .interest-icon {
+  background: rgba(37, 99, 235, 0.15);
+}
+
+[data-theme="dark"] .tech-tag.rewst {
+  background: rgba(21, 128, 61, 0.2);
+  border-color: rgba(74, 222, 128, 0.3);
+  color: #4ade80;
+}
+
+[data-theme="dark"] .tech-tag.python {
+  background: rgba(161, 98, 7, 0.2);
+  border-color: rgba(250, 204, 21, 0.3);
+  color: #facc15;
+}
+
+[data-theme="dark"] .grafana-label {
+  background: rgba(249, 115, 22, 0.15);
+  border-color: rgba(249, 115, 22, 0.3);
+}
+
+[data-theme="dark"] .timeline-marker {
+  border-color: var(--bg-alt);
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
 @media (max-width: 480px) {
   .hero {
     padding: 72px 20px 64px;

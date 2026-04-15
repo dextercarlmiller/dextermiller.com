@@ -5,11 +5,85 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dexter Miller — IT Manager &amp; Automation Engineer</title>
   <meta name="description" content="Dexter Miller is a Tier 1 IT Manager and automation engineer at Applied Technology Group in Fort Wayne, IN. Faith-driven, family-first professional.">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://dextermiller.com/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://dextermiller.com/">
+  <meta property="og:title" content="Dexter Miller — IT Manager &amp; Automation Engineer">
+  <meta property="og:description" content="Dexter Miller is a Tier 1 IT Manager and automation engineer at Applied Technology Group in Fort Wayne, IN. Faith-driven, family-first professional.">
+  <meta property="og:image" content="https://dextermiller.com/images/profile.jpg">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@dexymills">
+  <meta name="twitter:title" content="Dexter Miller — IT Manager &amp; Automation Engineer">
+  <meta name="twitter:description" content="Dexter Miller is a Tier 1 IT Manager and automation engineer at Applied Technology Group in Fort Wayne, IN. Faith-driven, family-first professional.">
+  <meta name="twitter:image" content="https://dextermiller.com/images/profile.jpg">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://dextermiller.com/#person",
+        "name": "Dexter Miller",
+        "jobTitle": "Tier 1 IT Manager",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Applied Technology Group",
+          "url": "http://www.atgfw.com"
+        },
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "Indiana Tech University"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Fort Wayne",
+          "addressRegion": "IN",
+          "addressCountry": "US"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/dextermiller2020",
+          "https://twitter.com/dexymills"
+        ],
+        "url": "https://dextermiller.com"
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://dextermiller.com/#website",
+        "url": "https://dextermiller.com",
+        "name": "Dexter Miller",
+        "description": "IT Manager and automation engineer portfolio",
+        "author": { "@id": "https://dextermiller.com/#person" }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Favicon -->
   <link rel="icon" href="images/stickerlogo.png" type="image/png">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="css/main.css">
+
+  <!-- Apply saved theme before page renders to prevent flash -->
+  <script>
+    (function () {
+      if (localStorage.getItem('theme') === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    }());
+  </script>
 </head>
 <body>
 
@@ -21,6 +95,11 @@
         <a class="nav-link active" href="index.html">About</a>
         <a class="nav-link" href="project.html">Projects</a>
         <a class="nav-link" href="https://www.linkedin.com/in/dextermiller2020" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="nav-link" href="mailto:dextercarlmiller+website@gmail.com">Contact</a>
+        <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Switch to dark mode" title="Toggle dark mode">
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
       </div>
     </div>
   </nav>
@@ -48,7 +127,12 @@
       </div>
       <div class="hero-photo-wrap">
         <div class="hero-photo-frame">
-          <img src="images/profile.jpg" alt="Dexter Miller" loading="eager">
+          <!-- width/height set to match the CSS frame dimensions for layout stability -->
+          <img src="images/profile.jpg"
+               alt="Dexter Miller"
+               width="260"
+               height="260"
+               loading="eager">
         </div>
       </div>
     </div>
@@ -70,7 +154,7 @@
             Over six years at <a href="http://www.atgfw.com" target="_blank" rel="noopener">Applied Technology Group</a>, I've worked my way from intern to Tier 1 Manager, gaining hands-on experience across helpdesk, client onboarding, and project engineering before moving into leadership. Today I oversee the first line of support engineers serving our managed IT clients.
           </p>
           <p>
-            My work is grounded in three core values: <strong>faith, family, and community</strong>. I believe technology should serve people and strengthen connections. Outside of work I play guitar, enjoy pickleball and disc golf, and love spending time outdoors.
+            My work is grounded in three core values: <strong>faith, family, and community</strong>. I believe technology should serve people and strengthen connections. Outside of work I cherish time with my wife and kids, enjoy pickleball and disc golf, and love spending time outdoors.
           </p>
         </div>
         <div class="values-grid">
@@ -173,7 +257,11 @@
       </div>
       <div class="education-card">
         <div class="education-photo">
-          <img src="images/indiana-tech-sign.jpg" alt="Indiana Tech University campus sign" loading="lazy">
+          <img src="images/indiana-tech-sign.jpg"
+               alt="Indiana Tech University campus sign"
+               width="200"
+               height="130"
+               loading="lazy">
         </div>
         <div class="education-info">
           <h3>Indiana Tech University</h3>
@@ -267,13 +355,14 @@
         <div class="interest-card">
           <div class="interest-icon">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M9 18V5l12-2v13"/>
-              <circle cx="6" cy="18" r="3"/>
-              <circle cx="18" cy="16" r="3"/>
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
             </svg>
           </div>
-          <h3>Guitar</h3>
-          <p>Playing music is a creative outlet and a way to unwind after complex technical days.</p>
+          <h3>Family</h3>
+          <p>Spending quality time with my wife and kids is the most rewarding part of life after a long day's work.</p>
         </div>
 
         <div class="interest-card">
@@ -329,6 +418,7 @@
           <a href="project.html">Projects</a>
           <a href="https://www.linkedin.com/in/dextermiller2020" target="_blank" rel="noopener">LinkedIn</a>
           <a href="https://twitter.com/dexymills" target="_blank" rel="noopener">Twitter</a>
+          <a href="mailto:dextercarlmiller+website@gmail.com">Contact</a>
         </nav>
       </div>
       <div class="footer-bottom">
@@ -336,6 +426,8 @@
       </div>
     </div>
   </footer>
+
+  <script src="js/theme.js" defer></script>
 
 </body>
 </html>
