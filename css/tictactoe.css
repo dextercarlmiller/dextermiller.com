@@ -1,82 +1,57 @@
-a {
-    text-decoration: none;
-}
+/* ================================================================
+   Tic-Tac-Toe Game Styles
+   All selectors are scoped to avoid affecting other elements
+   ================================================================ */
 
 .TicTacToe {
-    margin: auto;
-    object-position: center;
-    /* margin-right: 12.5%; */
-    width: 308px;
-    /* margin-left: 12.5%; */
-    display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
-tr {
-    margin: 2px;
-}
-
-td {
-    width: 100px;
-    height: 100px;
-    margin: 2%;
-    text-size-adjust: 100px;
-    text-align: center;
-    font-size: 70px;
-}
-
-#TicTacTitle {
-    width: 310px;
-    text-align: center;
-    scroll-margin: inherit;
-}
-
-#AlertWinner {
-    width: 310px;
-    text-align: center;
-    scroll-margin: inherit;
-}
-
+/* Board table — scoped with .boardTable prefix */
 .boardTable {
-    border-collapse: collapse;
-    position: inherit;
-    width: 308px;
-    height: 308px;
+  border-collapse: collapse;
+  width: 282px;
+  height: 282px;
+  margin: 0 auto;
 }
 
-.boardTable tr:first-child {
-    border-bottom: 2px solid black;
+/* Cells — scoped to boardTable */
+.boardTable td.celltictac {
+  width: 94px;
+  height: 94px;
+  text-align: center;
+  vertical-align: middle;
+  font-family: 'Poppins', system-ui, sans-serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  cursor: pointer;
+  color: #1e293b;
+  transition: background-color 0.15s ease;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-.boardTable tr:last-child {
-    border-top: 2px solid black;
+/* X gets blue, O gets amber */
+.boardTable td.celltictac[data-mark="X"] {
+  color: #2563eb;
 }
 
-.boardTable tr td:first-child {
-    border-right: 2px solid black;
+.boardTable td.celltictac[data-mark="O"] {
+  color: #d97706;
 }
 
-.boardTable tr td:last-child {
-    border-left: 2px solid black;
+.boardTable td.celltictac:hover {
+  background-color: #eff6ff;
 }
 
-.TicTacButton,
-.TicTacComp {
-    display: inline-block;
-    margin-top: 1%;
+/* Grid lines — classic tic-tac-toe look */
+.boardTable tr:not(:last-child) td.celltictac {
+  border-bottom: 3px solid #334155;
 }
 
-.TicTacButton {
-    padding-top: 4px;
-    padding-bottom: 4px;
-    padding-left: 24px;
-    padding-right: 24px;
-    margin-left: 12%;
-}
-
-.TicTacComp {
-    padding-top: 4px;
-    padding-bottom: 4px;
-    padding-left: 24px;
-    padding-right: 24px;
-    margin-right: 10%;
+.boardTable td.celltictac:not(:last-child) {
+  border-right: 3px solid #334155;
 }

@@ -1,111 +1,247 @@
-<!doctype html> 
-<html> 
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Games</title>
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" type="text/css" href="css/tictactoe.css">
-    <link rel="stylesheet" type="text/css" href="css/connect.css">
-    <script type="text/javascript" src="js/project.js" defer></script>
-    <script type="text/javascript" src="js/connect.js" defer></script>
-    <!-- <link rel="stylesheet" href="css/foundation.min.css"> -->
-    <link rel="stylesheet" href="css/wireframe-theme.min.css">
-
-    <link rel="icon" href="images/stickerlogo.png" type="image/icon">
-</head> 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — Dexter Miller</title>
+  <meta name="description" content="Senior project: Tic-Tac-Toe and Connect Four with MinMax AI, built by Dexter Miller at Indiana Tech.">
+  <link rel="icon" href="images/stickerlogo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/tictactoe.css">
+  <link rel="stylesheet" href="css/connect.css">
+</head>
 <body>
-        <div class="container nav-wrapper">
-          <a class="link-text nav-button" href=dextermiller.com>About Me</a>
-          <a class="link-text nav-button" href="#">Projects</a>
-          <a class="link-text nav-button" href="Methodology/method.html">Information</a>
-          <!-- <a class="link-text nav-button" href="Products/products.html">Products</a> -->
-        </div>    
-<section class="TicTacToe">
-    <h1 id="TicTacTitle">Tic-Tac-Toe</h1>
-    <h1 id="AlertWinner">Player Turn: X</h1>
-    <table class="boardTable">
-        <tr> 
-            <td class="celltictac" id="0"></td>
-            <td class="celltictac" id="1"></td>
-            <td class="celltictac" id="2"></td>
-        </tr>
-        <tr> 
-            <td class="celltictac" id="3"></td>
-            <td class="celltictac" id="4"></td>
-            <td class="celltictac" id="5"></td>
-        </tr>
-        <tr> 
-            <td class="celltictac" id="6"></td>
-            <td class="celltictac" id="7"></td>
-            <td class="celltictac" id="8"></td>
-        </tr>
-    </table>
-    <button class="TicTacButton" onClick="startTicTacToe()">Replay</button>
-    <button class="TicTacComp" onClick="CompTurn()">Computer Turn</button>
 
-</section> 
-<section class="Connect4">
-    <h1 id="Connect4Title">Connect 4</h1>
-    <h1 id="AlertConnectWinner">Player Turn: Yellow</h1>
-    <table class="connecTable">
-        <tr class="row">
-            <td class="connectcell" id="00"></td>
-            <td class="connectcell" id="01"></td>
-            <td class="connectcell" id="02"></td>
-            <td class="connectcell" id="03"></td>
-            <td class="connectcell" id="04"></td>
-            <td class="connectcell" id="05"></td>
-            <td class="connectcell" id="06"></td>
-        </tr>
-        <tr class="row">
-            <td class="connectcell" id="10"></td>
-            <td class="connectcell" id="11"></td>
-            <td class="connectcell" id="12"></td>
-            <td class="connectcell" id="13"></td>
-            <td class="connectcell" id="14"></td>
-            <td class="connectcell" id="15"></td>
-            <td class="connectcell" id="16"></td>
-        </tr>
-        <tr class="row">
-            <td class="connectcell" id="20"></td>
-            <td class="connectcell" id="21"></td>
-            <td class="connectcell" id="22"></td>
-            <td class="connectcell" id="23"></td>
-            <td class="connectcell" id="24"></td>
-            <td class="connectcell" id="25"></td>
-            <td class="connectcell" id="26"></td>
-        </tr>
-        <tr class="row">
-            <td class="connectcell" id="30"></td>
-            <td class="connectcell" id="31"></td>
-            <td class="connectcell" id="32"></td>
-            <td class="connectcell" id="33"></td>
-            <td class="connectcell" id="34"></td>
-            <td class="connectcell" id="35"></td>
-            <td class="connectcell" id="36"></td>
-        </tr>
-        <tr class="row">
-            <td class="connectcell" id="40"></td>
-            <td class="connectcell" id="41"></td>
-            <td class="connectcell" id="42"></td>
-            <td class="connectcell" id="43"></td>
-            <td class="connectcell" id="44"></td>
-            <td class="connectcell" id="45"></td>
-            <td class="connectcell" id="46"></td>
-        </tr>
-        <tr class="row">
-            <td class="connectcell" id="50"></td>
-            <td class="connectcell" id="51"></td>
-            <td class="connectcell" id="52"></td>
-            <td class="connectcell" id="53"></td>
-            <td class="connectcell" id="54"></td>
-            <td class="connectcell" id="55"></td>
-            <td class="connectcell" id="56"></td>
-        </tr>
-    </table> 
-    <button class="ConnectButton" onClick="startconnect()">Replay</button>
-    <button class="ConnectComp" onClick="ConnectComp()">Computer Turn</button>    
-</section>
- </body> 
-</html> 
+  <!-- ── Navigation ── -->
+  <nav class="site-nav" aria-label="Main navigation">
+    <div class="nav-container">
+      <a class="nav-logo" href="index.html">DM</a>
+      <div class="nav-links">
+        <a class="nav-link" href="index.html">About</a>
+        <a class="nav-link active" href="project.html">Projects</a>
+        <a class="nav-link" href="https://www.linkedin.com/in/dextermiller2020" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Page Hero ── -->
+  <header class="page-hero">
+    <div class="page-hero-inner">
+      <p class="page-hero-label">Senior Project &mdash; Indiana Tech</p>
+      <h1 class="page-hero-title">AI Game Suite</h1>
+      <p class="page-hero-desc">
+        Two classic strategy games powered by the MinMax algorithm. Play against a computer opponent that thinks several moves ahead &mdash; the same technique used in professional chess engines and game-playing AI.
+      </p>
+    </div>
+  </header>
+
+  <!-- ── Games ── -->
+  <section class="section" id="games">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Play the Games</h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="games-grid">
+
+        <!-- Tic-Tac-Toe -->
+        <div class="game-panel">
+          <h2 class="game-panel-title">Tic-Tac-Toe</h2>
+          <p class="game-subtitle">MinMax Algorithm</p>
+          <p id="AlertWinner" class="game-status-bar">Player Turn: X</p>
+
+          <div class="TicTacToe">
+            <table class="boardTable" aria-label="Tic-Tac-Toe board">
+              <tr>
+                <td class="celltictac" id="0"></td>
+                <td class="celltictac" id="1"></td>
+                <td class="celltictac" id="2"></td>
+              </tr>
+              <tr>
+                <td class="celltictac" id="3"></td>
+                <td class="celltictac" id="4"></td>
+                <td class="celltictac" id="5"></td>
+              </tr>
+              <tr>
+                <td class="celltictac" id="6"></td>
+                <td class="celltictac" id="7"></td>
+                <td class="celltictac" id="8"></td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="game-controls">
+            <button class="btn btn-outline" onclick="startTicTacToe()">Restart</button>
+            <button class="btn btn-primary" onclick="CompTurn()">AI Move</button>
+          </div>
+        </div>
+
+        <!-- Connect Four -->
+        <div class="game-panel">
+          <h2 class="game-panel-title">Connect Four</h2>
+          <p class="game-subtitle">Alpha-Beta Pruning</p>
+          <p id="AlertConnectWinner" class="game-status-bar">Player Turn: Yellow</p>
+
+          <div class="Connect4">
+            <table class="connecTable" aria-label="Connect Four board">
+              <tr class="row">
+                <td class="connectcell" id="00"></td>
+                <td class="connectcell" id="01"></td>
+                <td class="connectcell" id="02"></td>
+                <td class="connectcell" id="03"></td>
+                <td class="connectcell" id="04"></td>
+                <td class="connectcell" id="05"></td>
+                <td class="connectcell" id="06"></td>
+              </tr>
+              <tr class="row">
+                <td class="connectcell" id="10"></td>
+                <td class="connectcell" id="11"></td>
+                <td class="connectcell" id="12"></td>
+                <td class="connectcell" id="13"></td>
+                <td class="connectcell" id="14"></td>
+                <td class="connectcell" id="15"></td>
+                <td class="connectcell" id="16"></td>
+              </tr>
+              <tr class="row">
+                <td class="connectcell" id="20"></td>
+                <td class="connectcell" id="21"></td>
+                <td class="connectcell" id="22"></td>
+                <td class="connectcell" id="23"></td>
+                <td class="connectcell" id="24"></td>
+                <td class="connectcell" id="25"></td>
+                <td class="connectcell" id="26"></td>
+              </tr>
+              <tr class="row">
+                <td class="connectcell" id="30"></td>
+                <td class="connectcell" id="31"></td>
+                <td class="connectcell" id="32"></td>
+                <td class="connectcell" id="33"></td>
+                <td class="connectcell" id="34"></td>
+                <td class="connectcell" id="35"></td>
+                <td class="connectcell" id="36"></td>
+              </tr>
+              <tr class="row">
+                <td class="connectcell" id="40"></td>
+                <td class="connectcell" id="41"></td>
+                <td class="connectcell" id="42"></td>
+                <td class="connectcell" id="43"></td>
+                <td class="connectcell" id="44"></td>
+                <td class="connectcell" id="45"></td>
+                <td class="connectcell" id="46"></td>
+              </tr>
+              <tr class="row">
+                <td class="connectcell" id="50"></td>
+                <td class="connectcell" id="51"></td>
+                <td class="connectcell" id="52"></td>
+                <td class="connectcell" id="53"></td>
+                <td class="connectcell" id="54"></td>
+                <td class="connectcell" id="55"></td>
+                <td class="connectcell" id="56"></td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="game-controls">
+            <button class="btn btn-outline" onclick="startconnect()">Restart</button>
+            <button class="btn btn-primary" onclick="ConnectComp()">AI Move</button>
+          </div>
+        </div>
+
+      </div><!-- .games-grid -->
+    </div>
+  </section>
+
+  <!-- ── How the AI Works ── -->
+  <section class="section section-dark" id="algorithm">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">How the AI Works</h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="algo-intro">
+        <p>
+          These games were my senior project at Indiana Tech. The "AI Move" button doesn't guess &mdash; it runs a search algorithm that evaluates every possible future game state to find the mathematically optimal move. Here's the theory behind it.
+        </p>
+      </div>
+
+      <div class="algo-cards">
+
+        <div class="algo-card">
+          <p class="algo-card-label">Tic-Tac-Toe</p>
+          <h3>The MinMax Algorithm</h3>
+          <p>
+            MinMax is a recursive decision-making algorithm for two-player, zero-sum games. It explores the entire game tree by alternating between two roles: the <em>Maximizer</em> (who seeks the highest score) and the <em>Minimizer</em> (who seeks the lowest).
+          </p>
+          <p>
+            For Tic-Tac-Toe, the board is small enough that MinMax can evaluate every possible position to depth, guaranteeing a perfect move every time. The AI will never lose when playing optimally.
+          </p>
+          <ul>
+            <li>Only works on purely strategic, chance-free games</li>
+            <li>Requires exactly two players</li>
+            <li>Guaranteed optimal play on small boards</li>
+          </ul>
+        </div>
+
+        <div class="algo-card">
+          <p class="algo-card-label">Connect Four</p>
+          <h3>Alpha-Beta Pruning</h3>
+          <p>
+            Connect Four has a much larger game tree than Tic-Tac-Toe (over 4 trillion positions), so pure MinMax is too slow. Alpha-Beta pruning is an optimization that skips branches of the tree that cannot influence the final decision.
+          </p>
+          <p>
+            Alpha tracks the best guaranteed score for the Maximizer; Beta tracks the best for the Minimizer. When Alpha &ge; Beta, the branch is pruned &mdash; we already know it won't be chosen.
+          </p>
+          <ul>
+            <li>Alpha: highest value guaranteed for the maximizer</li>
+            <li>Beta: lowest value guaranteed for the minimizer</li>
+            <li>Pruning can reduce search time dramatically</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="algo-image-grid">
+        <div class="algo-image-card">
+          <img src="files/minimax.png" alt="MinMax algorithm decision tree diagram" loading="lazy">
+          <p class="algo-image-caption">MinMax decision tree — alternating max and min levels</p>
+        </div>
+        <div class="algo-image-card">
+          <img src="files/alphabeta.png" alt="Alpha-Beta pruning diagram" loading="lazy">
+          <p class="algo-image-caption">Alpha-Beta pruning — grayed branches are skipped entirely</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <span class="footer-brand-name">Dexter Miller</span>
+          <span class="footer-brand-sub">IT Manager &bull; Fort Wayne, IN</span>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="index.html">About</a>
+          <a href="project.html">Projects</a>
+          <a href="https://www.linkedin.com/in/dextermiller2020" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://twitter.com/dexymills" target="_blank" rel="noopener">Twitter</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p>Built with purpose &mdash; dextermiller.com</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/project.js" defer></script>
+  <script src="js/connect.js" defer></script>
+
+</body>
+</html>

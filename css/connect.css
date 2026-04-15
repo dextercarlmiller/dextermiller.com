@@ -1,73 +1,50 @@
-#Connect4Title {
-    text-align: center;
-    scroll-margin: inherit;
-}
-#AlertConnectWinner {
-    text-align: center;
-    scroll-margin: inherit;
-}
+/* ================================================================
+   Connect Four Game Styles
+   All selectors scoped to avoid affecting other elements.
+   Cell colors (empty/yellow/red) are set by connect.js inline styles.
+   ================================================================ */
 
 .Connect4 {
-    margin: auto;
-    object-position: center;
-    display: block;
-    width: 415px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
+/* Board — blue backing with circular holes */
 .connecTable {
-    margin: 20px auto;
-    display: table;
-    width: 415px;
-    height: 360px;
-    padding: 10px;
-    border: 1px solid #0044aa;
-    background: fixed #0077ee;
-    border-radius: 5px;
-    box-shadow: 1px 3px rgba(0, 0, 0, 0.5);
-    -webkit-box-shadow: 1px 3px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 1px 3px rgba(0, 0, 0, 0.5);
-    border-spacing: 5px 5px;
+  display: table;
+  border-collapse: separate;
+  border-spacing: 7px;
+  background: #1d4ed8;
+  border-radius: 14px;
+  padding: 10px;
+  box-shadow:
+    0 8px 32px rgba(29, 78, 216, 0.35),
+    inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin: 0 auto;
 }
 
-.connecTable tr td {
-    border: 1px solid black;
+/* Row */
+.connecTable tr.row {
+  display: table-row;
 }
 
-.connectcell {
-    display: table-cell;
-    background-color: #ffffff;
-    width: 50px;
-    height: 50px;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
-    margin: 2px;
+/* Cells — circular "holes" in the board */
+/* JS sets background-color inline: #dbeafe=empty, #fbbf24=yellow, #ef4444=red */
+.connecTable td.connectcell {
+  display: table-cell;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background-color: #dbeafe;
+  cursor: pointer;
+  transition: filter 0.15s ease, transform 0.1s ease;
+  box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.25);
+  border: none;
 }
 
-.row {
-    display: table-row;
+.connecTable td.connectcell:hover {
+  filter: brightness(1.1);
+  transform: scale(1.05);
 }
-
-.ConnectButton,
-.ConnectComp {
-    display: inline-block;
-    margin-top: 1%;
-}
-
-.ConnectButton {
-    padding-top: 4px;
-    padding-bottom: 4px;
-    padding-left: 24px;
-    padding-right: 24px;
-    margin-left: 21%;
-    margin-bottom: 10%;
-}
-
-.ConnectComp {
-    padding-top: 4px;
-    padding-bottom: 4px;
-    padding-left: 24px;
-    padding-right: 24px;
-    margin-right: 10%;
-}
-
