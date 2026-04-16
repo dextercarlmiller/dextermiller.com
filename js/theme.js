@@ -1,9 +1,9 @@
 (function () {
-  var toggle = document.getElementById('darkModeToggle');
+  const toggle = document.getElementById('darkModeToggle');
   if (!toggle) return;
 
   toggle.addEventListener('click', function () {
-    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     if (isDark) {
       document.documentElement.removeAttribute('data-theme');
       localStorage.setItem('theme', 'light');

@@ -1,0 +1,8 @@
+  <!-- Apply saved theme before page renders to prevent flash -->
+  <script>
+    (function () {
+      if (localStorage.getItem('theme') === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    }());
+  </script>

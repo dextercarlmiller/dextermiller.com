@@ -1,9 +1,9 @@
 (function () {
 
-  var gridboard = [];
-  var difficulty = GetDifficulty();
-  var player = 1;
-  var iterations = 0;
+  let gridboard = [];
+  let difficulty = GetDifficulty();
+  let player = 1;
+  let iterations = 0;
 
   startconnect();
 
@@ -13,8 +13,8 @@
 
   /* Count occurrences of a value in an array (replaces Array.prototype extension) */
   function countValues(arr, value) {
-    var count = 0;
-    for (var i = 0; i < arr.length; i++) {
+    let count = 0;
+    for (let i = 0; i < arr.length; i++) {
       if (arr[i] === value) count++;
     }
     return count;
@@ -31,9 +31,9 @@
       [0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0]
     ];
-    for (var row = 0; row < 6; row++) {
-      for (var col = 0; col < 7; col++) {
-        var cell = document.getElementById('' + row + col);
+    for (let row = 0; row < 6; row++) {
+      for (let col = 0; col < 7; col++) {
+        const cell = document.getElementById('' + row + col);
         cell.addEventListener('click', selectColumn, true);
         cell.setAttribute('tabindex', '0');
         cell.setAttribute('role', 'button');
@@ -49,14 +49,14 @@
   function handleConnectKeydown(e) {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      var col = parseInt(e.target.id) % 10;
+      const col = parseInt(e.target.id) % 10;
       selectColumn(col);
     }
   }
 
   /* Drops player move in the corresponding column and updates the next player */
   function selectColumn(box) {
-    var column;
+    let column;
     try {
       column = box.target.id % 10;
     } catch (err) {
@@ -76,14 +76,14 @@
       }
       refreshgridboard(gridboard);
     }
-    AlertConnectWinner(gridboard, player);
+    AlertConnectWinner(gridboard);
   }
 
   /* Updates the board display with the correct cell colors */
   function refreshgridboard(gridboard) {
-    for (var row = 0; row < 6; row++) {
-      for (var col = 0; col < 7; col++) {
-        var cell = document.getElementById('' + row + col);
+    for (let row = 0; row < 6; row++) {
+      for (let col = 0; col < 7; col++) {
+        const cell = document.getElementById('' + row + col);
         if (gridboard[row][col] == 0) {
           cell.style.setProperty('background-color', '#dbeafe');
         } else if (gridboard[row][col] == 1) {
@@ -102,8 +102,8 @@
 
   /* Drops a piece down the column and returns the updated board */
   function drop(col, player, connectboard) {
-    var tempboard = connectboard.map(function (inner) { return inner.slice(); });
-    for (var row = 5; row >= 0; row--) {
+    const tempboard = connectboard.map(function (inner) { return inner.slice(); });
+    for (let row = 5; row >= 0; row--) {
       if (tempboard[row][col] == 0) {
         tempboard[row][col] = player;
         return tempboard;
@@ -113,7 +113,7 @@
 
   /* Returns true if the board is completely full */
   function checkConnectFull(gridboard) {
-    for (var col = 0; col < 7; col++) {
+    for (let col = 0; col < 7; col++) {
       if (gridboard[0][col] == 0) return false;
     }
     return true;
@@ -121,7 +121,7 @@
 
   /* Returns true if any four-in-a-row exists on the board */
   function checkConnectWin(gridboard) {
-    var row, col;
+    let row, col;
     for (row = 0; row < 6; row++) {
       for (col = 0; col < 4; col++) {
         if (gridboard[row][col] == gridboard[row][col + 1] &&
@@ -163,7 +163,7 @@
 
   /* Returns true if the specified player has four in a row */
   function checkConnectWinner(gridboard, theplayer) {
-    var row, col;
+    let row, col;
     for (row = 0; row < 6; row++) {
       for (col = 0; col < 4; col++) {
         if (gridboard[row][col] == theplayer &&
@@ -204,14 +204,17 @@
     return !checkConnectWin(Connectboard) && checkConnectFull(Connectboard);
   }
 
-  /* Updates the status bar and ends the game if there is a winner or draw */
-  function AlertConnectWinner(ConnectBoard, player) {
-    var ConnectWinner = player == 1 ? 'Red' : 'Yellow';
-    if (checkConnectWin(ConnectBoard)) {
-      document.getElementById('AlertConnectWinner').innerText = ConnectWinner + ' is the winner!';
+  /* Updates the status bar and ends the game if there is a winner or draw.
+     Checks each player directly instead of relying on the (already-toggled)
+     player variable, which would give the wrong winner name. */
+  function AlertConnectWinner(ConnectBoard) {
+    if (checkConnectWinner(ConnectBoard, 1)) {
+      document.getElementById('AlertConnectWinner').innerText = 'Yellow is the winner!';
       endconnect();
-    }
-    if (checkConnectDraw(ConnectBoard)) {
+    } else if (checkConnectWinner(ConnectBoard, 2)) {
+      document.getElementById('AlertConnectWinner').innerText = 'Red is the winner!';
+      endconnect();
+    } else if (checkConnectDraw(ConnectBoard)) {
       document.getElementById('AlertConnectWinner').innerText = 'There is a Draw!';
       endconnect();
     }
@@ -219,9 +222,9 @@
 
   /* Removes all event listeners from board cells when the game ends */
   function endconnect() {
-    for (var row = 0; row < 6; row++) {
-      for (var col = 0; col < 7; col++) {
-        var cell = document.getElementById('' + row + col);
+    for (let row = 0; row < 6; row++) {
+      for (let col = 0; col < 7; col++) {
+        const cell = document.getElementById('' + row + col);
         cell.removeEventListener('click', selectColumn, true);
         cell.removeEventListener('keydown', handleConnectKeydown, true);
         cell.removeAttribute('tabindex');
@@ -232,7 +235,7 @@
   /* Triggers the AI to make its move */
   function ConnectComp() {
     if (!checkConnectWin(gridboard) || !checkConnectFull(gridboard)) {
-      var maximizer, minimizer;
+      let maximizer, minimizer;
       if (player == 1) {
         maximizer = 1;
         minimizer = 2;
@@ -242,14 +245,14 @@
       }
       iterations = 0;
       difficulty = GetDifficulty();
-      var Temp_values = alphabeta(gridboard, difficulty, maximizer, minimizer, true, -Infinity, Infinity);
-      var best_column = Temp_values[1];
+      const Temp_values = alphabeta(gridboard, difficulty, maximizer, minimizer, true, -Infinity, Infinity);
+      const best_column = Temp_values[1];
       selectColumn(best_column);
     }
   }
 
   function GetDifficulty() {
-    var radio = document.querySelector('input[name="c4difficulty"]:checked');
+    const radio = document.querySelector('input[name="c4difficulty"]:checked');
     return (radio && radio.value === 'easy') ? 4 : 6;
   }
 
@@ -260,9 +263,9 @@
   /* Alpha-Beta pruning algorithm */
   function alphabeta(theboard, depth, maximizer, minimizer, maximizingplayer, alpha, beta) {
     iterations += 1;
-    var tempboard = theboard.map(function (inner) { return inner.slice(); });
-    var valid_locations = [];
-    for (var i = 0; i < 7; i++) {
+    const tempboard = theboard.map(function (inner) { return inner.slice(); });
+    const valid_locations = [];
+    for (let i = 0; i < 7; i++) {
       if (!columnFull(tempboard, i)) valid_locations.push(i);
     }
     if (depth == 0 || isterminal_node(theboard, maximizer, minimizer)) {
@@ -275,7 +278,7 @@
         else return [score(tempboard, minimizer), null];
       }
     }
-    var i, value, bests, Temp_value, b_copy, c_copy;
+    let i, value, bests, Temp_value, b_copy, c_copy;
     if (maximizingplayer) {
       value = -Infinity;
       bests = [];
@@ -311,12 +314,12 @@
 
   /* Heuristic board evaluation for Alpha-Beta */
   function score(board, player) {
-    var opponent = player == 1 ? 2 : 1;
-    var score_position = 0;
-    var row, col, window_array;
+    const opponent = player == 1 ? 2 : 1;
+    let score_position = 0;
+    let row, col, window_array;
 
     /* Center column bonus */
-    var center_array = [];
+    const center_array = [];
     for (row = 0; row < 6; row++) center_array.push(board[row][3]);
     score_position += countValues(center_array, player) * 3;
 

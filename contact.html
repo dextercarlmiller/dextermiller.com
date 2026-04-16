@@ -14,17 +14,22 @@
   <meta property="og:url" content="https://dextermiller.com/contact.html">
   <meta property="og:title" content="Contact — Dexter Miller">
   <meta property="og:description" content="Get in touch with Dexter Miller — IT Manager and automation engineer in Fort Wayne, IN.">
+  <meta property="og:image" content="https://dextermiller.com/images/profile.jpg">
+  <meta property="og:image:width" content="520">
+  <meta property="og:image:height" content="520">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@dexymills">
+  <meta name="twitter:title" content="Contact — Dexter Miller">
+  <meta name="twitter:description" content="Get in touch with Dexter Miller — IT Manager and automation engineer in Fort Wayne, IN.">
+  <meta name="twitter:image" content="https://dextermiller.com/images/profile.jpg">
 
   <!-- Favicon & Mobile -->
   <link rel="icon" href="images/stickerlogo.png" type="image/png">
   <link rel="apple-touch-icon" href="images/stickerlogo.png">
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d1117">
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/main.css">
 
@@ -200,6 +205,20 @@
     }
   </style>
 
+  <!-- @@analytics:start -->
+  <!-- Google Analytics 4
+       Replace G-XXXXXXXXXX with your real Measurement ID from:
+       analytics.google.com → Admin → Data Streams → your stream → Measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  <!-- @@analytics:end -->
+
+  <!-- @@theme-flash:start -->
   <!-- Apply saved theme before page renders to prevent flash -->
   <script>
     (function () {
@@ -208,11 +227,13 @@
       }
     }());
   </script>
+  <!-- @@theme-flash:end -->
 </head>
 <body>
 
   <a href="#main-content" class="skip-nav">Skip to main content</a>
 
+  <!-- @@nav:start -->
   <!-- ── Navigation ── -->
   <nav class="site-nav" aria-label="Main navigation">
     <div class="nav-container">
@@ -235,6 +256,7 @@
       </div>
     </div>
   </nav>
+  <!-- @@nav:end -->
 
   <main id="main-content" tabindex="-1">
 
@@ -257,7 +279,7 @@
             <div class="contact-links">
               <div class="contact-link-item">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                <a href="mailto:dextercarlmiller+website@gmail.com">dextercarlmiller@gmail.com</a>
+                <a href="mailto:dextercarlmiller@gmail.com">dextercarlmiller@gmail.com</a>
               </div>
               <div class="contact-link-item">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
@@ -301,6 +323,7 @@
 
   </main>
 
+  <!-- @@footer:start -->
   <!-- ── Footer ── -->
   <footer class="site-footer">
     <div class="footer-inner">
@@ -322,13 +345,18 @@
       </div>
     </div>
   </footer>
+  <!-- @@footer:end -->
 
+  <!-- @@back-to-top:start -->
   <button class="back-to-top" id="backToTop" aria-label="Back to top">
     <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
   </button>
+  <!-- @@back-to-top:end -->
 
+  <!-- @@scripts-common:start -->
   <script src="js/theme.js" defer></script>
   <script src="js/main.js" defer></script>
+  <!-- @@scripts-common:end -->
   <script>
     document.getElementById('contactForm').addEventListener('submit', function (e) {
       e.preventDefault();

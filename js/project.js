@@ -1,10 +1,10 @@
 (function () {
 
-  var board = [];
+  let board = [];
   const player1 = 'X';
   const player2 = 'O';
-  var turnValue = 1;
-  var iterations = 0;
+  let turnValue = 1;
+  let iterations = 0;
   const cells = document.querySelectorAll('.celltictac');
 
   startTicTacToe();
@@ -25,10 +25,10 @@
   function startTicTacToe() {
     turnValue = 1;
     board = [];
-    for (var i = 0; i < 9; i++) {
+    for (let i = 0; i < 9; i++) {
       board.push(i);
     }
-    for (var i = 0; i < 9; i++) {
+    for (let i = 0; i < 9; i++) {
       cells[i].innerText = '';
       cells[i].dataset.mark = '';
       cells[i].style.removeProperty('background-color');
@@ -43,7 +43,7 @@
 
   /* Removes all event listeners when the game ends */
   function endGame() {
-    for (var i = 0; i < 9; i++) {
+    for (let i = 0; i < 9; i++) {
       cells[i].removeEventListener('click', playerturn, true);
       cells[i].removeEventListener('keydown', handleTTTKeydown, true);
       cells[i].removeAttribute('tabindex');
@@ -86,7 +86,7 @@
   /* Applies a single move and updates the cell display */
   function turn(boxId, player) {
     board[boxId] = player;
-    var cell = document.getElementById(boxId);
+    const cell = document.getElementById(boxId);
     cell.innerText = player;
     cell.dataset.mark = player;
     cell.setAttribute('aria-label', 'Cell ' + (parseInt(boxId) + 1) + ', ' + player);
@@ -94,12 +94,8 @@
     cell.removeEventListener('keydown', handleTTTKeydown, true);
     cell.removeAttribute('tabindex');
     SwitchPlayer(player);
-    if (turnValue == 1) {
-      player = player1;
-    } else {
-      player = player2;
-    }
-    document.getElementById('AlertWinner').innerText = ('Player Turn: ' + player);
+    const nextPlayer = turnValue == 1 ? player1 : player2;
+    document.getElementById('AlertWinner').innerText = ('Player Turn: ' + nextPlayer);
   }
 
   /* Toggles the active player */
@@ -113,8 +109,8 @@
 
   /* Returns true if all 9 cells are filled */
   function BoardFull(board) {
-    var j = 0;
-    for (var i = 0; i < board.length; i++) {
+    let j = 0;
+    for (let i = 0; i < board.length; i++) {
       if (board[i] == 'X' || board[i] == 'O') j++;
     }
     return j == 9;
@@ -122,24 +118,15 @@
 
   /* Returns true if the given player has won */
   function checkWin(board, player) {
-    var Win = false;
-    for (var i = 0; i < 8; i = i + 3) {
-      if (board[i] == board[i + 1] && board[i] == board[i + 2]) {
-        if (board[i] == player) { Win = true; return Win; }
-      }
+    for (let i = 0; i < 8; i = i + 3) {
+      if (board[i] == board[i + 1] && board[i] == board[i + 2] && board[i] == player) return true;
     }
-    for (var i = 0; i < 3; i++) {
-      if (board[i] == board[i + 3] && board[i] == board[i + 6]) {
-        if (board[i] == player) { Win = true; return Win; }
-      }
+    for (let i = 0; i < 3; i++) {
+      if (board[i] == board[i + 3] && board[i] == board[i + 6] && board[i] == player) return true;
     }
-    if (board[0] == board[4] && board[4] == board[8]) {
-      if (board[0] == player) { Win = true; return Win; }
-    }
-    if (board[2] == board[4] && board[4] == board[6]) {
-      if (board[2] == player) { Win = true; return Win; }
-    }
-    return Win;
+    if (board[0] == board[4] && board[4] == board[8] && board[0] == player) return true;
+    if (board[2] == board[4] && board[4] == board[6] && board[2] == player) return true;
+    return false;
   }
 
   /* Returns true if the game is a draw */
@@ -147,30 +134,18 @@
     return BoardFull(board) && !AlertWinner(board);
   }
 
-  /* Returns true if any three-in-a-row exists (either player) */
+  /* Returns true if either player has three in a row — delegates to checkWin to avoid
+     the original bug where empty-cell equality could yield a false positive */
   function AlertWinner(board) {
-    var Win = false;
-    for (var i = 0; i < 8; i = i + 3) {
-      if (board[i] == board[i + 1] && board[i] == board[i + 2]) { Win = true; return Win; }
-    }
-    for (var i = 0; i < 3; i++) {
-      if (board[i] == board[i + 3] && board[i] == board[i + 6]) { Win = true; return Win; }
-    }
-    if (board[0] == board[4] && board[4] == board[8]) { Win = true; return Win; }
-    if (board[2] == board[4] && board[4] == board[6]) { Win = true; return Win; }
-    return Win;
+    return checkWin(board, 'X') || checkWin(board, 'O');
   }
 
   /* Triggers the AI to calculate and play the best move */
   function CompTurn() {
-    var compBoard = board;
-    if (turnValue == 1) {
-      var player = 'X';
-    } else {
-      var player = 'O';
-    }
+    const compBoard = board;
+    const player = turnValue === 1 ? 'X' : 'O';
     iterations = 0;
-    var bestmove = minimax(compBoard, true, player, 0, -Infinity, Infinity)[1];
+    const bestmove = minimax(compBoard, true, player, 0, -Infinity, Infinity)[1];
     if (!AlertWinner(compBoard)) {
       if (turnValue == 1) {
         playerturn(bestmove, player1);
@@ -192,26 +167,22 @@
   /* Recursive MinMax with Alpha-Beta pruning */
   function minimax(minimaxBoard, isMax, MaxValue, depth, alpha, beta) {
     iterations += 1;
-    if (MaxValue == 'X') {
-      var MinValue = 'O';
-    } else {
-      var MinValue = 'X';
-    }
-    var availableSpots = [];
-    for (var i = 0; i < minimaxBoard.length; i++) {
+    const MinValue = MaxValue === 'X' ? 'O' : 'X';
+    const availableSpots = [];
+    for (let i = 0; i < minimaxBoard.length; i++) {
       if (Number.isInteger(minimaxBoard[i])) availableSpots.push(minimaxBoard[i]);
     }
-    var score = evaluate(minimaxBoard, MaxValue, MinValue);
+    const score = evaluate(minimaxBoard, MaxValue, MinValue);
     if (score == 10) return [(score - depth), null];
     if (score == -10) return [(score + depth), null];
     if (availableSpots.length == 0) return [0, null];
 
     if (isMax) {
-      var best = -Infinity;
-      var bestmove;
-      for (var i = 0; i < availableSpots.length; i++) {
+      let best = -Infinity;
+      let bestmove;
+      for (let i = 0; i < availableSpots.length; i++) {
         minimaxBoard[availableSpots[i]] = MaxValue;
-        var moveValue = Math.max(best, minimax(minimaxBoard, false, MaxValue, depth + 1, alpha, beta)[0]);
+        const moveValue = Math.max(best, minimax(minimaxBoard, false, MaxValue, depth + 1, alpha, beta)[0]);
         minimaxBoard[availableSpots[i]] = availableSpots[i];
         if (moveValue > best) { best = moveValue; bestmove = availableSpots[i]; }
         alpha = Math.max(alpha, best);
@@ -219,11 +190,11 @@
       }
       return [best, bestmove];
     } else {
-      var best = Infinity;
-      var bestmove;
-      for (var i = 0; i < availableSpots.length; i++) {
+      let best = Infinity;
+      let bestmove;
+      for (let i = 0; i < availableSpots.length; i++) {
         minimaxBoard[availableSpots[i]] = MinValue;
-        var moveValue = Math.min(best, minimax(minimaxBoard, true, MaxValue, depth + 1, alpha, beta)[0]);
+        const moveValue = Math.min(best, minimax(minimaxBoard, true, MaxValue, depth + 1, alpha, beta)[0]);
         minimaxBoard[availableSpots[i]] = availableSpots[i];
         if (moveValue < best) { best = moveValue; bestmove = availableSpots[i]; }
         beta = Math.min(beta, best);
