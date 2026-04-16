@@ -12,11 +12,6 @@
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d1117">
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="css/main.css">
 
   <style>
@@ -71,6 +66,20 @@
     }
   </style>
 
+  <!-- @@analytics:start -->
+  <!-- Google Analytics 4
+       Replace G-XXXXXXXXXX with your real Measurement ID from:
+       analytics.google.com → Admin → Data Streams → your stream → Measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  <!-- @@analytics:end -->
+
+  <!-- @@theme-flash:start -->
   <!-- Apply saved theme before page renders to prevent flash -->
   <script>
     (function () {
@@ -79,9 +88,13 @@
       }
     }());
   </script>
+  <!-- @@theme-flash:end -->
 </head>
 <body>
 
+  <a href="#main-content" class="skip-nav">Skip to main content</a>
+
+  <!-- @@nav:start -->
   <!-- ── Navigation ── -->
   <nav class="site-nav" aria-label="Main navigation">
     <div class="nav-container">
@@ -104,8 +117,9 @@
       </div>
     </div>
   </nav>
+  <!-- @@nav:end -->
 
-  <main>
+  <main id="main-content" tabindex="-1">
     <div class="not-found">
       <div class="not-found-inner">
         <p class="not-found-code" aria-hidden="true">404</p>
@@ -121,6 +135,7 @@
     </div>
   </main>
 
+  <!-- @@footer:start -->
   <!-- ── Footer ── -->
   <footer class="site-footer">
     <div class="footer-inner">
@@ -142,9 +157,18 @@
       </div>
     </div>
   </footer>
+  <!-- @@footer:end -->
 
+  <!-- @@back-to-top:start -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+  <!-- @@back-to-top:end -->
+
+  <!-- @@scripts-common:start -->
   <script src="js/theme.js" defer></script>
   <script src="js/main.js" defer></script>
+  <!-- @@scripts-common:end -->
 
 </body>
 </html>

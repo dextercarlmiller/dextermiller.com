@@ -1,12 +1,12 @@
 (function () {
 
   /* ── Hamburger / mobile nav ────────────────────────────────── */
-  var hamburger = document.getElementById('navHamburger');
-  var navLinks  = document.getElementById('navLinks');
+  const hamburger = document.getElementById('navHamburger');
+  const navLinks  = document.getElementById('navLinks');
 
   if (hamburger && navLinks) {
     hamburger.addEventListener('click', function () {
-      var isOpen = navLinks.classList.toggle('nav-open');
+      const isOpen = navLinks.classList.toggle('nav-open');
       hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       hamburger.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
     });
@@ -32,7 +32,7 @@
   }
 
   /* ── Back-to-top button ───────────────────────────────────── */
-  var backToTop = document.getElementById('backToTop');
+  const backToTop = document.getElementById('backToTop');
 
   if (backToTop) {
     window.addEventListener('scroll', function () {
@@ -46,6 +46,11 @@
     backToTop.addEventListener('click', function () {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+  }
+
+  /* ── Service Worker registration ─────────────────────────── */
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js');
   }
 
 }());

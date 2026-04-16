@@ -74,16 +74,25 @@
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d1117">
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
-
   <!-- Preload LCP image -->
   <link rel="preload" as="image" href="images/profile.jpg">
 
   <link rel="stylesheet" href="css/main.css">
 
+  <!-- @@analytics:start -->
+  <!-- Google Analytics 4
+       Replace G-XXXXXXXXXX with your real Measurement ID from:
+       analytics.google.com → Admin → Data Streams → your stream → Measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  <!-- @@analytics:end -->
+
+  <!-- @@theme-flash:start -->
   <!-- Apply saved theme before page renders to prevent flash -->
   <script>
     (function () {
@@ -92,11 +101,13 @@
       }
     }());
   </script>
+  <!-- @@theme-flash:end -->
 </head>
 <body>
 
   <a href="#main-content" class="skip-nav">Skip to main content</a>
 
+  <!-- @@nav:start -->
   <!-- ── Navigation ── -->
   <nav class="site-nav" aria-label="Main navigation">
     <div class="nav-container">
@@ -119,6 +130,7 @@
       </div>
     </div>
   </nav>
+  <!-- @@nav:end -->
 
   <main id="main-content" tabindex="-1">
 
@@ -303,7 +315,12 @@
         </div>
         <div class="skills-grid">
           <div class="skill-category">
-            <h3>Management</h3>
+            <h3>
+              <span class="skill-category-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </span>
+              Management
+            </h3>
             <ul class="skill-list">
               <li>Team Leadership</li>
               <li>Client Relations</li>
@@ -313,7 +330,12 @@
             </ul>
           </div>
           <div class="skill-category">
-            <h3>Automation &amp; Dev</h3>
+            <h3>
+              <span class="skill-category-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              </span>
+              Automation &amp; Dev
+            </h3>
             <ul class="skill-list">
               <li>Rewst (Workflow Automation)</li>
               <li>Python</li>
@@ -323,7 +345,12 @@
             </ul>
           </div>
           <div class="skill-category">
-            <h3>Platforms &amp; Tools</h3>
+            <h3>
+              <span class="skill-category-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </span>
+              Platforms &amp; Tools
+            </h3>
             <ul class="skill-list">
               <li>ConnectWise Manage</li>
               <li>NinjaRMM</li>
@@ -426,6 +453,7 @@
 
   </main>
 
+  <!-- @@footer:start -->
   <!-- ── Footer ── -->
   <footer class="site-footer">
     <div class="footer-inner">
@@ -447,13 +475,18 @@
       </div>
     </div>
   </footer>
+  <!-- @@footer:end -->
 
+  <!-- @@back-to-top:start -->
   <button class="back-to-top" id="backToTop" aria-label="Back to top">
     <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
   </button>
+  <!-- @@back-to-top:end -->
 
+  <!-- @@scripts-common:start -->
   <script src="js/theme.js" defer></script>
   <script src="js/main.js" defer></script>
+  <!-- @@scripts-common:end -->
 
 </body>
 </html>
