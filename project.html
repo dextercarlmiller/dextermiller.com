@@ -10,13 +10,13 @@
   <link rel="canonical" href="https://dextermiller.com/project.html">
 
   <!-- Open Graph -->
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="article">
   <meta property="og:url" content="https://dextermiller.com/project.html">
   <meta property="og:title" content="Projects — Dexter Miller">
   <meta property="og:description" content="Projects by Dexter Miller — automation workflows built in Rewst, Grafana dashboards, and AI-powered games from his Indiana Tech senior project.">
   <meta property="og:image" content="https://dextermiller.com/images/profile.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  <meta property="og:image:width" content="520">
+  <meta property="og:image:height" content="520">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
@@ -38,7 +38,7 @@
         "worksFor": {
           "@type": "Organization",
           "name": "Applied Technology Group",
-          "url": "http://www.atgfw.com"
+          "url": "https://www.atgfw.com"
         },
         "url": "https://dextermiller.com"
       },
@@ -65,7 +65,8 @@
   <!-- Favicon & Mobile -->
   <link rel="icon" href="images/stickerlogo.png" type="image/png">
   <link rel="apple-touch-icon" href="images/stickerlogo.png">
-  <meta name="theme-color" content="#0f172a">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d1117">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -103,7 +104,7 @@
         <a class="nav-link active" href="project.html">Projects</a>
         <a class="nav-link" href="resume.html" target="_blank" rel="noopener">Resume</a>
         <a class="nav-link" href="https://www.linkedin.com/in/dextermiller2020" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="nav-link" href="mailto:dextercarlmiller+website@gmail.com">Contact</a>
+        <a class="nav-link" href="contact.html">Contact</a>
         <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Switch to dark mode" title="Toggle dark mode">
           <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
           <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -112,348 +113,361 @@
     </div>
   </nav>
 
-  <!-- ── Page Hero ── -->
-  <header class="page-hero" id="main-content" tabindex="-1">
-    <div class="page-hero-inner">
-      <p class="page-hero-label">Applied Technology Group &amp; Indiana Tech</p>
-      <h1 class="page-hero-title">Projects</h1>
-      <p class="page-hero-desc">
-        Automation workflows that save real time, dashboards that surface the right data, and an AI game suite that started it all. These are the projects that define how I think about technology.
-      </p>
-    </div>
-  </header>
+  <main id="main-content" tabindex="-1">
 
-  <!-- ── Automation & Workflow ── -->
-  <section class="section" id="automation">
-    <div class="container">
-      <div class="section-header">
-        <p class="section-label">Rewst Automation</p>
-        <h2 class="section-title">Automation &amp; Workflow</h2>
-        <div class="section-divider"></div>
-      </div>
-
-      <div class="projects-section-intro">
-        <p>
-          These workflows were built in <strong>Rewst</strong>, a managed service automation platform. Each one targets a specific repetitive process — eliminating manual work, improving accuracy, and freeing engineers to focus on higher-value tasks.
+    <!-- ── Page Hero ── -->
+    <header class="page-hero">
+      <div class="page-hero-inner">
+        <p class="page-hero-label">Applied Technology Group &amp; Indiana Tech</p>
+        <h1 class="page-hero-title">Projects</h1>
+        <p class="page-hero-desc">
+          Automation workflows that save real time, dashboards that surface the right data, and an AI game suite that started it all. These are the projects that define how I think about technology.
         </p>
       </div>
+    </header>
 
-      <div class="project-cards-grid">
+    <!-- ── Automation & Workflow ── -->
+    <section class="section" id="automation" aria-label="Automation and Workflow">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Rewst Automation</p>
+          <h2 class="section-title">Automation &amp; Workflow</h2>
+          <div class="section-divider"></div>
+        </div>
 
-        <div class="project-card">
-          <div class="project-card-header">
-            <div class="project-card-icon">AD</div>
-            <div class="project-card-title-wrap">
-              <p class="project-card-title">Auto Dispatch — Emailed Tickets</p>
-              <div class="tech-tags">
-                <span class="tech-tag rewst">Rewst</span>
+        <div class="projects-section-intro">
+          <p>
+            These workflows were built in <strong>Rewst</strong>, a managed service automation platform. Each one targets a specific repetitive process — eliminating manual work, improving accuracy, and freeing engineers to focus on higher-value tasks.
+          </p>
+        </div>
+
+        <div class="project-cards-grid">
+
+          <div class="project-card">
+            <div class="project-card-header">
+              <div class="project-card-icon">AD</div>
+              <div class="project-card-title-wrap">
+                <h3 class="project-card-title">Auto Dispatch — Emailed Tickets</h3>
+                <div class="tech-tags">
+                  <span class="tech-tag rewst">Rewst</span>
+                </div>
               </div>
             </div>
+            <p class="project-card-desc">
+              The most complex automation in production. When a ticket arrives by email, this workflow parses the content, determines priority and category, and assigns it to the correct engineer automatically — no manual triage required.
+            </p>
+            <span class="project-card-stat">Handles 60–100 tickets per week</span>
           </div>
-          <p class="project-card-desc">
-            The most complex automation in production. When a ticket arrives by email, this workflow parses the content, determines priority and category, and assigns it to the correct engineer automatically — no manual triage required.
-          </p>
-          <span class="project-card-stat">Handles 60–100 tickets per week</span>
-        </div>
 
-        <div class="project-card">
-          <div class="project-card-header">
-            <div class="project-card-icon">TA</div>
-            <div class="project-card-title-wrap">
-              <p class="project-card-title">Timesheet Audit</p>
-              <div class="tech-tags">
-                <span class="tech-tag rewst">Rewst</span>
-                <span class="tech-tag python">Python (original)</span>
+          <div class="project-card">
+            <div class="project-card-header">
+              <div class="project-card-icon">TA</div>
+              <div class="project-card-title-wrap">
+                <h3 class="project-card-title">Timesheet Audit</h3>
+                <div class="tech-tags">
+                  <span class="tech-tag rewst">Rewst</span>
+                  <span class="tech-tag python">Python (original)</span>
+                </div>
               </div>
             </div>
+            <p class="project-card-desc">
+              Originally built as a Python script that emailed engineers directly, this tool was later migrated to Rewst. It reviews engineer time entries, flags discrepancies, and sends targeted notifications — improving accuracy without anyone having to chase down corrections manually.
+            </p>
+            <span class="project-card-stat">Saves ~1 hour per week in reviews</span>
           </div>
-          <p class="project-card-desc">
-            Originally built as a Python script that emailed engineers directly, this tool was later migrated to Rewst. It reviews engineer time entries, flags discrepancies, and sends targeted notifications — improving accuracy without anyone having to chase down corrections manually.
-          </p>
-          <span class="project-card-stat">Saves ~1 hour per week in reviews</span>
-        </div>
 
-        <div class="project-card">
-          <div class="project-card-header">
-            <div class="project-card-icon">TE</div>
-            <div class="project-card-title-wrap">
-              <p class="project-card-title">Ticket Auto Escalation</p>
-              <div class="tech-tags">
-                <span class="tech-tag rewst">Rewst</span>
+          <div class="project-card">
+            <div class="project-card-header">
+              <div class="project-card-icon">TE</div>
+              <div class="project-card-title-wrap">
+                <h3 class="project-card-title">Ticket Auto Escalation</h3>
+                <div class="tech-tags">
+                  <span class="tech-tag rewst">Rewst</span>
+                </div>
               </div>
             </div>
+            <p class="project-card-desc">
+              When a ticket needs to move up the stack, this workflow automatically identifies the correct engineer to escalate to based on issue type and team structure. Removes ambiguity from the escalation process and ensures the right person gets the ticket immediately.
+            </p>
           </div>
-          <p class="project-card-desc">
-            When a ticket needs to move up the stack, this workflow automatically identifies the correct engineer to escalate to based on issue type and team structure. Removes ambiguity from the escalation process and ensures the right person gets the ticket immediately.
-          </p>
-        </div>
 
-        <div class="project-card">
-          <div class="project-card-header">
-            <div class="project-card-icon">AR</div>
-            <div class="project-card-title-wrap">
-              <p class="project-card-title">Attendance Reporter</p>
-              <div class="tech-tags">
-                <span class="tech-tag rewst">Rewst</span>
+          <div class="project-card">
+            <div class="project-card-header">
+              <div class="project-card-icon">AR</div>
+              <div class="project-card-title-wrap">
+                <h3 class="project-card-title">Attendance Reporter</h3>
+                <div class="tech-tags">
+                  <span class="tech-tag rewst">Rewst</span>
+                </div>
               </div>
             </div>
+            <p class="project-card-desc">
+              Generates attendance reports by pulling entry log data from the company's security system. Used during performance reviews to provide a factual, timestamped record of attendance and punctuality — removing subjectivity from the process.
+            </p>
           </div>
-          <p class="project-card-desc">
-            Generates attendance reports by pulling entry log data from the company's security system. Used during performance reviews to provide a factual, timestamped record of attendance and punctuality — removing subjectivity from the process.
-          </p>
-        </div>
 
-        <div class="project-card">
-          <div class="project-card-header">
-            <div class="project-card-icon">TO</div>
-            <div class="project-card-title-wrap">
-              <p class="project-card-title">Time Off Report</p>
-              <div class="tech-tags">
-                <span class="tech-tag rewst">Rewst</span>
+          <div class="project-card">
+            <div class="project-card-header">
+              <div class="project-card-icon">TO</div>
+              <div class="project-card-title-wrap">
+                <h3 class="project-card-title">Time Off Report</h3>
+                <div class="tech-tags">
+                  <span class="tech-tag rewst">Rewst</span>
+                </div>
               </div>
             </div>
-          </div>
-          <p class="project-card-desc">
-            Automatically emails each employee a personalized summary of how much vacation time they've used and when their days reset. Eliminates recurring questions to management and keeps every employee self-informed on their balance.
-          </p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Data & Visualization ── -->
-  <section class="section section-alt" id="dashboards">
-    <div class="container">
-      <div class="section-header">
-        <p class="section-label">Grafana</p>
-        <h2 class="section-title">Data &amp; Visualization</h2>
-        <div class="section-divider"></div>
-      </div>
-
-      <div class="projects-section-intro">
-        <p>
-          Built a suite of <strong>Grafana dashboards</strong> to surface operational metrics that previously required manual investigation. These dashboards give the team real-time visibility into call queue performance and backup system health.
-        </p>
-      </div>
-
-      <div class="grafana-grid">
-
-        <div class="grafana-card">
-          <span class="grafana-label">Call Queue</span>
-          <h3>Queue Performance Dashboards</h3>
-          <p>Three dashboards covering every angle of call queue activity:</p>
-          <ul>
-            <li>Individual engineer metrics within the queue</li>
-            <li>Overall queue stats including call volume and received calls over time</li>
-            <li>Call arrival heatmap — visualizes when calls peak by hour and day</li>
-            <li>Missed call heatmap — shows patterns in calls that go unanswered</li>
-          </ul>
-        </div>
-
-        <div class="grafana-card">
-          <span class="grafana-label">Infrastructure</span>
-          <h3>Backup System Dashboard</h3>
-          <p>
-            A monitoring dashboard that surfaces failed backup jobs across all managed client systems and devices. Previously, finding failed backups required manual checks across multiple systems — now they're visible at a glance.
-          </p>
-          <p>
-            Gives engineers an immediate starting point each morning and ensures nothing slips through unnoticed.
-          </p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Senior Project: AI Games ── -->
-  <section class="section" id="games">
-    <div class="container">
-      <div class="section-header">
-        <p class="section-label">Senior Project &mdash; Indiana Tech</p>
-        <h2 class="section-title">AI Game Suite</h2>
-        <div class="section-divider"></div>
-      </div>
-
-      <div class="projects-section-intro">
-        <p>
-          Two classic strategy games powered by the MinMax algorithm — built as my senior project at Indiana Tech. The AI doesn't guess; it runs a recursive search algorithm that evaluates every possible future game state to find the optimal move.
-        </p>
-      </div>
-
-      <div class="games-grid">
-
-        <!-- Tic-Tac-Toe -->
-        <div class="game-panel">
-          <h3 class="game-panel-title">Tic-Tac-Toe</h3>
-          <p class="game-subtitle">MinMax Algorithm</p>
-          <p id="AlertWinner" class="game-status-bar" aria-live="polite" aria-atomic="true">Player Turn: X</p>
-
-          <div class="TicTacToe">
-            <table class="boardTable" aria-label="Tic-Tac-Toe board" role="grid">
-              <tr>
-                <td class="celltictac" id="0"></td>
-                <td class="celltictac" id="1"></td>
-                <td class="celltictac" id="2"></td>
-              </tr>
-              <tr>
-                <td class="celltictac" id="3"></td>
-                <td class="celltictac" id="4"></td>
-                <td class="celltictac" id="5"></td>
-              </tr>
-              <tr>
-                <td class="celltictac" id="6"></td>
-                <td class="celltictac" id="7"></td>
-                <td class="celltictac" id="8"></td>
-              </tr>
-            </table>
+            <p class="project-card-desc">
+              Automatically emails each employee a personalized summary of how much vacation time they've used and when their days reset. Eliminates recurring questions to management and keeps every employee self-informed on their balance.
+            </p>
           </div>
 
-          <div class="game-controls">
-            <button class="btn btn-outline" id="tttRestart">Restart</button>
-            <button class="btn btn-primary" id="tttAI">AI Move</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Data & Visualization ── -->
+    <section class="section section-alt" id="dashboards" aria-label="Data and Visualization">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Grafana</p>
+          <h2 class="section-title">Data &amp; Visualization</h2>
+          <div class="section-divider"></div>
+        </div>
+
+        <div class="projects-section-intro">
+          <p>
+            Built a suite of <strong>Grafana dashboards</strong> to surface operational metrics that previously required manual investigation. These dashboards give the team real-time visibility into call queue performance and backup system health.
+          </p>
+        </div>
+
+        <div class="grafana-grid">
+
+          <div class="grafana-card">
+            <span class="grafana-label">Call Queue</span>
+            <h3>Queue Performance Dashboards</h3>
+            <p>Three dashboards covering every angle of call queue activity:</p>
+            <ul>
+              <li>Individual engineer metrics within the queue</li>
+              <li>Overall queue stats including call volume and received calls over time</li>
+              <li>Call arrival heatmap — visualizes when calls peak by hour and day</li>
+              <li>Missed call heatmap — shows patterns in calls that go unanswered</li>
+            </ul>
+          </div>
+
+          <div class="grafana-card">
+            <span class="grafana-label">Infrastructure</span>
+            <h3>Backup System Dashboard</h3>
+            <p>
+              A monitoring dashboard that surfaces failed backup jobs across all managed client systems and devices. Previously, finding failed backups required manual checks across multiple systems — now they're visible at a glance.
+            </p>
+            <p>
+              Gives engineers an immediate starting point each morning and ensures nothing slips through unnoticed.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Senior Project: AI Games ── -->
+    <section class="section" id="games" aria-label="AI Game Suite">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Senior Project &mdash; Indiana Tech</p>
+          <h2 class="section-title">AI Game Suite</h2>
+          <div class="section-divider"></div>
+        </div>
+
+        <div class="projects-section-intro">
+          <p>
+            Two classic strategy games powered by the MinMax algorithm — built as my senior project at Indiana Tech. The AI doesn't guess; it runs a recursive search algorithm that evaluates every possible future game state to find the optimal move.
+          </p>
+        </div>
+
+        <div class="games-grid">
+
+          <!-- Tic-Tac-Toe -->
+          <div class="game-panel">
+            <h3 class="game-panel-title">Tic-Tac-Toe</h3>
+            <p class="game-subtitle">MinMax Algorithm</p>
+            <p id="AlertWinner" class="game-status-bar" aria-live="polite" aria-atomic="true">Player Turn: X</p>
+
+            <div class="TicTacToe">
+              <table class="boardTable" aria-label="Tic-Tac-Toe board" role="grid">
+                <tr>
+                  <td class="celltictac" id="0"></td>
+                  <td class="celltictac" id="1"></td>
+                  <td class="celltictac" id="2"></td>
+                </tr>
+                <tr>
+                  <td class="celltictac" id="3"></td>
+                  <td class="celltictac" id="4"></td>
+                  <td class="celltictac" id="5"></td>
+                </tr>
+                <tr>
+                  <td class="celltictac" id="6"></td>
+                  <td class="celltictac" id="7"></td>
+                  <td class="celltictac" id="8"></td>
+                </tr>
+              </table>
+            </div>
+
+            <div class="game-controls">
+              <button class="btn btn-outline" id="tttRestart">Restart</button>
+              <button class="btn btn-primary" id="tttAI">AI Move</button>
+            </div>
+          </div>
+
+          <!-- Connect Four -->
+          <div class="game-panel">
+            <h3 class="game-panel-title">Connect Four</h3>
+            <p class="game-subtitle">Alpha-Beta Pruning</p>
+            <p id="AlertConnectWinner" class="game-status-bar" aria-live="polite" aria-atomic="true">Player Turn: Yellow</p>
+
+            <div class="Connect4">
+              <table class="connecTable" aria-label="Connect Four board" role="grid">
+                <tr class="row">
+                  <td class="connectcell" id="00"></td>
+                  <td class="connectcell" id="01"></td>
+                  <td class="connectcell" id="02"></td>
+                  <td class="connectcell" id="03"></td>
+                  <td class="connectcell" id="04"></td>
+                  <td class="connectcell" id="05"></td>
+                  <td class="connectcell" id="06"></td>
+                </tr>
+                <tr class="row">
+                  <td class="connectcell" id="10"></td>
+                  <td class="connectcell" id="11"></td>
+                  <td class="connectcell" id="12"></td>
+                  <td class="connectcell" id="13"></td>
+                  <td class="connectcell" id="14"></td>
+                  <td class="connectcell" id="15"></td>
+                  <td class="connectcell" id="16"></td>
+                </tr>
+                <tr class="row">
+                  <td class="connectcell" id="20"></td>
+                  <td class="connectcell" id="21"></td>
+                  <td class="connectcell" id="22"></td>
+                  <td class="connectcell" id="23"></td>
+                  <td class="connectcell" id="24"></td>
+                  <td class="connectcell" id="25"></td>
+                  <td class="connectcell" id="26"></td>
+                </tr>
+                <tr class="row">
+                  <td class="connectcell" id="30"></td>
+                  <td class="connectcell" id="31"></td>
+                  <td class="connectcell" id="32"></td>
+                  <td class="connectcell" id="33"></td>
+                  <td class="connectcell" id="34"></td>
+                  <td class="connectcell" id="35"></td>
+                  <td class="connectcell" id="36"></td>
+                </tr>
+                <tr class="row">
+                  <td class="connectcell" id="40"></td>
+                  <td class="connectcell" id="41"></td>
+                  <td class="connectcell" id="42"></td>
+                  <td class="connectcell" id="43"></td>
+                  <td class="connectcell" id="44"></td>
+                  <td class="connectcell" id="45"></td>
+                  <td class="connectcell" id="46"></td>
+                </tr>
+                <tr class="row">
+                  <td class="connectcell" id="50"></td>
+                  <td class="connectcell" id="51"></td>
+                  <td class="connectcell" id="52"></td>
+                  <td class="connectcell" id="53"></td>
+                  <td class="connectcell" id="54"></td>
+                  <td class="connectcell" id="55"></td>
+                  <td class="connectcell" id="56"></td>
+                </tr>
+              </table>
+            </div>
+
+            <div class="game-difficulty" role="group" aria-label="AI difficulty">
+              <label class="difficulty-label">
+                <input type="radio" name="c4difficulty" value="easy" checked> Easy
+              </label>
+              <label class="difficulty-label">
+                <input type="radio" name="c4difficulty" value="hard"> Hard
+              </label>
+            </div>
+
+            <div class="game-controls">
+              <button class="btn btn-outline" id="c4Restart">Restart</button>
+              <button class="btn btn-primary" id="c4AI">AI Move</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── How the AI Works ── -->
+    <section class="section section-dark" id="algorithm" aria-label="How the AI Works">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">The Theory</p>
+          <h2 class="section-title">How the AI Works</h2>
+          <div class="section-divider"></div>
+        </div>
+
+        <div class="projects-section-intro">
+          <p>
+            The "AI Move" button doesn't guess &mdash; it runs a search algorithm that evaluates every possible future game state to find the mathematically optimal move.
+          </p>
+        </div>
+
+        <div class="algo-cards">
+
+          <div class="algo-card">
+            <p class="algo-card-label">Tic-Tac-Toe</p>
+            <h3>The MinMax Algorithm</h3>
+            <p>
+              MinMax is a recursive decision-making algorithm for two-player, zero-sum games. It explores the entire game tree by alternating between two roles: the <em>Maximizer</em> (who seeks the highest score) and the <em>Minimizer</em> (who seeks the lowest).
+            </p>
+            <p>
+              For Tic-Tac-Toe, the board is small enough that MinMax can evaluate every possible position to depth, guaranteeing a perfect move every time. The AI will never lose when playing optimally.
+            </p>
+            <ul>
+              <li>Only works on purely strategic, chance-free games</li>
+              <li>Requires exactly two players</li>
+              <li>Guaranteed optimal play on small boards</li>
+            </ul>
+          </div>
+
+          <div class="algo-card">
+            <p class="algo-card-label">Connect Four</p>
+            <h3>Alpha-Beta Pruning</h3>
+            <p>
+              Connect Four has a much larger game tree than Tic-Tac-Toe (over 4 trillion positions), so pure MinMax is too slow. Alpha-Beta pruning is an optimization that skips branches of the tree that cannot influence the final decision.
+            </p>
+            <p>
+              Alpha tracks the best guaranteed score for the Maximizer; Beta tracks the best for the Minimizer. When Alpha &ge; Beta, the branch is pruned &mdash; we already know it won't be chosen.
+            </p>
+            <ul>
+              <li>Alpha: highest value guaranteed for the maximizer</li>
+              <li>Beta: lowest value guaranteed for the minimizer</li>
+              <li>Pruning can reduce search time dramatically</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="algo-image-grid">
+          <div class="algo-image-card">
+            <img src="files/minimax.png" alt="MinMax algorithm decision tree diagram" width="799" height="373" loading="lazy">
+            <p class="algo-image-caption">MinMax decision tree — alternating max and min levels</p>
+          </div>
+          <div class="algo-image-card">
+            <img src="files/alphabeta.png" alt="Alpha-Beta pruning diagram" width="400" height="203" loading="lazy">
+            <p class="algo-image-caption">Alpha-Beta pruning — grayed branches are skipped entirely</p>
           </div>
         </div>
 
-        <!-- Connect Four -->
-        <div class="game-panel">
-          <h3 class="game-panel-title">Connect Four</h3>
-          <p class="game-subtitle">Alpha-Beta Pruning</p>
-          <p id="AlertConnectWinner" class="game-status-bar" aria-live="polite" aria-atomic="true">Player Turn: Yellow</p>
-
-          <div class="Connect4">
-            <table class="connecTable" aria-label="Connect Four board" role="grid">
-              <tr class="row">
-                <td class="connectcell" id="00"></td>
-                <td class="connectcell" id="01"></td>
-                <td class="connectcell" id="02"></td>
-                <td class="connectcell" id="03"></td>
-                <td class="connectcell" id="04"></td>
-                <td class="connectcell" id="05"></td>
-                <td class="connectcell" id="06"></td>
-              </tr>
-              <tr class="row">
-                <td class="connectcell" id="10"></td>
-                <td class="connectcell" id="11"></td>
-                <td class="connectcell" id="12"></td>
-                <td class="connectcell" id="13"></td>
-                <td class="connectcell" id="14"></td>
-                <td class="connectcell" id="15"></td>
-                <td class="connectcell" id="16"></td>
-              </tr>
-              <tr class="row">
-                <td class="connectcell" id="20"></td>
-                <td class="connectcell" id="21"></td>
-                <td class="connectcell" id="22"></td>
-                <td class="connectcell" id="23"></td>
-                <td class="connectcell" id="24"></td>
-                <td class="connectcell" id="25"></td>
-                <td class="connectcell" id="26"></td>
-              </tr>
-              <tr class="row">
-                <td class="connectcell" id="30"></td>
-                <td class="connectcell" id="31"></td>
-                <td class="connectcell" id="32"></td>
-                <td class="connectcell" id="33"></td>
-                <td class="connectcell" id="34"></td>
-                <td class="connectcell" id="35"></td>
-                <td class="connectcell" id="36"></td>
-              </tr>
-              <tr class="row">
-                <td class="connectcell" id="40"></td>
-                <td class="connectcell" id="41"></td>
-                <td class="connectcell" id="42"></td>
-                <td class="connectcell" id="43"></td>
-                <td class="connectcell" id="44"></td>
-                <td class="connectcell" id="45"></td>
-                <td class="connectcell" id="46"></td>
-              </tr>
-              <tr class="row">
-                <td class="connectcell" id="50"></td>
-                <td class="connectcell" id="51"></td>
-                <td class="connectcell" id="52"></td>
-                <td class="connectcell" id="53"></td>
-                <td class="connectcell" id="54"></td>
-                <td class="connectcell" id="55"></td>
-                <td class="connectcell" id="56"></td>
-              </tr>
-            </table>
-          </div>
-
-          <div class="game-controls">
-            <button class="btn btn-outline" id="c4Restart">Restart</button>
-            <button class="btn btn-primary" id="c4AI">AI Move</button>
-          </div>
-        </div>
-
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ── How the AI Works ── -->
-  <section class="section section-dark" id="algorithm">
-    <div class="container">
-      <div class="section-header">
-        <p class="section-label">The Theory</p>
-        <h2 class="section-title">How the AI Works</h2>
-        <div class="section-divider"></div>
-      </div>
-
-      <div class="projects-section-intro">
-        <p>
-          The "AI Move" button doesn't guess &mdash; it runs a search algorithm that evaluates every possible future game state to find the mathematically optimal move.
-        </p>
-      </div>
-
-      <div class="algo-cards">
-
-        <div class="algo-card">
-          <p class="algo-card-label">Tic-Tac-Toe</p>
-          <h3>The MinMax Algorithm</h3>
-          <p>
-            MinMax is a recursive decision-making algorithm for two-player, zero-sum games. It explores the entire game tree by alternating between two roles: the <em>Maximizer</em> (who seeks the highest score) and the <em>Minimizer</em> (who seeks the lowest).
-          </p>
-          <p>
-            For Tic-Tac-Toe, the board is small enough that MinMax can evaluate every possible position to depth, guaranteeing a perfect move every time. The AI will never lose when playing optimally.
-          </p>
-          <ul>
-            <li>Only works on purely strategic, chance-free games</li>
-            <li>Requires exactly two players</li>
-            <li>Guaranteed optimal play on small boards</li>
-          </ul>
-        </div>
-
-        <div class="algo-card">
-          <p class="algo-card-label">Connect Four</p>
-          <h3>Alpha-Beta Pruning</h3>
-          <p>
-            Connect Four has a much larger game tree than Tic-Tac-Toe (over 4 trillion positions), so pure MinMax is too slow. Alpha-Beta pruning is an optimization that skips branches of the tree that cannot influence the final decision.
-          </p>
-          <p>
-            Alpha tracks the best guaranteed score for the Maximizer; Beta tracks the best for the Minimizer. When Alpha &ge; Beta, the branch is pruned &mdash; we already know it won't be chosen.
-          </p>
-          <ul>
-            <li>Alpha: highest value guaranteed for the maximizer</li>
-            <li>Beta: lowest value guaranteed for the minimizer</li>
-            <li>Pruning can reduce search time dramatically</li>
-          </ul>
-        </div>
-
-      </div>
-
-      <div class="algo-image-grid">
-        <div class="algo-image-card">
-          <img src="files/minimax.png" alt="MinMax algorithm decision tree diagram" loading="lazy">
-          <p class="algo-image-caption">MinMax decision tree — alternating max and min levels</p>
-        </div>
-        <div class="algo-image-card">
-          <img src="files/alphabeta.png" alt="Alpha-Beta pruning diagram" loading="lazy">
-          <p class="algo-image-caption">Alpha-Beta pruning — grayed branches are skipped entirely</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
+  </main>
 
   <!-- ── Footer ── -->
   <footer class="site-footer">
@@ -468,11 +482,11 @@
           <a href="project.html">Projects</a>
           <a href="https://www.linkedin.com/in/dextermiller2020" target="_blank" rel="noopener">LinkedIn</a>
           <a href="https://twitter.com/dexymills" target="_blank" rel="noopener">X</a>
-          <a href="mailto:dextercarlmiller+website@gmail.com">Contact</a>
+          <a href="contact.html">Contact</a>
         </nav>
       </div>
       <div class="footer-bottom">
-        <p>Built with purpose &mdash; dextermiller.com</p>
+        <p>&copy; 2026 Dexter Miller &mdash; dextermiller.com</p>
       </div>
     </div>
   </footer>

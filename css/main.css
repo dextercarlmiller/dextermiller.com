@@ -530,7 +530,7 @@ ul {
 .education-minor {
   font-size: 0.875rem;
   color: var(--text-muted);
-  margin-bottom: 16px;
+  margin-bottom: 6px;
 }
 
 .education-info p {
@@ -707,7 +707,7 @@ ul {
 
 .footer-bottom p {
   font-size: 0.8rem;
-  color: #334155;
+  color: #94a3b8;
 }
 
 /* --- Page Hero (inner pages) -------------------------------- */
@@ -1306,10 +1306,35 @@ ul {
   margin-bottom: 10px;
 }
 
-/* --- Fix footer bottom text contrast ---------------------------- */
-.footer-bottom p {
-  font-size: 0.8rem;
-  color: #64748b;
+/* --- Education year -------------------------------------------- */
+.education-year {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+/* --- Connect Four difficulty toggle ----------------------------- */
+.game-difficulty {
+  display: flex;
+  gap: 20px;
+  margin-top: 16px;
+}
+
+.difficulty-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.difficulty-label input[type="radio"] {
+  accent-color: var(--blue);
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
 }
 
 /* --- Responsive -------------------------------------------- */
