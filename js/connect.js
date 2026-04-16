@@ -7,6 +7,10 @@
 
   startconnect();
 
+  /* Wire up game control buttons */
+  document.getElementById('c4Restart').addEventListener('click', startconnect);
+  document.getElementById('c4AI').addEventListener('click', ConnectComp);
+
   /* Count occurrences of a value in an array (replaces Array.prototype extension) */
   function countValues(arr, value) {
     var count = 0;
@@ -360,10 +364,5 @@
 
     return score_position;
   }
-
-  /* Expose public API to the global scope for HTML onclick handlers */
-  window.startconnect = startconnect;
-  window.ConnectComp = ConnectComp;
-  window.selectColumn = selectColumn;
 
 }());
