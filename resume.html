@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume — Dexter Miller</title>
+  <meta name="robots" content="noindex">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    ul { list-style: none; }
+
+    /* ── Design tokens ── */
+    :root {
+      --navy:       #0f172a;
+      --blue:       #2563eb;
+      --blue-light: #3b82f6;
+      --gold:       #d97706;
+      --text:       #1e293b;
+      --muted:      #64748b;
+      --border:     #e2e8f0;
+      --bg-alt:     #f8fafc;
+      --font-body:  'Inter', system-ui, sans-serif;
+      --font-head:  'Poppins', system-ui, sans-serif;
+    }
+
+    /* ── Page shell ── */
+    body {
+      font-family: var(--font-body);
+      color: var(--text);
+      background: #f1f5f9;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+
+    /* ── Top bar ── */
+    .top-bar {
+      background: var(--navy);
+      color: rgba(255,255,255,0.75);
+      padding: 10px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .top-bar a {
+      color: #93c5fd;
+      text-decoration: none;
+    }
+
+    .top-bar a:hover { color: #ffffff; }
+
+    .print-btn {
+      background: var(--blue);
+      color: #ffffff;
+      border: none;
+      padding: 7px 18px;
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .print-btn:hover { background: #1d4ed8; }
+
+    /* ── Resume paper ── */
+    .resume {
+      max-width: 860px;
+      margin: 32px auto;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+      overflow: hidden;
+    }
+
+    /* ── Header ── */
+    .resume-header {
+      background: linear-gradient(135deg, #0a1628 0%, #0f172a 45%, #1e3a5f 100%);
+      color: #ffffff;
+      padding: 40px 48px 36px;
+    }
+
+    .resume-name {
+      font-family: var(--font-head);
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .resume-title {
+      font-size: 1rem;
+      color: #93c5fd;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+
+    .resume-contact {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.72);
+    }
+
+    .resume-contact a {
+      color: #bfdbfe;
+      text-decoration: none;
+    }
+
+    .resume-contact span::before {
+      content: '·';
+      margin-right: 20px;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .resume-contact span:first-child::before { content: none; margin: 0; }
+
+    /* ── Body ── */
+    .resume-body {
+      padding: 40px 48px;
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 48px;
+      align-items: start;
+    }
+
+    /* ── Section ── */
+    .section { margin-bottom: 36px; }
+    .section:last-child { margin-bottom: 0; }
+
+    .section-title {
+      font-family: var(--font-head);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    /* ── Experience ── */
+    .exp-item { margin-bottom: 24px; }
+    .exp-item:last-child { margin-bottom: 0; }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: 2px;
+    }
+
+    .exp-role {
+      font-family: var(--font-head);
+      font-size: 0.97rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .exp-date {
+      font-size: 0.77rem;
+      font-weight: 600;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .exp-company {
+      font-size: 0.85rem;
+      color: var(--blue);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .exp-progression {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .prog-step {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--muted);
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 8px;
+    }
+
+    .prog-step.current {
+      color: var(--blue);
+      background: #eff6ff;
+      border-color: #bfdbfe;
+      font-weight: 700;
+    }
+
+    .prog-arrow {
+      font-size: 0.7rem;
+      color: #cbd5e1;
+    }
+
+    .exp-bullets { padding-left: 0; }
+
+    .exp-bullets li {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.65;
+      padding: 3px 0 3px 16px;
+      position: relative;
+    }
+
+    .exp-bullets li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 11px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--blue-light);
+    }
+
+    /* ── Sidebar ── */
+    .sidebar .section { margin-bottom: 28px; }
+
+    .skill-group { margin-bottom: 16px; }
+    .skill-group:last-child { margin-bottom: 0; }
+
+    .skill-group-label {
+      font-size: 0.77rem;
+      font-weight: 700;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .skill-tag {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--muted);
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 3px 8px;
+    }
+
+    /* Education */
+    .edu-school {
+      font-family: var(--font-head);
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 3px;
+    }
+
+    .edu-degree {
+      font-size: 0.83rem;
+      color: var(--blue);
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .edu-minor {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .edu-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* Community */
+    .community-item { margin-bottom: 12px; }
+    .community-item:last-child { margin-bottom: 0; }
+
+    .community-org {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .community-role {
+      font-size: 0.77rem;
+      color: var(--gold);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Print ── */
+    @media print {
+      body { background: #ffffff; }
+      .top-bar { display: none; }
+      .resume {
+        max-width: 100%;
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+      }
+      .resume-body { gap: 36px; }
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 680px) {
+      .resume-header { padding: 28px 24px; }
+      .resume-body {
+        grid-template-columns: 1fr;
+        padding: 28px 24px;
+        gap: 0;
+      }
+      .sidebar { border-top: 2px solid var(--border); padding-top: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <span>
+      <a href="index.html">&larr; Back to dextermiller.com</a>
+    </span>
+    <button class="print-btn" onclick="window.print()">Print / Save as PDF</button>
+  </div>
+
+  <div class="resume">
+
+    <!-- Header -->
+    <header class="resume-header">
+      <p class="resume-name">Dexter Miller</p>
+      <p class="resume-title">IT Manager &amp; Automation Engineer</p>
+      <div class="resume-contact">
+        <span>Fort Wayne, IN</span>
+        <span><a href="mailto:dextercarlmiller@gmail.com">dextercarlmiller@gmail.com</a></span>
+        <span><a href="https://www.linkedin.com/in/dextermiller2020" target="_blank" rel="noopener">linkedin.com/in/dextermiller2020</a></span>
+        <span><a href="https://dextermiller.com" target="_blank" rel="noopener">dextermiller.com</a></span>
+      </div>
+    </header>
+
+    <div class="resume-body">
+
+      <!-- Main column -->
+      <main>
+
+        <!-- Summary -->
+        <section class="section">
+          <h2 class="section-title">Summary</h2>
+          <p style="font-size:0.9rem; color:var(--muted); line-height:1.75;">
+            IT Manager and automation engineer with 6+ years at Applied Technology Group, progressing from intern to Tier 1 Manager. Specializes in designing and deploying automated workflows that eliminate repetitive manual work, leading first-line support teams for managed service clients, and building data visualizations that surface operational insights in real time. Computer Science graduate with a strong foundation in algorithms and software development.
+          </p>
+        </section>
+
+        <!-- Experience -->
+        <section class="section">
+          <h2 class="section-title">Experience</h2>
+
+          <div class="exp-item">
+            <div class="exp-header">
+              <span class="exp-role">Tier 1 Manager</span>
+              <span class="exp-date">June 2019 &ndash; Present</span>
+            </div>
+            <p class="exp-company">Applied Technology Group &mdash; Fort Wayne, IN</p>
+            <div class="exp-progression">
+              <span class="prog-step">Intern</span>
+              <span class="prog-arrow">&#8594;</span>
+              <span class="prog-step">Helpdesk</span>
+              <span class="prog-arrow">&#8594;</span>
+              <span class="prog-step">Projects Engineer</span>
+              <span class="prog-arrow">&#8594;</span>
+              <span class="prog-step current">Tier 1 Manager</span>
+            </div>
+            <ul class="exp-bullets">
+              <li>Manage first-line support engineers responsible for all managed IT clients, overseeing escalation routing, team performance, and continuous process improvement</li>
+              <li>Built and deployed an automated email ticket dispatch workflow in Rewst that parses, categorizes, and assigns 60&ndash;100 tickets per week with no manual triage</li>
+              <li>Designed a Timesheet Audit automation (originally Python, migrated to Rewst) that flags discrepancies and notifies engineers directly, saving ~1 hour of review per week</li>
+              <li>Developed Ticket Auto Escalation, Attendance Reporter, and Time Off Report workflows in Rewst, eliminating recurring manual tasks across the team</li>
+              <li>Built a suite of Grafana dashboards covering call queue performance (engineer metrics, call volume, arrival and missed call heatmaps) and backup system health across all managed clients</li>
+              <li>As Projects Engineer, onboarded new clients and deployed full IT stack (networking, endpoints, cloud, security) for incoming managed service agreements</li>
+            </ul>
+          </div>
+
+          <div class="exp-item">
+            <div class="exp-header">
+              <span class="exp-role">Production Associate</span>
+              <span class="exp-date">June 2018 &ndash; August 2018</span>
+            </div>
+            <p class="exp-company">Key Fasteners Corporation &mdash; Fort Wayne, IN</p>
+            <ul class="exp-bullets">
+              <li>Operated heavy manufacturing equipment in a high-precision production environment</li>
+              <li>Developed attention to process discipline, workplace safety protocols, and quality standards</li>
+            </ul>
+          </div>
+
+          <div class="exp-item">
+            <div class="exp-header">
+              <span class="exp-role">Food Service</span>
+              <span class="exp-date">May 2012 &ndash; May 2018</span>
+            </div>
+            <p class="exp-company">Swiss Village Inc.</p>
+            <ul class="exp-bullets">
+              <li>Sustained consistent employment for six years while completing full-time undergraduate education</li>
+              <li>Developed customer service, time management, and the discipline of managing long-term commitments</li>
+            </ul>
+          </div>
+
+        </section>
+
+        <!-- Projects -->
+        <section class="section">
+          <h2 class="section-title">Notable Projects</h2>
+          <ul class="exp-bullets">
+            <li><strong>Auto Dispatch Workflow (Rewst):</strong> Parses inbound support emails, classifies by priority and category, and auto-assigns to the correct engineer &mdash; handles 60&ndash;100 tickets/week</li>
+            <li><strong>Call Queue Dashboard Suite (Grafana):</strong> Four dashboards providing real-time and historical visibility into call queue volume, engineer performance, and missed-call patterns</li>
+            <li><strong>AI Game Suite (JavaScript):</strong> Tic-Tac-Toe and Connect Four with fully implemented MinMax and Alpha-Beta Pruning algorithms; built as senior capstone project at Indiana Tech</li>
+            <li><strong>Backup System Monitor (Grafana):</strong> Surfaces failed backup jobs across all managed client devices at a glance, replacing daily manual checks</li>
+          </ul>
+        </section>
+
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+
+        <section class="section">
+          <h2 class="section-title">Skills</h2>
+
+          <div class="skill-group">
+            <p class="skill-group-label">Management</p>
+            <div class="skill-tags">
+              <span class="skill-tag">Team Leadership</span>
+              <span class="skill-tag">Client Relations</span>
+              <span class="skill-tag">Client Onboarding</span>
+              <span class="skill-tag">Escalation Management</span>
+              <span class="skill-tag">IT Infrastructure</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <p class="skill-group-label">Automation &amp; Dev</p>
+            <div class="skill-tags">
+              <span class="skill-tag">Rewst</span>
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">Grafana</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">HTML / CSS</span>
+              <span class="skill-tag">Algorithm Design</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <p class="skill-group-label">Platforms</p>
+            <div class="skill-tags">
+              <span class="skill-tag">ConnectWise Manage</span>
+              <span class="skill-tag">NinjaRMM</span>
+              <span class="skill-tag">ScreenConnect</span>
+              <span class="skill-tag">ImmyBot</span>
+              <span class="skill-tag">Entra ID</span>
+              <span class="skill-tag">Windows Server</span>
+              <span class="skill-tag">Microsoft 365</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">Education</h2>
+          <p class="edu-school">Indiana Tech University</p>
+          <p class="edu-degree">B.S. Computer Science</p>
+          <p class="edu-minor">Minor: Mathematics</p>
+          <p class="edu-note">Senior project: MinMax algorithm with Alpha-Beta Pruning for AI-powered Tic-Tac-Toe and Connect Four</p>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">Community</h2>
+          <div class="community-item">
+            <p class="community-org">Cornerstone Daycare Learning Center</p>
+            <p class="community-role">Board Member</p>
+          </div>
+          <div class="community-item">
+            <p class="community-org">Chi Alpha Campus Ministries</p>
+            <p class="community-role">Volunteer</p>
+          </div>
+        </section>
+
+      </aside>
+
+    </div>
+  </div>
+
+</body>
+</html>

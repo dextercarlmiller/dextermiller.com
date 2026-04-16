@@ -15,6 +15,8 @@
   <meta property="og:title" content="Projects — Dexter Miller">
   <meta property="og:description" content="Projects by Dexter Miller — automation workflows built in Rewst, Grafana dashboards, and AI-powered games from his Indiana Tech senior project.">
   <meta property="og:image" content="https://dextermiller.com/images/profile.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
@@ -23,8 +25,47 @@
   <meta name="twitter:description" content="Projects by Dexter Miller — automation workflows built in Rewst, Grafana dashboards, and AI-powered games from his Indiana Tech senior project.">
   <meta name="twitter:image" content="https://dextermiller.com/images/profile.jpg">
 
-  <!-- Favicon -->
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://dextermiller.com/#person",
+        "name": "Dexter Miller",
+        "jobTitle": "Tier 1 IT Manager",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Applied Technology Group",
+          "url": "http://www.atgfw.com"
+        },
+        "url": "https://dextermiller.com"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://dextermiller.com/project.html#webpage",
+        "url": "https://dextermiller.com/project.html",
+        "name": "Projects — Dexter Miller",
+        "description": "Automation workflows, Grafana dashboards, and AI game projects by Dexter Miller.",
+        "author": { "@id": "https://dextermiller.com/#person" },
+        "isPartOf": { "@id": "https://dextermiller.com/#website" }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://dextermiller.com/#website",
+        "url": "https://dextermiller.com",
+        "name": "Dexter Miller",
+        "author": { "@id": "https://dextermiller.com/#person" }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Favicon & Mobile -->
   <link rel="icon" href="images/stickerlogo.png" type="image/png">
+  <link rel="apple-touch-icon" href="images/stickerlogo.png">
+  <meta name="theme-color" content="#0f172a">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,13 +87,21 @@
 </head>
 <body>
 
+  <a href="#main-content" class="skip-nav">Skip to main content</a>
+
   <!-- ── Navigation ── -->
   <nav class="site-nav" aria-label="Main navigation">
     <div class="nav-container">
       <a class="nav-logo" href="index.html">DM</a>
-      <div class="nav-links">
+      <button class="nav-hamburger" id="navHamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-links" id="navLinks">
         <a class="nav-link" href="index.html">About</a>
         <a class="nav-link active" href="project.html">Projects</a>
+        <a class="nav-link" href="resume.html" target="_blank" rel="noopener">Resume</a>
         <a class="nav-link" href="https://www.linkedin.com/in/dextermiller2020" target="_blank" rel="noopener">LinkedIn</a>
         <a class="nav-link" href="mailto:dextercarlmiller+website@gmail.com">Contact</a>
         <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Switch to dark mode" title="Toggle dark mode">
@@ -64,7 +113,7 @@
   </nav>
 
   <!-- ── Page Hero ── -->
-  <header class="page-hero">
+  <header class="page-hero" id="main-content" tabindex="-1">
     <div class="page-hero-inner">
       <p class="page-hero-label">Applied Technology Group &amp; Indiana Tech</p>
       <h1 class="page-hero-title">Projects</h1>
@@ -236,7 +285,7 @@
 
         <!-- Tic-Tac-Toe -->
         <div class="game-panel">
-          <h2 class="game-panel-title">Tic-Tac-Toe</h2>
+          <h3 class="game-panel-title">Tic-Tac-Toe</h3>
           <p class="game-subtitle">MinMax Algorithm</p>
           <p id="AlertWinner" class="game-status-bar" aria-live="polite" aria-atomic="true">Player Turn: X</p>
 
@@ -261,14 +310,14 @@
           </div>
 
           <div class="game-controls">
-            <button class="btn btn-outline" onclick="startTicTacToe()">Restart</button>
-            <button class="btn btn-primary" onclick="CompTurn()">AI Move</button>
+            <button class="btn btn-outline" id="tttRestart">Restart</button>
+            <button class="btn btn-primary" id="tttAI">AI Move</button>
           </div>
         </div>
 
         <!-- Connect Four -->
         <div class="game-panel">
-          <h2 class="game-panel-title">Connect Four</h2>
+          <h3 class="game-panel-title">Connect Four</h3>
           <p class="game-subtitle">Alpha-Beta Pruning</p>
           <p id="AlertConnectWinner" class="game-status-bar" aria-live="polite" aria-atomic="true">Player Turn: Yellow</p>
 
@@ -332,8 +381,8 @@
           </div>
 
           <div class="game-controls">
-            <button class="btn btn-outline" onclick="startconnect()">Restart</button>
-            <button class="btn btn-primary" onclick="ConnectComp()">AI Move</button>
+            <button class="btn btn-outline" id="c4Restart">Restart</button>
+            <button class="btn btn-primary" id="c4AI">AI Move</button>
           </div>
         </div>
 
@@ -418,7 +467,7 @@
           <a href="index.html">About</a>
           <a href="project.html">Projects</a>
           <a href="https://www.linkedin.com/in/dextermiller2020" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://twitter.com/dexymills" target="_blank" rel="noopener">Twitter</a>
+          <a href="https://twitter.com/dexymills" target="_blank" rel="noopener">X</a>
           <a href="mailto:dextercarlmiller+website@gmail.com">Contact</a>
         </nav>
       </div>
@@ -428,9 +477,14 @@
     </div>
   </footer>
 
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
   <script src="js/project.js" defer></script>
   <script src="js/connect.js" defer></script>
   <script src="js/theme.js" defer></script>
+  <script src="js/main.js" defer></script>
 
 </body>
 </html>

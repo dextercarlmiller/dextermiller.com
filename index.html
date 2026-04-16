@@ -15,6 +15,8 @@
   <meta property="og:title" content="Dexter Miller — IT Manager &amp; Automation Engineer">
   <meta property="og:description" content="Dexter Miller is a Tier 1 IT Manager and automation engineer at Applied Technology Group in Fort Wayne, IN. Faith-driven, family-first professional.">
   <meta property="og:image" content="https://dextermiller.com/images/profile.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
@@ -66,8 +68,10 @@
   }
   </script>
 
-  <!-- Favicon -->
+  <!-- Favicon & Mobile -->
   <link rel="icon" href="images/stickerlogo.png" type="image/png">
+  <link rel="apple-touch-icon" href="images/stickerlogo.png">
+  <meta name="theme-color" content="#0f172a">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -87,13 +91,21 @@
 </head>
 <body>
 
+  <a href="#about" class="skip-nav">Skip to main content</a>
+
   <!-- ── Navigation ── -->
   <nav class="site-nav" aria-label="Main navigation">
     <div class="nav-container">
       <a class="nav-logo" href="index.html">DM</a>
-      <div class="nav-links">
+      <button class="nav-hamburger" id="navHamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-links" id="navLinks">
         <a class="nav-link active" href="index.html">About</a>
         <a class="nav-link" href="project.html">Projects</a>
+        <a class="nav-link" href="resume.html" target="_blank" rel="noopener">Resume</a>
         <a class="nav-link" href="https://www.linkedin.com/in/dextermiller2020" target="_blank" rel="noopener">LinkedIn</a>
         <a class="nav-link" href="mailto:dextercarlmiller+website@gmail.com">Contact</a>
         <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Switch to dark mode" title="Toggle dark mode">
@@ -105,7 +117,7 @@
   </nav>
 
   <!-- ── Hero ── -->
-  <section class="hero" id="top">
+  <section class="hero" id="top" aria-label="Introduction">
     <div class="hero-inner">
       <div class="hero-text">
         <p class="hero-label">IT Manager &amp; Automation Engineer</p>
@@ -117,6 +129,7 @@
         <div class="hero-actions">
           <a href="project.html" class="btn btn-primary">View My Projects</a>
           <a href="#experience" class="btn btn-ghost">My Background</a>
+          <a href="resume.html" class="btn btn-ghost" target="_blank" rel="noopener">View Resume</a>
         </div>
         <div class="hero-values">
           <span class="hero-value">Faith-Driven Leadership</span>
@@ -139,7 +152,7 @@
   </section>
 
   <!-- ── About ── -->
-  <section class="section" id="about">
+  <section class="section" id="about" aria-label="About me" tabindex="-1">
     <div class="container">
       <div class="section-header">
         <h2 class="section-title">About Me</h2>
@@ -210,7 +223,7 @@
             <p>
               Started as an intern and worked through four roles over six years. As a Projects Engineer I onboarded new clients and deployed our full IT stack for incoming companies. As Tier 1 Manager I now oversee the first line of support engineers across all managed clients — handling escalation routing, team performance, and continuous process improvement.
             </p>
-            <p style="margin-top: 10px;">
+            <p class="timeline-note">
               A significant part of my work has shifted toward automation — building workflows in Rewst that eliminate repetitive manual tasks, improve accuracy, and free engineers to focus on higher-value work. See <a href="project.html">Projects</a> for specifics.
             </p>
           </div>
@@ -417,7 +430,7 @@
           <a href="index.html">About</a>
           <a href="project.html">Projects</a>
           <a href="https://www.linkedin.com/in/dextermiller2020" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://twitter.com/dexymills" target="_blank" rel="noopener">Twitter</a>
+          <a href="https://twitter.com/dexymills" target="_blank" rel="noopener">X</a>
           <a href="mailto:dextercarlmiller+website@gmail.com">Contact</a>
         </nav>
       </div>
@@ -427,7 +440,12 @@
     </div>
   </footer>
 
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
   <script src="js/theme.js" defer></script>
+  <script src="js/main.js" defer></script>
 
 </body>
 </html>

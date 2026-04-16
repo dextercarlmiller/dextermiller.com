@@ -9,6 +9,10 @@
 
   startTicTacToe();
 
+  /* Wire up game control buttons */
+  document.getElementById('tttRestart').addEventListener('click', startTicTacToe);
+  document.getElementById('tttAI').addEventListener('click', CompTurn);
+
   /* Keyboard handler — Enter or Space plays the focused cell */
   function handleTTTKeydown(e) {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -228,9 +232,5 @@
       return [best, bestmove];
     }
   }
-
-  /* Expose public API for HTML onclick handlers */
-  window.startTicTacToe = startTicTacToe;
-  window.CompTurn = CompTurn;
 
 }());
