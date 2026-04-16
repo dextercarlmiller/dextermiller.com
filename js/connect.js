@@ -241,6 +241,7 @@
         minimizer = 1;
       }
       iterations = 0;
+      difficulty = GetDifficulty();
       var Temp_values = alphabeta(gridboard, difficulty, maximizer, minimizer, true, -Infinity, Infinity);
       var best_column = Temp_values[1];
       selectColumn(best_column);
@@ -248,7 +249,8 @@
   }
 
   function GetDifficulty() {
-    return 6;
+    var radio = document.querySelector('input[name="c4difficulty"]:checked');
+    return (radio && radio.value === 'easy') ? 4 : 6;
   }
 
   function isterminal_node(theboard, maximizer, minimizer) {

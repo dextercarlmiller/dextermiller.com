@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found — Dexter Miller</title>
+  <meta name="robots" content="noindex">
+
+  <!-- Favicon & Mobile -->
+  <link rel="icon" href="images/stickerlogo.png" type="image/png">
+  <link rel="apple-touch-icon" href="images/stickerlogo.png">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d1117">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/main.css">
+
+  <style>
+    .not-found {
+      min-height: calc(100vh - 64px - 160px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 24px;
+      text-align: center;
+    }
+
+    .not-found-inner {
+      max-width: 480px;
+    }
+
+    .not-found-code {
+      font-family: var(--font-head);
+      font-size: clamp(5rem, 18vw, 9rem);
+      font-weight: 800;
+      color: var(--blue);
+      line-height: 1;
+      margin-bottom: 8px;
+      letter-spacing: -0.04em;
+      opacity: 0.2;
+    }
+
+    .not-found-title {
+      font-family: var(--font-head);
+      font-size: clamp(1.4rem, 4vw, 1.9rem);
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+
+    .not-found-desc {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 36px;
+    }
+
+    .not-found-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    [data-theme="dark"] .not-found-title {
+      color: #f0f6fc;
+    }
+  </style>
+
+  <!-- Apply saved theme before page renders to prevent flash -->
+  <script>
+    (function () {
+      if (localStorage.getItem('theme') === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    }());
+  </script>
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav class="site-nav" aria-label="Main navigation">
+    <div class="nav-container">
+      <a class="nav-logo" href="index.html">DM</a>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-links" id="navLinks">
+        <a class="nav-link" href="index.html">About</a>
+        <a class="nav-link" href="project.html">Projects</a>
+        <a class="nav-link" href="resume.html" target="_blank" rel="noopener">Resume</a>
+        <a class="nav-link" href="https://www.linkedin.com/in/dextermiller2020" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="nav-link" href="contact.html">Contact</a>
+        <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Switch to dark mode" title="Toggle dark mode">
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <div class="not-found">
+      <div class="not-found-inner">
+        <p class="not-found-code" aria-hidden="true">404</p>
+        <h1 class="not-found-title">Page Not Found</h1>
+        <p class="not-found-desc">
+          The page you're looking for doesn't exist or may have moved. Let's get you back on track.
+        </p>
+        <div class="not-found-actions">
+          <a href="index.html" class="btn btn-primary">Back to Home</a>
+          <a href="project.html" class="btn btn-outline">View Projects</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <span class="footer-brand-name">Dexter Miller</span>
+          <span class="footer-brand-sub">IT Manager &bull; Fort Wayne, IN</span>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="index.html">About</a>
+          <a href="project.html">Projects</a>
+          <a href="https://www.linkedin.com/in/dextermiller2020" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://twitter.com/dexymills" target="_blank" rel="noopener">X</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Dexter Miller &mdash; dextermiller.com</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/theme.js" defer></script>
+  <script src="js/main.js" defer></script>
+
+</body>
+</html>

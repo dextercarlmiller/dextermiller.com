@@ -15,8 +15,8 @@
   <meta property="og:title" content="Dexter Miller — IT Manager &amp; Automation Engineer">
   <meta property="og:description" content="Dexter Miller is a Tier 1 IT Manager and automation engineer at Applied Technology Group in Fort Wayne, IN. Faith-driven, family-first professional.">
   <meta property="og:image" content="https://dextermiller.com/images/profile.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  <meta property="og:image:width" content="520">
+  <meta property="og:image:height" content="520">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
@@ -38,7 +38,7 @@
         "worksFor": {
           "@type": "Organization",
           "name": "Applied Technology Group",
-          "url": "http://www.atgfw.com"
+          "url": "https://www.atgfw.com"
         },
         "alumniOf": {
           "@type": "CollegeOrUniversity",
@@ -71,12 +71,16 @@
   <!-- Favicon & Mobile -->
   <link rel="icon" href="images/stickerlogo.png" type="image/png">
   <link rel="apple-touch-icon" href="images/stickerlogo.png">
-  <meta name="theme-color" content="#0f172a">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d1117">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Preload LCP image -->
+  <link rel="preload" as="image" href="images/profile.jpg">
 
   <link rel="stylesheet" href="css/main.css">
 
@@ -91,7 +95,7 @@
 </head>
 <body>
 
-  <a href="#about" class="skip-nav">Skip to main content</a>
+  <a href="#main-content" class="skip-nav">Skip to main content</a>
 
   <!-- ── Navigation ── -->
   <nav class="site-nav" aria-label="Main navigation">
@@ -107,7 +111,7 @@
         <a class="nav-link" href="project.html">Projects</a>
         <a class="nav-link" href="resume.html" target="_blank" rel="noopener">Resume</a>
         <a class="nav-link" href="https://www.linkedin.com/in/dextermiller2020" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="nav-link" href="mailto:dextercarlmiller+website@gmail.com">Contact</a>
+        <a class="nav-link" href="contact.html">Contact</a>
         <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Switch to dark mode" title="Toggle dark mode">
           <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
           <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -116,307 +120,311 @@
     </div>
   </nav>
 
-  <!-- ── Hero ── -->
-  <section class="hero" id="top" aria-label="Introduction">
-    <div class="hero-inner">
-      <div class="hero-text">
-        <p class="hero-label">IT Manager &amp; Automation Engineer</p>
-        <h1 class="hero-name">Dexter Miller</h1>
-        <p class="hero-subtitle">Bridging Technology &amp; Purpose</p>
-        <p class="hero-tagline">
-          Leading a team of support engineers at Applied Technology Group in Fort Wayne, IN. I build automated workflows that save real time, manage infrastructure that keeps businesses running, and lead with faith, family, and community at the core.
-        </p>
-        <div class="hero-actions">
-          <a href="project.html" class="btn btn-primary">View My Projects</a>
-          <a href="#experience" class="btn btn-ghost">My Background</a>
-          <a href="resume.html" class="btn btn-ghost" target="_blank" rel="noopener">View Resume</a>
-        </div>
-        <div class="hero-values">
-          <span class="hero-value">Faith-Driven Leadership</span>
-          <span class="hero-value">Family-First Mentality</span>
-          <span class="hero-value">Community Involvement</span>
-          <span class="hero-value">Continuous Learning</span>
-        </div>
-      </div>
-      <div class="hero-photo-wrap">
-        <div class="hero-photo-frame">
-          <!-- width/height set to match the CSS frame dimensions for layout stability -->
-          <img src="images/profile.jpg"
-               alt="Dexter Miller"
-               width="260"
-               height="260"
-               loading="eager">
-        </div>
-      </div>
-    </div>
-  </section>
+  <main id="main-content" tabindex="-1">
 
-  <!-- ── About ── -->
-  <section class="section" id="about" aria-label="About me" tabindex="-1">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">About Me</h2>
-        <div class="section-divider"></div>
-      </div>
-      <div class="about-grid">
-        <div class="about-text">
-          <p>
-            I'm an IT Manager and automation engineer who started his career with a deep love for algorithms — implementing the MinMax algorithm for game AI during my senior year at Indiana Tech — and has since grown into leading teams, managing IT infrastructure, and building automated workflows that save real time for real people.
+    <!-- ── Hero ── -->
+    <section class="hero" id="top" aria-label="Introduction">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <p class="hero-label">IT Manager &amp; Automation Engineer</p>
+          <h1 class="hero-name">Dexter Miller</h1>
+          <p class="hero-subtitle">Bridging Technology &amp; Purpose</p>
+          <p class="hero-tagline">
+            Leading a team of support engineers at Applied Technology Group in Fort Wayne, IN. I build automated workflows that save real time, manage infrastructure that keeps businesses running, and lead with faith, family, and community at the core.
           </p>
-          <p>
-            Over six years at <a href="http://www.atgfw.com" target="_blank" rel="noopener">Applied Technology Group</a>, I've worked my way from intern to Tier 1 Manager, gaining hands-on experience across helpdesk, client onboarding, and project engineering before moving into leadership. Today I oversee the first line of support engineers serving our managed IT clients.
-          </p>
-          <p>
-            My work is grounded in three core values: <strong>faith, family, and community</strong>. I believe technology should serve people and strengthen connections. Outside of work I cherish time with my wife and kids, enjoy pickleball and disc golf, and love spending time outdoors.
-          </p>
-        </div>
-        <div class="values-grid">
-          <div class="value-card">
-            <h3>Faith</h3>
-            <p>Faith-driven leadership that keeps purpose at the center of every decision.</p>
+          <div class="hero-actions">
+            <a href="project.html" class="btn btn-primary">View My Projects</a>
+            <a href="#experience" class="btn btn-ghost">My Background</a>
+            <a href="resume.html" class="btn btn-ghost" target="_blank" rel="noopener">View Resume</a>
           </div>
-          <div class="value-card">
+          <div class="hero-values">
+            <span class="hero-value">Faith-Driven Leadership</span>
+            <span class="hero-value">Family-First Mentality</span>
+            <span class="hero-value">Community Involvement</span>
+            <span class="hero-value">Continuous Learning</span>
+          </div>
+        </div>
+        <div class="hero-photo-wrap">
+          <div class="hero-photo-frame">
+            <img src="images/profile.jpg"
+                 alt="Dexter Miller — IT Manager and Automation Engineer"
+                 width="260"
+                 height="260"
+                 loading="eager">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── About ── -->
+    <section class="section" id="about" aria-label="About me">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">About Me</h2>
+          <div class="section-divider"></div>
+        </div>
+        <div class="about-grid">
+          <div class="about-text">
+            <p>
+              I'm an IT Manager and automation engineer who started his career with a deep love for algorithms — implementing the MinMax algorithm for game AI during my senior year at Indiana Tech — and has since grown into leading teams, managing IT infrastructure, and building automated workflows that save real time for real people.
+            </p>
+            <p>
+              Over six years at <a href="https://www.atgfw.com" target="_blank" rel="noopener">Applied Technology Group</a>, I've worked my way from intern to Tier 1 Manager, gaining hands-on experience across helpdesk, client onboarding, and project engineering before moving into leadership. Today I oversee the first line of support engineers serving our managed IT clients.
+            </p>
+            <p>
+              My work is grounded in three core values: <strong>faith, family, and community</strong>. I believe technology should serve people and strengthen connections. Outside of work I cherish time with my wife and kids, enjoy pickleball and disc golf, and love spending time outdoors.
+            </p>
+          </div>
+          <div class="values-grid">
+            <div class="value-card">
+              <h3>Faith</h3>
+              <p>Faith-driven leadership that keeps purpose at the center of every decision.</p>
+            </div>
+            <div class="value-card">
+              <h3>Family</h3>
+              <p>A family-first mentality that shapes my priorities inside and outside of work.</p>
+            </div>
+            <div class="value-card">
+              <h3>Community</h3>
+              <p>Active community involvement and a genuine commitment to giving back.</p>
+            </div>
+            <div class="value-card">
+              <h3>Growth</h3>
+              <p>Continuous learning and a bias toward building things that improve how people work.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Experience ── -->
+    <section class="section section-alt" id="experience" aria-label="Experience">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Experience</h2>
+          <div class="section-divider"></div>
+        </div>
+        <div class="timeline">
+
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <h3>Tier 1 Manager</h3>
+                <span class="timeline-company">
+                  <a href="https://www.atgfw.com" target="_blank" rel="noopener">Applied Technology Group</a>
+                </span>
+              </div>
+              <span class="timeline-date"><time datetime="2019-06">June 2019</time> &ndash; Present</span>
+              <div class="career-path" aria-label="Career progression at ATG">
+                <span class="career-path-step">Intern</span>
+                <span class="career-path-arrow" aria-hidden="true">→</span>
+                <span class="career-path-step">Helpdesk</span>
+                <span class="career-path-arrow" aria-hidden="true">→</span>
+                <span class="career-path-step">Projects Engineer</span>
+                <span class="career-path-arrow" aria-hidden="true">→</span>
+                <span class="career-path-step current">Tier 1 Manager</span>
+              </div>
+              <p>
+                Started as an intern and worked through four roles over six years. As a Projects Engineer I onboarded new clients and deployed our full IT stack for incoming companies. As Tier 1 Manager I now oversee the first line of support engineers across all managed clients — handling escalation routing, team performance, and continuous process improvement.
+              </p>
+              <p class="timeline-note">
+                A significant part of my work has shifted toward automation — building workflows in Rewst that eliminate repetitive manual tasks, improve accuracy, and free engineers to focus on higher-value work. See <a href="project.html">Projects</a> for specifics.
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <h3>Production Associate</h3>
+                <span class="timeline-company">Key Fasteners Corporation</span>
+              </div>
+              <span class="timeline-date"><time datetime="2018-06">June 2018</time> &ndash; <time datetime="2018-08">August 2018</time></span>
+              <p>
+                Gained hands-on experience in a manufacturing environment working with heavy equipment. Developed an appreciation for process precision, workplace safety, and the discipline required in production settings.
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <h3>Food Service</h3>
+                <span class="timeline-company">Swiss Village Inc.</span>
+              </div>
+              <span class="timeline-date"><time datetime="2012-05">May 2012</time> &ndash; <time datetime="2018-05">May 2018</time></span>
+              <p>
+                My first professional role, held across six years of school. Serving under food safety guidelines taught me time management, customer service, and the discipline of balancing long-term responsibilities alongside full-time education.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Education ── -->
+    <section class="section" id="education" aria-label="Education">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Education</h2>
+          <div class="section-divider"></div>
+        </div>
+        <div class="education-card">
+          <div class="education-photo">
+            <img src="images/indiana-tech-sign.jpg"
+                 alt="Indiana Tech University campus sign"
+                 width="200"
+                 height="130"
+                 loading="lazy">
+          </div>
+          <div class="education-info">
+            <h3>Indiana Tech University</h3>
+            <p class="education-degree">Bachelor of Science &mdash; Computer Science</p>
+            <p class="education-minor">Minor: Mathematics</p>
+            <p class="education-year"><time datetime="2020-05">Graduated May 2020</time></p>
+            <p>
+              Completed a rigorous program with a focus on algorithms, software development, and problem-solving. Senior project: implemented the MinMax algorithm with Alpha-Beta pruning for AI-powered Tic-Tac-Toe and Connect Four — both playable on this site.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Skills ── -->
+    <section class="section section-alt" id="skills" aria-label="Skills and Tools">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Skills &amp; Tools</h2>
+          <div class="section-divider"></div>
+        </div>
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h3>Management</h3>
+            <ul class="skill-list">
+              <li>Team Leadership</li>
+              <li>Client Relations</li>
+              <li>New Client Onboarding</li>
+              <li>Escalation Management</li>
+              <li>IT Infrastructure</li>
+            </ul>
+          </div>
+          <div class="skill-category">
+            <h3>Automation &amp; Dev</h3>
+            <ul class="skill-list">
+              <li>Rewst (Workflow Automation)</li>
+              <li>Python</li>
+              <li>Grafana Dashboards</li>
+              <li>JavaScript / HTML / CSS</li>
+              <li>Algorithm Design</li>
+            </ul>
+          </div>
+          <div class="skill-category">
+            <h3>Platforms &amp; Tools</h3>
+            <ul class="skill-list">
+              <li>ConnectWise Manage</li>
+              <li>NinjaRMM</li>
+              <li>ScreenConnect</li>
+              <li>ImmyBot</li>
+              <li>Entra ID / Windows Server / M365</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Community ── -->
+    <section class="section" id="community" aria-label="Community">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Community</h2>
+          <div class="section-divider"></div>
+        </div>
+        <div class="community-grid">
+          <div class="community-card">
+            <h3>Chi Alpha Campus Ministries</h3>
+            <span class="community-role">Volunteer</span>
+            <p>
+              Chi Alpha is a national Christian organization focused on reaching college students for Christ. I volunteered with the local chapter for 3&ndash;4 years, investing in students and supporting the ministry's campus outreach. I continue to help out occasionally.
+            </p>
+          </div>
+          <div class="community-card">
+            <h3>Cornerstone Daycare Learning Center</h3>
+            <span class="community-role">Board Member</span>
+            <p>
+              A church-affiliated daycare serving families in Fort Wayne. I serve monthly on the board, contributing to organizational direction, oversight, and the long-term health of a community institution that serves young children and their families.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Interests ── -->
+    <section class="section section-alt" id="interests" aria-label="Outside of Work">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Outside of Work</h2>
+          <div class="section-divider"></div>
+        </div>
+        <div class="interests-grid">
+
+          <div class="interest-card">
+            <div class="interest-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
             <h3>Family</h3>
-            <p>A family-first mentality that shapes my priorities inside and outside of work.</p>
+            <p>Spending quality time with my wife and kids is the most rewarding part of life after a long day's work.</p>
           </div>
-          <div class="value-card">
-            <h3>Community</h3>
-            <p>Active community involvement and a genuine commitment to giving back.</p>
-          </div>
-          <div class="value-card">
-            <h3>Growth</h3>
-            <p>Continuous learning and a bias toward building things that improve how people work.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ── Experience ── -->
-  <section class="section section-alt" id="experience">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Experience</h2>
-        <div class="section-divider"></div>
-      </div>
-      <div class="timeline">
-
-        <div class="timeline-item">
-          <div class="timeline-marker"></div>
-          <div class="timeline-content">
-            <div class="timeline-header">
-              <h3>Tier 1 Manager</h3>
-              <span class="timeline-company">
-                <a href="http://www.atgfw.com" target="_blank" rel="noopener">Applied Technology Group</a>
-              </span>
+          <div class="interest-card">
+            <div class="interest-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="9.5" cy="9.5" r="5.5"/>
+                <path d="M14 14 L20.5 20.5"/>
+                <circle cx="20.5" cy="20.5" r="1.5"/>
+              </svg>
             </div>
-            <span class="timeline-date">June 2019 &ndash; Present</span>
-            <div class="career-path" aria-label="Career progression at ATG">
-              <span class="career-path-step">Intern</span>
-              <span class="career-path-arrow" aria-hidden="true">→</span>
-              <span class="career-path-step">Helpdesk</span>
-              <span class="career-path-arrow" aria-hidden="true">→</span>
-              <span class="career-path-step">Projects Engineer</span>
-              <span class="career-path-arrow" aria-hidden="true">→</span>
-              <span class="career-path-step current">Tier 1 Manager</span>
+            <h3>Pickleball</h3>
+            <p>A fast-growing sport that combines strategy, quick reflexes, and great community.</p>
+          </div>
+
+          <div class="interest-card">
+            <div class="interest-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <ellipse cx="12" cy="11" rx="9" ry="3.5"/>
+                <ellipse cx="12" cy="11" rx="4.5" ry="1.75"/>
+                <path d="M12 14.5 L12 20"/>
+                <path d="M9 20 L15 20"/>
+              </svg>
             </div>
-            <p>
-              Started as an intern and worked through four roles over six years. As a Projects Engineer I onboarded new clients and deployed our full IT stack for incoming companies. As Tier 1 Manager I now oversee the first line of support engineers across all managed clients — handling escalation routing, team performance, and continuous process improvement.
-            </p>
-            <p class="timeline-note">
-              A significant part of my work has shifted toward automation — building workflows in Rewst that eliminate repetitive manual tasks, improve accuracy, and free engineers to focus on higher-value work. See <a href="project.html">Projects</a> for specifics.
-            </p>
+            <h3>Disc Golf</h3>
+            <p>Combining the outdoors with a sport that rewards patience and precision over power.</p>
           </div>
-        </div>
 
-        <div class="timeline-item">
-          <div class="timeline-marker"></div>
-          <div class="timeline-content">
-            <div class="timeline-header">
-              <h3>Production Associate</h3>
-              <span class="timeline-company">Key Fasteners Corporation</span>
+          <div class="interest-card">
+            <div class="interest-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M3 20 L8.5 9 L12 15 L15.5 10 L21 20 Z"/>
+                <path d="M1 20 L23 20"/>
+              </svg>
             </div>
-            <span class="timeline-date">June 2018 &ndash; August 2018</span>
-            <p>
-              Gained hands-on experience in a manufacturing environment working with heavy equipment. Developed an appreciation for process precision, workplace safety, and the discipline required in production settings.
-            </p>
+            <h3>The Outdoors</h3>
+            <p>Time in nature &mdash; hiking, exploring, and appreciating the world beyond the screen.</p>
           </div>
-        </div>
 
-        <div class="timeline-item">
-          <div class="timeline-marker"></div>
-          <div class="timeline-content">
-            <div class="timeline-header">
-              <h3>Food Service</h3>
-              <span class="timeline-company">Swiss Village Inc.</span>
-            </div>
-            <span class="timeline-date">May 2012 &ndash; May 2018</span>
-            <p>
-              My first professional role, held across six years of school. Serving under food safety guidelines taught me time management, customer service, and the discipline of balancing long-term responsibilities alongside full-time education.
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Education ── -->
-  <section class="section" id="education">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Education</h2>
-        <div class="section-divider"></div>
-      </div>
-      <div class="education-card">
-        <div class="education-photo">
-          <img src="images/indiana-tech-sign.jpg"
-               alt="Indiana Tech University campus sign"
-               width="200"
-               height="130"
-               loading="lazy">
-        </div>
-        <div class="education-info">
-          <h3>Indiana Tech University</h3>
-          <p class="education-degree">Bachelor of Science &mdash; Computer Science</p>
-          <p class="education-minor">Minor: Mathematics</p>
-          <p>
-            Completed a rigorous program with a focus on algorithms, software development, and problem-solving. Senior project: implemented the MinMax algorithm with Alpha-Beta pruning for AI-powered Tic-Tac-Toe and Connect Four — both playable on this site.
-          </p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ── Skills ── -->
-  <section class="section section-alt" id="skills">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Skills &amp; Tools</h2>
-        <div class="section-divider"></div>
-      </div>
-      <div class="skills-grid">
-        <div class="skill-category">
-          <h3>Management</h3>
-          <ul class="skill-list">
-            <li>Team Leadership</li>
-            <li>Client Relations</li>
-            <li>New Client Onboarding</li>
-            <li>Escalation Management</li>
-            <li>IT Infrastructure</li>
-          </ul>
-        </div>
-        <div class="skill-category">
-          <h3>Automation &amp; Dev</h3>
-          <ul class="skill-list">
-            <li>Rewst (Workflow Automation)</li>
-            <li>Python</li>
-            <li>Grafana Dashboards</li>
-            <li>JavaScript / HTML / CSS</li>
-            <li>Algorithm Design</li>
-          </ul>
-        </div>
-        <div class="skill-category">
-          <h3>Platforms &amp; Tools</h3>
-          <ul class="skill-list">
-            <li>ConnectWise Manage</li>
-            <li>NinjaRMM</li>
-            <li>ScreenConnect</li>
-            <li>ImmyBot</li>
-            <li>Entra ID / Windows Server / M365</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Community ── -->
-  <section class="section" id="community">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Community</h2>
-        <div class="section-divider"></div>
-      </div>
-      <div class="community-grid">
-        <div class="community-card">
-          <h3>Chi Alpha Campus Ministries</h3>
-          <span class="community-role">Volunteer</span>
-          <p>
-            Chi Alpha is a national Christian organization focused on reaching college students for Christ. I volunteered with the local chapter for 3&ndash;4 years, investing in students and supporting the ministry's campus outreach. I continue to help out occasionally.
-          </p>
-        </div>
-        <div class="community-card">
-          <h3>Cornerstone Daycare Learning Center</h3>
-          <span class="community-role">Board Member</span>
-          <p>
-            A church-affiliated daycare serving families in Fort Wayne. I serve monthly on the board, contributing to organizational direction, oversight, and the long-term health of a community institution that serves young children and their families.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Interests ── -->
-  <section class="section section-alt" id="interests">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Outside of Work</h2>
-        <div class="section-divider"></div>
-      </div>
-      <div class="interests-grid">
-
-        <div class="interest-card">
-          <div class="interest-icon">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-              <circle cx="9" cy="7" r="4"/>
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-            </svg>
-          </div>
-          <h3>Family</h3>
-          <p>Spending quality time with my wife and kids is the most rewarding part of life after a long day's work.</p>
-        </div>
-
-        <div class="interest-card">
-          <div class="interest-icon">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <circle cx="9.5" cy="9.5" r="5.5"/>
-              <path d="M14 14 L20.5 20.5"/>
-              <circle cx="20.5" cy="20.5" r="1.5"/>
-            </svg>
-          </div>
-          <h3>Pickleball</h3>
-          <p>A fast-growing sport that combines strategy, quick reflexes, and great community.</p>
-        </div>
-
-        <div class="interest-card">
-          <div class="interest-icon">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <ellipse cx="12" cy="11" rx="9" ry="3.5"/>
-              <ellipse cx="12" cy="11" rx="4.5" ry="1.75"/>
-              <path d="M12 14.5 L12 20"/>
-              <path d="M9 20 L15 20"/>
-            </svg>
-          </div>
-          <h3>Disc Golf</h3>
-          <p>Combining the outdoors with a sport that rewards patience and precision over power.</p>
-        </div>
-
-        <div class="interest-card">
-          <div class="interest-icon">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M3 20 L8.5 9 L12 15 L15.5 10 L21 20 Z"/>
-              <path d="M1 20 L23 20"/>
-            </svg>
-          </div>
-          <h3>The Outdoors</h3>
-          <p>Time in nature &mdash; hiking, exploring, and appreciating the world beyond the screen.</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
+  </main>
 
   <!-- ── Footer ── -->
   <footer class="site-footer">
@@ -431,11 +439,11 @@
           <a href="project.html">Projects</a>
           <a href="https://www.linkedin.com/in/dextermiller2020" target="_blank" rel="noopener">LinkedIn</a>
           <a href="https://twitter.com/dexymills" target="_blank" rel="noopener">X</a>
-          <a href="mailto:dextercarlmiller+website@gmail.com">Contact</a>
+          <a href="contact.html">Contact</a>
         </nav>
       </div>
       <div class="footer-bottom">
-        <p>Built with purpose &mdash; dextermiller.com</p>
+        <p>&copy; 2026 Dexter Miller &mdash; dextermiller.com</p>
       </div>
     </div>
   </footer>
