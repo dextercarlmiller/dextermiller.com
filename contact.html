@@ -31,6 +31,10 @@
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d1117">
 
+  <!-- Preload critical fonts -->
+  <link rel="preload" as="font" type="font/woff2" href="fonts/inter-latin.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="fonts/poppins-700.woff2" crossorigin>
+
   <link rel="stylesheet" href="css/main.css">
 
   <style>
@@ -206,6 +210,8 @@
   </style>
 
   <!-- @@analytics:start -->
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-KKL15STH52"></script>
   <script>
@@ -293,6 +299,7 @@
           <!-- Right column: form -->
           <div class="contact-form-card">
             <form id="contactForm" novalidate>
+              <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
               <div class="form-group">
                 <label class="form-label" for="contactName">Name</label>
                 <input class="form-input" type="text" id="contactName" name="name" placeholder="Your name" required>
@@ -384,7 +391,8 @@
           name: name,
           email: email,
           message: message,
-          _subject: 'New message from dextermiller.com'
+          _subject: 'New message from dextermiller.com',
+          _honey: document.querySelector('[name="_honey"]').value
         })
       })
       .then(function (res) { return res.json(); })

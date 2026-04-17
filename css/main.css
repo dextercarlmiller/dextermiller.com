@@ -61,6 +61,11 @@
   --shadow:      0 2px 12px rgba(0, 0, 0, 0.06);
   --shadow-md:   0 6px 28px rgba(0, 0, 0, 0.10);
   --transition:  0.2s ease;
+
+  /* Connect Four cell colors */
+  --c4-empty:    #dbeafe;
+  --c4-player1:  #fbbf24;
+  --c4-player2:  #ef4444;
 }
 
 /* --- Reset & Base -------------------------------------------- */
@@ -1599,6 +1604,11 @@ ul {
   --border:    #30363d;
   --shadow:    0 2px 12px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 6px 28px rgba(0, 0, 0, 0.4);
+
+  /* Connect Four cell colors — dark mode */
+  --c4-empty:    #1e3a5f;
+  --c4-player1:  #d97706;
+  --c4-player2:  #dc2626;
 }
 
 /* Heading colors in dark mode */
