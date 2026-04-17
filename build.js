@@ -31,11 +31,24 @@ const PAGES = [
 
 /* ── Load all partials ──────────────────────────────────────── */
 const partialContent = {};
+let loadErrors = 0;
 for (const name of PARTIALS) {
   const p = path.join('src', 'partials', name + '.html');
   if (fs.existsSync(p)) {
-    partialContent[name] = fs.readFileSync(p, 'utf8');
+    try {
+      partialContent[name] = fs.readFileSync(p, 'utf8');
+    } catch (err) {
+      console.error(`  ERROR  failed to read partial "${name}": ${err.message}`);
+      loadErrors++;
+    }
+  } else {
+    console.error(`  ERROR  partial not found: ${p}`);
+    loadErrors++;
   }
+}
+if (loadErrors > 0) {
+  console.error(`\nAborted — ${loadErrors} partial(s) could not be loaded.`);
+  process.exit(1);
 }
 
 /* ── Build nav for a specific page (sets the active link) ───── */
@@ -59,24 +72,34 @@ function replacePartial(html, name, content) {
 
 /* ── Process each page ──────────────────────────────────────── */
 let built = 0;
+let pageErrors = 0;
 for (const { file, activePage } of PAGES) {
   if (!fs.existsSync(file)) {
     console.warn(`  skip  ${file} (not found)`);
     continue;
   }
 
-  let html = fs.readFileSync(file, 'utf8');
+  try {
+    let html = fs.readFileSync(file, 'utf8');
 
-  for (const name of PARTIALS) {
-    const content = name === 'nav' ? buildNav(activePage) : partialContent[name];
-    if (content !== undefined) {
-      html = replacePartial(html, name, content);
+    for (const name of PARTIALS) {
+      const content = name === 'nav' ? buildNav(activePage) : partialContent[name];
+      if (content !== undefined) {
+        html = replacePartial(html, name, content);
+      }
     }
-  }
 
-  fs.writeFileSync(file, html, 'utf8');
-  console.log(`  built ${file}`);
-  built++;
+    fs.writeFileSync(file, html, 'utf8');
+    console.log(`  built ${file}`);
+    built++;
+  } catch (err) {
+    console.error(`  ERROR  failed to process ${file}: ${err.message}`);
+    pageErrors++;
+  }
 }
 
+if (pageErrors > 0) {
+  console.error(`\nFinished with errors — ${built} built, ${pageErrors} failed.`);
+  process.exit(1);
+}
 console.log(`\nDone — ${built} page(s) rebuilt.`);

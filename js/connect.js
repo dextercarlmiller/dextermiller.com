@@ -81,16 +81,16 @@
 
   /* Updates the board display with the correct cell colors */
   function refreshgridboard(gridboard) {
+    const style = getComputedStyle(document.documentElement);
+    const colors = [
+      style.getPropertyValue('--c4-empty').trim(),
+      style.getPropertyValue('--c4-player1').trim(),
+      style.getPropertyValue('--c4-player2').trim()
+    ];
     for (let row = 0; row < 6; row++) {
       for (let col = 0; col < 7; col++) {
         const cell = document.getElementById('' + row + col);
-        if (gridboard[row][col] == 0) {
-          cell.style.setProperty('background-color', '#dbeafe');
-        } else if (gridboard[row][col] == 1) {
-          cell.style.setProperty('background-color', '#fbbf24');
-        } else if (gridboard[row][col] == 2) {
-          cell.style.setProperty('background-color', '#ef4444');
-        }
+        cell.style.setProperty('background-color', colors[gridboard[row][col]]);
       }
     }
   }
