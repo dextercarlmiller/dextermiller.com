@@ -352,7 +352,12 @@
 
     /* ── Print ── */
     @media print {
-      body { background: #ffffff; }
+      @page { size: letter portrait; margin: 0.55in 0.5in; }
+      body {
+        background: #ffffff;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
       .top-bar { display: none; }
       .resume {
         max-width: 100%;
@@ -360,7 +365,11 @@
         border-radius: 0;
         box-shadow: none;
       }
-      .resume-body { gap: 36px; }
+      .resume-header { padding: 32px 40px 28px; }
+      .resume-body { gap: 32px; padding: 32px 40px; }
+      .exp-item { break-inside: avoid; page-break-inside: avoid; }
+      .section { break-inside: avoid; page-break-inside: avoid; }
+      .section-title { break-after: avoid; page-break-after: avoid; }
     }
 
     /* ── Mobile ── */
@@ -381,7 +390,7 @@
     <span>
       <a href="index.html">&larr; Back to dextermiller.com</a>
     </span>
-    <button class="print-btn" onclick="window.print()">Print / Save as PDF</button>
+    <button class="print-btn" onclick="window.print()">&#8595; Download Resume</button>
   </div>
 
   <div class="resume">
