@@ -501,20 +501,11 @@
 
         <div class="calendar-puzzle-wrapper">
 
-          <!-- Date selectors -->
-          <div class="cal-date-selectors">
-            <div class="cal-select-group">
-              <label for="calMonth">Month</label>
-              <select id="calMonth"></select>
-            </div>
-            <div class="cal-select-group">
-              <label for="calDay">Day</label>
-              <select id="calDay"></select>
-            </div>
-            <div class="cal-select-group">
-              <label for="calWeekday">Weekday</label>
-              <select id="calWeekday"></select>
-            </div>
+          <!-- Date picker -->
+          <div class="cal-date-picker-wrap">
+            <label class="cal-date-label" for="calDateInput">Date</label>
+            <input type="date" id="calDateInput" class="cal-date-input">
+            <div class="cal-date-display" id="calDateDisplay"></div>
           </div>
 
           <!-- Board -->
@@ -529,20 +520,20 @@
           <!-- Controls -->
           <div class="cal-controls">
             <button class="btn btn-outline" id="calSolve">&#128269; Show Solutions</button>
-            <button class="btn btn-primary" id="calPlayMode">&#9998; Play Mode</button>
             <button class="btn btn-outline" id="calReset">&#8635; Reset</button>
           </div>
 
-          <!-- Solution navigator -->
+          <!-- Solution navigator (shown only in solution mode) -->
           <div class="cal-solution-nav" id="calSolutionNav" hidden>
-            <button id="calPrevSol" aria-label="Previous solution">&#8249;</button>
-            <span id="calSolCount">Solution 1 of 5</span>
-            <button id="calNextSol" aria-label="Next solution">&#8250;</button>
+            <button class="cal-sol-arrow" id="calPrevSol" aria-label="Previous solution">&#8249;</button>
+            <span class="cal-sol-count" id="calSolCount">Solution 1 of 5</span>
+            <button class="cal-sol-arrow" id="calNextSol" aria-label="Next solution">&#8250;</button>
+            <button class="cal-back-play-btn" id="calBackToPlay">&#8592; Play</button>
           </div>
 
           <!-- Piece tray -->
           <div class="cal-piece-tray" id="calPieceTray">
-            <p class="cal-piece-tray-label">Select a piece &rarr; click board to place &middot; click placed piece to remove</p>
+            <p class="cal-piece-tray-label">Drag a piece onto the board &middot; or click to select, then click the board to place &middot; drag or click placed pieces to move them</p>
             <div class="cal-pieces-grid" id="calPiecesGrid"></div>
           </div>
 
