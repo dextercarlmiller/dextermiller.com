@@ -1,4 +1,4 @@
-const CACHE = 'dm-v2';
+const CACHE = 'dm-v3';
 
 const ASSETS = [
   '/',
@@ -16,6 +16,7 @@ const ASSETS = [
   '/js/project.js',
   '/js/connect.js',
   '/js/calendar.js',
+  '/js/calendar-worker.js',
   '/fonts/inter-latin.woff2',
   '/fonts/poppins-600.woff2',
   '/fonts/poppins-700.woff2',

@@ -26,17 +26,19 @@
   const PERM_BLOCKED = new Set(['0,6', '1,6', '7,0', '7,1', '7,2', '7,3']);
 
   // ── Piece Definitions ─────────────────────────────────────────────────────────
+  // 10 pieces totalling 47 squares — matches the 47 cells that need covering
+  // (50 valid board cells minus 3 highlighted date cells)
   const PIECE_DEFS = [
-    { id: 0, color: '#e74c3c', squares: [[0,0],[0,1],[1,0],[2,0]]           },
-    { id: 1, color: '#e67e22', squares: [[0,1],[1,1],[2,0],[2,1],[2,2]]     },
-    { id: 2, color: '#d4ac0d', squares: [[0,0],[0,1],[1,1],[1,2]]           },
-    { id: 3, color: '#27ae60', squares: [[0,0],[1,0],[2,0],[3,0],[3,1]]     },
-    { id: 4, color: '#1abc9c', squares: [[0,0],[0,1],[0,2],[1,0],[1,2]]     },
-    { id: 5, color: '#3498db', squares: [[0,1],[0,2],[1,0],[1,1]]           },
-    { id: 6, color: '#9b59b6', squares: [[0,1],[1,0],[1,1],[2,0],[3,0]]     },
-    { id: 7, color: '#e91e63', squares: [[0,0],[1,0],[2,0],[3,0]]           },
-    { id: 8, color: '#00bcd4', squares: [[0,0],[1,0],[2,0],[2,1],[2,2]]     },
-    { id: 9, color: '#ff9800', squares: [[0,0],[0,1],[1,1],[2,1],[2,2]]     },
+    { id: 0, color: '#e74c3c', squares: [[0,0],[0,1],[1,0],[2,0]]         },  // L-tetromino
+    { id: 1, color: '#e67e22', squares: [[0,1],[1,1],[2,0],[2,1],[2,2]]   },  // T-pentomino
+    { id: 2, color: '#d4ac0d', squares: [[0,0],[0,1],[1,1],[1,2]]         },  // S-tetromino
+    { id: 3, color: '#27ae60', squares: [[0,0],[1,0],[2,0],[3,0],[3,1]]   },  // L-pentomino
+    { id: 4, color: '#1abc9c', squares: [[0,0],[0,1],[0,2],[1,0],[1,2]]   },  // U-pentomino
+    { id: 5, color: '#3498db', squares: [[0,0],[0,1],[1,0],[1,1],[2,0]]   },  // P-pentomino (2×2 box + extra)
+    { id: 6, color: '#9b59b6', squares: [[0,1],[1,0],[1,1],[2,0],[3,0]]   },  // skew-pentomino
+    { id: 7, color: '#e91e63', squares: [[0,0],[1,0],[2,0],[3,0]]         },  // I-tetromino
+    { id: 8, color: '#00bcd4', squares: [[0,0],[1,0],[2,0],[2,1],[2,2]]   },  // J-pentomino
+    { id: 9, color: '#ff9800', squares: [[0,0],[0,1],[1,1],[2,1],[2,2]]   },  // S-pentomino
   ];
 
   // ── Orientation helpers ───────────────────────────────────────────────────────
@@ -66,54 +68,6 @@
   }
   const PIECE_ORIENTATIONS = PIECE_DEFS.map(p => getAllOrientations(p.squares));
 
-  // ── Solver (backtracking) ─────────────────────────────────────────────────────
-  function solve(targetMonth, targetDay, targetWeekday, maxSols) {
-    const targetRCs = new Set(
-      [LABEL_TO_RC[targetMonth], LABEL_TO_RC[targetDay], LABEL_TO_RC[targetWeekday]].filter(Boolean)
-    );
-
-    const toFill = [];
-    for (let r = 0; r < 8; r++) {
-      for (let c = 0; c < 7; c++) {
-        const k = `${r},${c}`;
-        if (ALL_VALID.has(k) && !PERM_BLOCKED.has(k) && !targetRCs.has(k)) toFill.push(k);
-      }
-    }
-
-    const solutions = [];
-    const board     = {};
-    const used      = new Array(10).fill(false);
-    const remaining = new Set(toFill);
-
-    function bt() {
-      if (remaining.size === 0) {
-        solutions.push({ ...board });
-        return solutions.length >= maxSols;
-      }
-      const [first] = remaining;
-      const [fr, fc] = first.split(',').map(Number);
-      for (let pid = 0; pid < 10; pid++) {
-        if (used[pid]) continue;
-        for (const orient of PIECE_ORIENTATIONS[pid]) {
-          for (const [pr, pc] of orient) {
-            const dr = fr - pr, dc = fc - pc;
-            const placed = orient.map(([rr, cc]) => `${rr + dr},${cc + dc}`);
-            if (placed.every(k => remaining.has(k))) {
-              placed.forEach(k => { board[k] = pid; remaining.delete(k); });
-              used[pid] = true;
-              if (bt()) return true;
-              used[pid] = false;
-              placed.forEach(k => { delete board[k]; remaining.add(k); });
-            }
-          }
-        }
-      }
-      return false;
-    }
-    bt();
-    return solutions;
-  }
-
   // ── State ─────────────────────────────────────────────────────────────────────
   function getTodayLabels() {
     const now = new Date();
@@ -129,12 +83,62 @@
   let selDay     = today.day;
   let selWeekday = today.weekday;
   let mode          = 'play';   // 'play' | 'solution'
-  let placedPieces  = {};       // pieceId (number key) -> [{r, c}]
+  let placedPieces  = {};       // pieceId (number) -> [{r, c}]
   let selectedPiece = null;
   let orientIdxs    = Array(10).fill(0);
   let solutions     = [];
   let solIdx        = 0;
   let hoverCell     = null;
+
+  // ── Web Worker for async solving ──────────────────────────────────────────────
+  let solverWorker    = null;
+  let solverTimeout   = null;
+
+  function abortSolver() {
+    if (solverTimeout)  { clearTimeout(solverTimeout); solverTimeout = null; }
+    if (solverWorker)   { solverWorker.terminate(); solverWorker = null; }
+  }
+
+  function runSolver() {
+    abortSolver();
+    solveBtn.textContent = 'Solving…';
+    solveBtn.disabled    = true;
+
+    solverWorker = new Worker('js/calendar-worker.js');
+
+    solverWorker.onmessage = function (e) {
+      abortSolver();
+      solutions = e.data.ok ? e.data.solutions : [];
+      solIdx    = 0;
+      mode      = 'solution';
+      solveBtn.textContent = 'Show Solutions';
+      solveBtn.disabled    = false;
+      renderBoard();
+    };
+
+    solverWorker.onerror = function () {
+      abortSolver();
+      solutions = [];
+      solIdx    = 0;
+      mode      = 'solution';
+      solveBtn.textContent = 'Show Solutions';
+      solveBtn.disabled    = false;
+      renderBoard();
+    };
+
+    // Safety net: kill worker after 30 s and show no-solutions state
+    solverTimeout = setTimeout(function () {
+      abortSolver();
+      solutions = [];
+      solIdx    = 0;
+      mode      = 'solution';
+      solveBtn.textContent = 'Show Solutions';
+      solveBtn.disabled    = false;
+      renderBoard();
+    }, 30000);
+
+    solverWorker.postMessage({ month: selMonth, day: selDay, weekday: selWeekday, maxSols: 50 });
+  }
 
   // ── DOM references ────────────────────────────────────────────────────────────
   const boardEl     = document.getElementById('calBoard');
@@ -156,8 +160,8 @@
   // ── Populate selects ──────────────────────────────────────────────────────────
   function populateSelect(el, options, selected) {
     options.forEach(o => {
-      const opt     = document.createElement('option');
-      opt.value     = o;
+      const opt       = document.createElement('option');
+      opt.value       = o;
       opt.textContent = o;
       if (o === selected) opt.selected = true;
       el.appendChild(opt);
@@ -195,7 +199,7 @@
     const usedIds       = new Set(Object.keys(placedPieces).map(Number));
     const isWin         = mode === 'play' && usedIds.size === 10;
 
-    // Compute preview cells
+    // Compute placement preview
     const validPreview   = new Set();
     const invalidPreview = new Set();
     if (mode === 'play' && selectedPiece !== null && hoverCell) {
@@ -217,19 +221,19 @@
       }
     }
 
-    // Update each cell element
+    // Update each cell
     for (let r = 0; r < 8; r++) {
       for (let c = 0; c < 7; c++) {
-        const k    = `${r},${c}`;
-        const cell = document.getElementById(`cal-${r}-${c}`);
+        const k       = `${r},${c}`;
+        const cell    = document.getElementById(`cal-${r}-${c}`);
         if (!cell) continue;
 
         const labelEl   = cell.querySelector('.cal-cell-label');
         const isBlocked = !ALL_VALID.has(k) || PERM_BLOCKED.has(k);
 
-        cell.className     = 'cal-cell';
+        cell.className        = 'cal-cell';
         cell.style.background = '';
-        cell.style.cursor  = '';
+        cell.style.cursor     = '';
 
         if (isBlocked) {
           cell.classList.add('cal-cell--blocked');
@@ -269,7 +273,7 @@
     winBanner.hidden = !isWin;
     noSolsEl.hidden  = !(mode === 'solution' && solutions.length === 0);
 
-    // Play mode button state
+    // Play mode button highlight
     playModeBtn.classList.toggle('btn-primary', mode === 'play');
     playModeBtn.classList.toggle('btn-outline',  mode !== 'play');
 
@@ -277,18 +281,18 @@
     if (mode === 'solution' && solutions.length > 0) {
       solNav.hidden = false;
       const more    = solutions.length >= 50 ? ' (50+ exist)' : '';
-      solCount.textContent  = `Solution ${solIdx + 1} of ${solutions.length}${more}`;
-      prevSolBtn.disabled   = solIdx === 0;
-      nextSolBtn.disabled   = solIdx === solutions.length - 1;
+      solCount.textContent = `Solution ${solIdx + 1} of ${solutions.length}${more}`;
+      prevSolBtn.disabled  = solIdx === 0;
+      nextSolBtn.disabled  = solIdx === solutions.length - 1;
     } else {
       solNav.hidden = true;
     }
 
-    // Show/hide piece tray
+    // Piece tray visibility
     pieceTray.hidden = mode !== 'play';
   }
 
-  // ── Build board DOM (once) ────────────────────────────────────────────────────
+  // ── Build board DOM (once on load) ────────────────────────────────────────────
   function buildBoardDOM() {
     boardEl.innerHTML = '';
     for (let r = 0; r < 8; r++) {
@@ -299,8 +303,8 @@
         cell.className = 'cal-cell';
         cell.setAttribute('role', 'gridcell');
 
-        const labelEl       = document.createElement('span');
-        labelEl.className   = 'cal-cell-label';
+        const labelEl     = document.createElement('span');
+        labelEl.className = 'cal-cell-label';
         cell.appendChild(labelEl);
 
         const isBlocked = !ALL_VALID.has(k) || PERM_BLOCKED.has(k);
@@ -314,7 +318,7 @@
     }
   }
 
-  // ── Piece tray rendering ──────────────────────────────────────────────────────
+  // ── Piece tray ────────────────────────────────────────────────────────────────
   function renderPieceTray() {
     piecesGrid.innerHTML = '';
     const usedIds = new Set(Object.keys(placedPieces).map(Number));
@@ -327,35 +331,34 @@
       const maxC   = Math.max(...orient.map(([, c]) => c));
       const SQ     = 14;
 
-      const wrapper       = document.createElement('div');
-      wrapper.className   = 'cal-piece-wrapper' + (isUsed ? ' cal-piece--used' : '');
+      const wrapper     = document.createElement('div');
+      wrapper.className = 'cal-piece-wrapper' + (isUsed ? ' cal-piece--used' : '');
 
-      const canvas        = document.createElement('div');
-      canvas.className    = 'cal-piece-canvas';
-      canvas.style.cssText = [
-        'position: relative',
-        `width: ${(maxC + 1) * SQ + 4}px`,
-        `height: ${(maxR + 1) * SQ + 4}px`,
-        'min-width: 32px',
-        'min-height: 32px',
-        `outline: 2px solid ${isSel ? p.color : 'transparent'}`,
-        'border-radius: 4px',
-        'padding: 2px',
-        `cursor: ${isUsed ? 'default' : 'pointer'}`,
-        'transition: outline-color 0.15s',
+      const canvas          = document.createElement('div');
+      canvas.className      = 'cal-piece-canvas';
+      canvas.style.cssText  = [
+        'position:relative',
+        `width:${(maxC + 1) * SQ + 4}px`,
+        `height:${(maxR + 1) * SQ + 4}px`,
+        'min-width:32px',
+        'min-height:32px',
+        `outline:2px solid ${isSel ? p.color : 'transparent'}`,
+        'border-radius:4px',
+        'padding:2px',
+        `cursor:${isUsed ? 'default' : 'pointer'}`,
+        'transition:outline-color 0.15s',
       ].join(';');
 
       orient.forEach(([pr, pc]) => {
-        const sq          = document.createElement('div');
-        sq.className      = 'cal-piece-sq';
-        sq.style.cssText  = [
-          'position: absolute',
-          `left: ${pc * SQ + 2}px`,
-          `top: ${pr * SQ + 2}px`,
-          `width: ${SQ - 1}px`,
-          `height: ${SQ - 1}px`,
-          `background: ${p.color}`,
-          'border-radius: 2px',
+        const sq         = document.createElement('div');
+        sq.style.cssText = [
+          'position:absolute',
+          `left:${pc * SQ + 2}px`,
+          `top:${pr * SQ + 2}px`,
+          `width:${SQ - 1}px`,
+          `height:${SQ - 1}px`,
+          `background:${p.color}`,
+          'border-radius:2px',
         ].join(';');
         canvas.appendChild(sq);
       });
@@ -396,7 +399,7 @@
 
     const placedCellMap = getPlacedCellMap();
 
-    // Remove piece if the cell is already occupied
+    // Click an occupied cell → remove that piece and re-select it
     if (placedCellMap[k] !== undefined) {
       const pid = placedCellMap[k];
       delete placedPieces[pid];
@@ -425,12 +428,15 @@
 
   // ── Reset ─────────────────────────────────────────────────────────────────────
   function resetAll() {
-    placedPieces  = {};
-    selectedPiece = null;
-    solutions     = [];
-    solIdx        = 0;
-    mode          = 'play';
-    orientIdxs    = Array(10).fill(0);
+    abortSolver();
+    placedPieces         = {};
+    selectedPiece        = null;
+    solutions            = [];
+    solIdx               = 0;
+    mode                 = 'play';
+    orientIdxs           = Array(10).fill(0);
+    solveBtn.textContent = 'Show Solutions';
+    solveBtn.disabled    = false;
     renderPieceTray();
     renderBoard();
   }
@@ -440,18 +446,7 @@
   daySel.addEventListener('change',     e => { selDay     = e.target.value; resetAll(); });
   weekdaySel.addEventListener('change', e => { selWeekday = e.target.value; resetAll(); });
 
-  solveBtn.addEventListener('click', () => {
-    solveBtn.textContent = 'Solving…';
-    solveBtn.disabled    = true;
-    setTimeout(() => {
-      solutions = solve(selMonth, selDay, selWeekday, 50);
-      solIdx    = 0;
-      mode      = 'solution';
-      solveBtn.textContent = 'Show Solutions';
-      solveBtn.disabled    = false;
-      renderBoard();
-    }, 50);
-  });
+  solveBtn.addEventListener('click', runSolver);
 
   playModeBtn.addEventListener('click', () => {
     mode = 'play';
