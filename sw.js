@@ -1,4 +1,4 @@
-const CACHE = 'dm-v1';
+const CACHE = 'dm-v2';
 
 const ASSETS = [
   '/',
@@ -10,10 +10,12 @@ const ASSETS = [
   '/css/main.css',
   '/css/tictactoe.css',
   '/css/connect.css',
+  '/css/calendar.css',
   '/js/main.js',
   '/js/theme.js',
   '/js/project.js',
   '/js/connect.js',
+  '/js/calendar.js',
   '/fonts/inter-latin.woff2',
   '/fonts/poppins-600.woff2',
   '/fonts/poppins-700.woff2',
