@@ -523,33 +523,22 @@
             <button class="btn btn-outline" id="calReset">&#8635; Reset</button>
           </div>
 
-          <!-- Solution navigator (shown only in solution mode) -->
-          <div class="cal-solution-nav" id="calSolutionNav" hidden>
-            <button class="cal-sol-arrow" id="calPrevSol" aria-label="Previous solution">&#8249;</button>
-            <span class="cal-sol-count" id="calSolCount">Solution 1 of 5</span>
-            <button class="cal-sol-arrow" id="calNextSol" aria-label="Next solution">&#8250;</button>
-            <button class="cal-back-play-btn" id="calBackToPlay">&#8592; Play</button>
-          </div>
-
-          <!-- Piece tray -->
+          <!-- Piece tray (play mode) -->
           <div class="cal-piece-tray" id="calPieceTray">
             <p class="cal-piece-tray-label">Drag a piece onto the board &middot; or click to select, then click the board to place &middot; drag or click placed pieces to move them</p>
             <div class="cal-pieces-grid" id="calPiecesGrid"></div>
           </div>
 
-          <!-- Legend -->
-          <div class="cal-legend">
-            <div class="cal-legend-item">
-              <div class="cal-legend-swatch" style="background:#fff9c4;border:2px solid #f9a825"></div>
-              <span>Today&rsquo;s date</span>
+          <!-- Solution Panel (shown only when solutions are found) -->
+          <div class="cal-solution-panel" id="calSolutionPanel" hidden>
+            <div class="cal-solution-panel-header">
+              <span class="cal-solution-panel-title">Solution Viewer</span>
+              <button class="cal-solution-back-btn" id="calBackToPlay">&#8592; Back to Playing</button>
             </div>
-            <div class="cal-legend-item">
-              <div class="cal-legend-swatch cal-legend-swatch--empty"></div>
-              <span>Empty cell</span>
-            </div>
-            <div class="cal-legend-item">
-              <div class="cal-legend-swatch cal-legend-swatch--blocked"></div>
-              <span>Blocked</span>
+            <div class="cal-solution-panel-nav">
+              <button class="cal-sol-arrow" id="calPrevSol" aria-label="Previous solution">&#8249;</button>
+              <span class="cal-sol-count" id="calSolCount">Solution 1 of 5</span>
+              <button class="cal-sol-arrow" id="calNextSol" aria-label="Next solution">&#8250;</button>
             </div>
           </div>
 

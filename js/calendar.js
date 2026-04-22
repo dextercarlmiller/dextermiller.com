@@ -136,9 +136,9 @@
       solveBtn.textContent = 'Show Solutions';
       solveBtn.disabled    = false;
       renderBoard();
-    }, 30000);
+    }, 120000);
 
-    solverWorker.postMessage({ month: selMonth, day: selDay, weekday: selWeekday, maxSols: 50 });
+    solverWorker.postMessage({ month: selMonth, day: selDay, weekday: selWeekday, maxSols: 500 });
   }
 
   // ── Drag & Drop ───────────────────────────────────────────────────────────────
@@ -304,7 +304,7 @@
   const noSolsEl      = document.getElementById('calNoSolutions');
   const solveBtn      = document.getElementById('calSolve');
   const resetBtn      = document.getElementById('calReset');
-  const solNav        = document.getElementById('calSolutionNav');
+  const solPanel      = document.getElementById('calSolutionPanel');
   const prevSolBtn    = document.getElementById('calPrevSol');
   const nextSolBtn    = document.getElementById('calNextSol');
   const solCount      = document.getElementById('calSolCount');
@@ -423,13 +423,13 @@
     noSolsEl.hidden  = !(mode === 'solution' && solutions.length === 0);
 
     if (mode === 'solution' && solutions.length > 0) {
-      solNav.hidden = false;
-      const more    = solutions.length >= 50 ? ' (50+ exist)' : '';
-      solCount.textContent = `Solution ${solIdx + 1} of ${solutions.length}${more}`;
+      solPanel.hidden = false;
+      const more      = solutions.length >= 500 ? '+' : ` of ${solutions.length}`;
+      solCount.textContent = `Solution ${solIdx + 1}${more}`;
       prevSolBtn.disabled  = solIdx === 0;
       nextSolBtn.disabled  = solIdx === solutions.length - 1;
     } else {
-      solNav.hidden = true;
+      solPanel.hidden = true;
     }
 
     pieceTray.hidden = mode !== 'play';
