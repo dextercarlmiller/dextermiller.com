@@ -189,7 +189,7 @@
         `height:${CS - 3}px`,
         `background:${PIECE_DEFS[pieceId].color}`,
         'border-radius:5px',
-        'border:1px solid rgba(255,255,255,0.3)',
+        'border:2px solid rgba(0,0,0,0.22)',
       ].join(';');
       el.appendChild(sq);
     });
@@ -240,13 +240,19 @@
         const baseC     = cell[1] - drag.anchorC;
         const targetRCs = getTargetRCs();
         const placedMap = getPlacedCellMap();
-        const orient    = PIECE_ORIENTATIONS[drag.pieceId][orientIdxs[drag.pieceId]];
-        const placed    = orient.map(([pr, pc]) => ({ r: baseR + pr, c: baseC + pc }));
-        const isValid   = placed.every(({ r, c }) => {
+        const orient       = PIECE_ORIENTATIONS[drag.pieceId][orientIdxs[drag.pieceId]];
+        const placed       = orient.map(([pr, pc]) => ({ r: baseR + pr, c: baseC + pc }));
+        const conflictPids = new Set();
+        placed.forEach(({ r, c }) => {
+          const pid = placedMap[`${r},${c}`];
+          if (pid !== undefined) conflictPids.add(pid);
+        });
+        const isValid = placed.every(({ r, c }) => {
           const pk = `${r},${c}`;
-          return ALL_VALID.has(pk) && !PERM_BLOCKED.has(pk) && !targetRCs.has(pk) && placedMap[pk] === undefined;
+          return ALL_VALID.has(pk) && !PERM_BLOCKED.has(pk) && !targetRCs.has(pk);
         });
         if (isValid) {
+          conflictPids.forEach(cid => { delete placedPieces[cid]; });
           placedPieces[drag.pieceId] = placed;
         }
       }
@@ -290,11 +296,26 @@
     endDrag(t.clientX, t.clientY);
   });
 
-  // Escape cancels drag or deselects
+  // Escape cancels drag or deselects; arrow keys / R rotate selected piece
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
       if (drag.active) { endDrag(); }
       else { selectedPiece = null; renderBoard(); renderPieceTray(); }
+      return;
+    }
+    if (selectedPiece !== null && !drag.active) {
+      const len = PIECE_ORIENTATIONS[selectedPiece].length;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === 'r' || e.key === 'R') {
+        e.preventDefault();
+        orientIdxs[selectedPiece] = (orientIdxs[selectedPiece] + 1) % len;
+        renderPieceTray();
+        renderBoard();
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        orientIdxs[selectedPiece] = (orientIdxs[selectedPiece] - 1 + len) % len;
+        renderPieceTray();
+        renderBoard();
+      }
     }
   });
 
@@ -366,7 +387,7 @@
       const placed   = orient.map(([pr, pc]) => ({ r: hr + pr, c: hc + pc }));
       const ok       = placed.every(({ r, c }) => {
         const pk = `${r},${c}`;
-        return ALL_VALID.has(pk) && !PERM_BLOCKED.has(pk) && !targetRCs.has(pk) && placedMap[pk] === undefined;
+        return ALL_VALID.has(pk) && !PERM_BLOCKED.has(pk) && !targetRCs.has(pk);
       });
       if (ok) {
         placed.forEach(({ r, c }) => validPrev.add(`${r},${c}`));
@@ -536,6 +557,7 @@
           `height:${SQ - 2}px`,
           `background:${p.color}`,
           'border-radius:3px',
+          'border:1px solid rgba(0,0,0,0.22)',
         ].join(';');
         canvas.appendChild(sq);
       });
@@ -575,7 +597,7 @@
       const rotBtn       = document.createElement('button');
       rotBtn.className   = 'cal-rotate-btn';
       rotBtn.textContent = '↻';
-      rotBtn.title       = 'Rotate';
+      rotBtn.title       = 'Rotate (→ or R key when piece is selected)';
       rotBtn.disabled    = isUsed;
       rotBtn.setAttribute('aria-label', `Rotate piece ${p.id + 1}`);
       rotBtn.addEventListener('click', e => {
@@ -602,28 +624,34 @@
 
     const placedMap = getPlacedCellMap();
 
-    if (placedMap[k] !== undefined) {
-      // Remove and re-select the piece
-      const pid = placedMap[k];
-      delete placedPieces[pid];
-      if (selectedPiece === null) selectedPiece = pid;
-      renderBoard();
-      renderPieceTray();
+    // Piece selected — place it, displacing any pieces already in the way
+    if (selectedPiece !== null) {
+      const orient       = PIECE_ORIENTATIONS[selectedPiece][orientIdxs[selectedPiece]];
+      const placed       = orient.map(([pr, pc]) => ({ r: r + pr, c: c + pc }));
+      const conflictPids = new Set();
+      placed.forEach(({ r: pr, c: pc }) => {
+        const pid = placedMap[`${pr},${pc}`];
+        if (pid !== undefined) conflictPids.add(pid);
+      });
+      const isValid = placed.every(({ r: pr, c: pc }) => {
+        const pk = `${pr},${pc}`;
+        return ALL_VALID.has(pk) && !PERM_BLOCKED.has(pk) && !targetRCs.has(pk);
+      });
+      if (isValid) {
+        conflictPids.forEach(cid => { delete placedPieces[cid]; });
+        placedPieces[selectedPiece] = placed;
+        selectedPiece = null;
+        renderBoard();
+        renderPieceTray();
+      }
       return;
     }
 
-    if (selectedPiece === null) return;
-
-    const orient  = PIECE_ORIENTATIONS[selectedPiece][orientIdxs[selectedPiece]];
-    const placed  = orient.map(([pr, pc]) => ({ r: r + pr, c: c + pc }));
-    const isValid = placed.every(({ r: pr, c: pc }) => {
-      const pk = `${pr},${pc}`;
-      return ALL_VALID.has(pk) && !PERM_BLOCKED.has(pk) && !targetRCs.has(pk) && placedMap[pk] === undefined;
-    });
-
-    if (isValid) {
-      placedPieces[selectedPiece] = placed;
-      selectedPiece = null;
+    // No piece selected — pick up whatever piece is at the clicked cell
+    if (placedMap[k] !== undefined) {
+      const pid = placedMap[k];
+      delete placedPieces[pid];
+      selectedPiece = pid;
       renderBoard();
       renderPieceTray();
     }

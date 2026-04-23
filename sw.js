@@ -1,4 +1,4 @@
-const CACHE = 'dm-v4';
+const CACHE = 'dm-v5';
 
 const ASSETS = [
   '/',
