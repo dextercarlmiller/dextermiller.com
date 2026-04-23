@@ -508,39 +508,49 @@
             <div class="cal-date-display" id="calDateDisplay"></div>
           </div>
 
-          <!-- Board -->
-          <div class="cal-board" id="calBoard" role="grid" aria-label="Calendar puzzle board"></div>
+          <!-- Game area: piece tray on left, board on right -->
+          <div class="cal-game-layout">
 
-          <!-- Win banner -->
-          <div class="cal-win-banner" id="calWinBanner" hidden>&#x1F389; Puzzle Solved!</div>
-
-          <!-- No solutions message -->
-          <div class="cal-no-solutions" id="calNoSolutions" hidden>No solutions found for this combination.</div>
-
-          <!-- Controls -->
-          <div class="cal-controls">
-            <button class="btn btn-outline" id="calSolve">&#128269; Show Solutions</button>
-            <button class="btn btn-outline" id="calReset">&#8635; Reset</button>
-          </div>
-
-          <!-- Piece tray (play mode) -->
-          <div class="cal-piece-tray" id="calPieceTray">
-            <p class="cal-piece-tray-label">Drag a piece onto the board &middot; or click to select, then click the board to place &middot; drag or click placed pieces to move them</p>
-            <div class="cal-pieces-grid" id="calPiecesGrid"></div>
-          </div>
-
-          <!-- Solution Panel (shown only when solutions are found) -->
-          <div class="cal-solution-panel" id="calSolutionPanel" hidden>
-            <div class="cal-solution-panel-header">
-              <span class="cal-solution-panel-title">Solution Viewer</span>
-              <button class="cal-solution-back-btn" id="calBackToPlay">&#8592; Back to Playing</button>
+            <!-- Piece tray (play mode) — left panel -->
+            <div class="cal-piece-tray" id="calPieceTray">
+              <p class="cal-piece-tray-label">Pieces</p>
+              <div class="cal-pieces-grid" id="calPiecesGrid"></div>
             </div>
-            <div class="cal-solution-panel-nav">
-              <button class="cal-sol-arrow" id="calPrevSol" aria-label="Previous solution">&#8249;</button>
-              <span class="cal-sol-count" id="calSolCount">Solution 1 of 5</span>
-              <button class="cal-sol-arrow" id="calNextSol" aria-label="Next solution">&#8250;</button>
-            </div>
-          </div>
+
+            <!-- Board column -->
+            <div class="cal-board-column">
+
+              <!-- Board -->
+              <div class="cal-board" id="calBoard" role="grid" aria-label="Calendar puzzle board"></div>
+
+              <!-- Win banner -->
+              <div class="cal-win-banner" id="calWinBanner" hidden>&#x1F389; Puzzle Solved!</div>
+
+              <!-- No solutions message -->
+              <div class="cal-no-solutions" id="calNoSolutions" hidden>No solutions found for this combination.</div>
+
+              <!-- Controls -->
+              <div class="cal-controls">
+                <button class="btn btn-outline" id="calSolve">&#128269; Show Solutions</button>
+                <button class="btn btn-outline" id="calReset">&#8635; Reset</button>
+              </div>
+
+              <!-- Solution Panel (shown only when solutions are found) -->
+              <div class="cal-solution-panel" id="calSolutionPanel" hidden>
+                <div class="cal-solution-panel-header">
+                  <span class="cal-solution-panel-title">Solution Viewer</span>
+                  <button class="cal-solution-back-btn" id="calBackToPlay">&#8592; Back to Playing</button>
+                </div>
+                <div class="cal-solution-panel-nav">
+                  <button class="cal-sol-arrow" id="calPrevSol" aria-label="Previous solution">&#8249;</button>
+                  <span class="cal-sol-count" id="calSolCount">Solution 1 of 5</span>
+                  <button class="cal-sol-arrow" id="calNextSol" aria-label="Next solution">&#8250;</button>
+                </div>
+              </div>
+
+            </div><!-- /.cal-board-column -->
+
+          </div><!-- /.cal-game-layout -->
 
         </div>
       </div>

@@ -27,18 +27,17 @@ var ALL_VALID    = (function() { var s = new Set(); Object.keys(BOARD_CELLS).for
 var PERM_BLOCKED = new Set(['0,6','1,6','7,0','7,1','7,2','7,3']);
 
 // ── Piece Squares ─────────────────────────────────────────────────────────────
-// 10 pieces totalling 47 squares to fill 47 board cells (50 valid − 3 date targets)
 var PIECE_SQUARES = [
-  [[0,0],[0,1],[1,0],[2,0]],           // 0: L-tetromino        (4 sq)
-  [[0,1],[1,1],[2,0],[2,1],[2,2]],     // 1: T-pentomino        (5 sq)
-  [[0,0],[0,1],[1,1],[1,2]],           // 2: S-tetromino        (4 sq)
-  [[0,0],[1,0],[2,0],[3,0],[3,1]],     // 3: L-pentomino        (5 sq)
-  [[0,0],[0,1],[0,2],[1,0],[1,2]],     // 4: U-pentomino        (5 sq)
-  [[0,0],[0,1],[1,0],[1,1],[2,0]],     // 5: P-pentomino        (5 sq) — 2×2 box + extra
-  [[0,1],[1,0],[1,1],[2,0],[3,0]],     // 6: skew-pentomino     (5 sq)
-  [[0,0],[1,0],[2,0],[3,0]],           // 7: I-tetromino        (4 sq)
-  [[0,0],[1,0],[2,0],[2,1],[2,2]],     // 8: J-pentomino        (5 sq)
-  [[0,0],[0,1],[1,1],[2,1],[2,2]],     // 9: S-pentomino        (5 sq)
+  [[0,0],[0,1],[1,0],[2,0]],           // 0: L-tetromino
+  [[0,1],[1,1],[2,0],[2,1],[2,2]],     // 1: T-pentomino
+  [[0,0],[0,1],[1,1],[1,2]],           // 2: S-tetromino
+  [[0,0],[1,0],[2,0],[3,0],[3,1]],     // 3: L-pentomino
+  [[0,0],[0,1],[0,2],[1,0],[1,2]],     // 4: U-pentomino
+  [[0,0],[0,1],[1,0],[1,1],[2,0]],     // 5: P-pentomino
+  [[0,1],[1,0],[1,1],[2,0],[3,0]],     // 6: skew-pentomino
+  [[0,0],[1,0],[2,0],[3,0]],           // 7: I-tetromino
+  [[0,0],[1,0],[2,0],[2,1],[2,2]],     // 8: J-pentomino
+  [[0,0],[0,1],[1,1],[2,1],[2,2]],     // 9: S-pentomino
 ];
 
 // ── Orientation helpers ───────────────────────────────────────────────────────
@@ -66,7 +65,7 @@ function getAllOrientations(sqs) {
 var PIECE_ORIENTATIONS = PIECE_SQUARES.map(getAllOrientations);
 
 // ── Solver ────────────────────────────────────────────────────────────────────
-function solve(targetMonth, targetDay, targetWeekday, maxSols) {
+function solve(targetMonth, targetDay, targetWeekday, maxSols, onSolution) {
   var targetRCs = new Set();
   [LABEL_TO_RC[targetMonth], LABEL_TO_RC[targetDay], LABEL_TO_RC[targetWeekday]].forEach(function(v) { if (v) targetRCs.add(v); });
 
@@ -78,18 +77,18 @@ function solve(targetMonth, targetDay, targetWeekday, maxSols) {
     }
   }
 
-  var solutions = [];
+  var count     = 0;
   var board     = {};
   var used      = [false,false,false,false,false,false,false,false,false,false];
   var remaining = new Set(toFill);
 
   function bt() {
     if (remaining.size === 0) {
-      solutions.push(Object.assign({}, board));
-      return solutions.length >= maxSols;
+      onSolution(Object.assign({}, board));
+      count++;
+      return count >= maxSols;
     }
 
-    // Always fill the first remaining cell — minimises branching factor
     var first = remaining.values().next().value;
     var parts = first.split(',');
     var fr = parseInt(parts[0], 10), fc = parseInt(parts[1], 10);
@@ -121,16 +120,20 @@ function solve(targetMonth, targetDay, targetWeekday, maxSols) {
   }
 
   bt();
-  return solutions;
+  return count;
 }
 
 // ── Message handler ───────────────────────────────────────────────────────────
 self.onmessage = function(e) {
   var d = e.data;
+  var maxSols = d.maxSols || 100;
   try {
-    var solutions = solve(d.month, d.day, d.weekday, d.maxSols || 50);
-    self.postMessage({ ok: true, solutions: solutions });
+    var count = solve(d.month, d.day, d.weekday, maxSols, function(sol) {
+      // Stream each solution to the main thread as found
+      self.postMessage({ type: 'solution', solution: sol });
+    });
+    self.postMessage({ type: 'done', count: count });
   } catch (err) {
-    self.postMessage({ ok: false, error: String(err) });
+    self.postMessage({ type: 'error', error: String(err) });
   }
 };
