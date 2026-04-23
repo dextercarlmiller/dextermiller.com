@@ -75,6 +75,7 @@
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/tictactoe.css">
   <link rel="stylesheet" href="css/connect.css">
+  <link rel="stylesheet" href="css/calendar.css">
 
   <!-- @@analytics:start -->
   <link rel="preconnect" href="https://www.googletagmanager.com">
@@ -483,6 +484,68 @@
       </div>
     </section>
 
+    <!-- ── Calendar Puzzle ── -->
+    <section class="section" id="calendar-puzzle" aria-label="Calendar Puzzle">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Personal Project</p>
+          <h2 class="section-title">Calendar Puzzle</h2>
+          <div class="section-divider"></div>
+        </div>
+
+        <div class="projects-section-intro">
+          <p>
+            A daily puzzle: cover every cell on the board except today's month, day, and weekday using ten uniquely shaped pieces. Each date has multiple solutions &mdash; find one yourself or let the solver reveal them.
+          </p>
+        </div>
+
+        <div class="calendar-puzzle-wrapper">
+
+          <!-- Date picker -->
+          <div class="cal-date-picker-wrap">
+            <label class="cal-date-label" for="calDateInput">Date</label>
+            <input type="date" id="calDateInput" class="cal-date-input">
+            <div class="cal-date-display" id="calDateDisplay"></div>
+          </div>
+
+          <!-- Board -->
+          <div class="cal-board" id="calBoard" role="grid" aria-label="Calendar puzzle board"></div>
+
+          <!-- Win banner -->
+          <div class="cal-win-banner" id="calWinBanner" hidden>&#x1F389; Puzzle Solved!</div>
+
+          <!-- No solutions message -->
+          <div class="cal-no-solutions" id="calNoSolutions" hidden>No solutions found for this combination.</div>
+
+          <!-- Controls -->
+          <div class="cal-controls">
+            <button class="btn btn-outline" id="calSolve">&#128269; Show Solutions</button>
+            <button class="btn btn-outline" id="calReset">&#8635; Reset</button>
+          </div>
+
+          <!-- Piece tray (play mode) -->
+          <div class="cal-piece-tray" id="calPieceTray">
+            <p class="cal-piece-tray-label">Drag a piece onto the board &middot; or click to select, then click the board to place &middot; drag or click placed pieces to move them</p>
+            <div class="cal-pieces-grid" id="calPiecesGrid"></div>
+          </div>
+
+          <!-- Solution Panel (shown only when solutions are found) -->
+          <div class="cal-solution-panel" id="calSolutionPanel" hidden>
+            <div class="cal-solution-panel-header">
+              <span class="cal-solution-panel-title">Solution Viewer</span>
+              <button class="cal-solution-back-btn" id="calBackToPlay">&#8592; Back to Playing</button>
+            </div>
+            <div class="cal-solution-panel-nav">
+              <button class="cal-sol-arrow" id="calPrevSol" aria-label="Previous solution">&#8249;</button>
+              <span class="cal-sol-count" id="calSolCount">Solution 1 of 5</span>
+              <button class="cal-sol-arrow" id="calNextSol" aria-label="Next solution">&#8250;</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- @@footer:start -->
@@ -517,6 +580,7 @@
 
   <script src="js/project.js" defer></script>
   <script src="js/connect.js" defer></script>
+  <script src="js/calendar.js" defer></script>
   <!-- @@scripts-common:start -->
   <script src="js/theme.js" defer></script>
   <script src="js/main.js" defer></script>
