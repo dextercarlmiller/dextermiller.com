@@ -1,12 +1,27 @@
 /* ── Calendar Puzzle ─────────────────────────────────────────────────────── */
 
 .calendar-puzzle-wrapper {
-  max-width: 640px;
+  max-width: 900px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
+}
+
+/* ── Game layout: side-by-side piece tray + board ────────────────────────── */
+.cal-game-layout {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.cal-board-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
 }
 
 /* ── Date picker ─────────────────────────────────────────────────────────── */
@@ -121,6 +136,12 @@
   border: 2px dashed #dc2626 !important;
 }
 
+.cal-cell--conflict {
+  background: #dc2626 !important;
+  border: 2px solid #991b1b !important;
+  cursor: grab;
+}
+
 /* ── Win / no-solution banners ───────────────────────────────────────────── */
 .cal-win-banner {
   background: #16a34a;
@@ -159,17 +180,16 @@
 
 /* ── Solution Panel ──────────────────────────────────────────────────────── */
 .cal-solution-panel {
-  background: var(--navy);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 20px 28px;
+  padding: 16px 20px;
   width: 100%;
-  max-width: 560px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
 }
 
 .cal-solution-panel-header {
@@ -184,7 +204,7 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-weight: 700;
-  color: #94a3b8;
+  color: var(--text-muted);
 }
 
 .cal-solution-panel-nav {
@@ -217,16 +237,16 @@
 
 .cal-sol-count {
   font-weight: 600;
-  color: #ffffff;
+  color: var(--text);
   font-size: 0.9rem;
   min-width: 150px;
   text-align: center;
 }
 
 .cal-solution-back-btn {
-  background: rgba(255, 255, 255, 0.07);
-  color: #94a3b8;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
   border-radius: 6px;
   padding: 5px 12px;
   font-size: 0.78rem;
@@ -236,8 +256,8 @@
 }
 
 .cal-solution-back-btn:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.14);
+  color: var(--text);
+  background: var(--bg-card);
 }
 
 /* ── Piece tray ──────────────────────────────────────────────────────────── */
@@ -245,26 +265,27 @@
   background: var(--bg-alt);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 16px 16px 12px;
-  width: 100%;
-  max-width: 560px;
+  padding: 12px 10px;
   box-sizing: border-box;
+  /* Side panel: fixed width, scrolls if needed */
+  width: 140px;
+  flex-shrink: 0;
 }
 
 .cal-piece-tray-label {
-  font-size: 0.68rem;
+  font-size: 0.62rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--blue);
   text-align: center;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
   font-weight: 600;
 }
 
 .cal-pieces-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 14px;
+  gap: 10px;
   justify-content: center;
 }
 
@@ -324,6 +345,24 @@
 }
 
 /* ── Responsive ──────────────────────────────────────────────────────────── */
+
+/* Tablet and below: stack piece tray below board */
+@media (max-width: 700px) {
+  .cal-game-layout {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cal-piece-tray {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .cal-pieces-grid {
+    gap: 12px;
+  }
+}
+
 @media (max-width: 520px) {
   .cal-board {
     --cal-cell: 42px;

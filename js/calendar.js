@@ -86,10 +86,12 @@
   let currentDate = now;
   let { month: selMonth, day: selDay, weekday: selWeekday } = labelsFromDate(now);
 
-  let mode         = 'play';   // 'play' | 'solution'
-  let placedPieces = {};       // pieceId (number) -> [{r, c}]
+  let mode          = 'play';   // 'play' | 'solution'
+  let placedPieces  = {};       // pieceId (number) -> [{r, c}]
   let selectedPiece = null;
-  let orientIdxs   = Array(10).fill(0);
+  let selectedAnchorR = 0;     // which square of the selected piece sits under the cursor
+  let selectedAnchorC = 0;
+  let orientIdxs    = Array(10).fill(0);
   let solutions    = [];
   let solIdx       = 0;
   let hoverCell    = null;     // [baseR, baseC] where orient[0,0] lands for preview
@@ -105,24 +107,33 @@
 
   function runSolver() {
     abortSolver();
-    solveBtn.textContent = 'Solving…';
+    solutions = [];
+    solIdx    = 0;
+    solveBtn.textContent = 'Searching…';
     solveBtn.disabled    = true;
 
     solverWorker = new Worker('js/calendar-worker.js');
     solverWorker.onmessage = function (e) {
-      abortSolver();
-      solutions = e.data.ok ? e.data.solutions : [];
-      solIdx    = 0;
-      mode      = 'solution';
-      solveBtn.textContent = 'Show Solutions';
-      solveBtn.disabled    = false;
-      renderBoard();
+      var msg = e.data;
+      if (msg.type === 'solution') {
+        solutions.push(msg.solution);
+        if (solutions.length === 1) {
+          // Show first solution immediately without waiting for rest
+          mode = 'solution';
+          solveBtn.textContent = 'Finding more…';
+        }
+        renderBoard();
+      } else if (msg.type === 'done' || msg.type === 'error') {
+        abortSolver();
+        if (solutions.length === 0) mode = 'solution';
+        solveBtn.textContent = 'Show Solutions';
+        solveBtn.disabled    = false;
+        renderBoard();
+      }
     };
     solverWorker.onerror = function () {
       abortSolver();
-      solutions = [];
-      solIdx    = 0;
-      mode      = 'solution';
+      mode = 'solution';
       solveBtn.textContent = 'Show Solutions';
       solveBtn.disabled    = false;
       renderBoard();
@@ -130,15 +141,13 @@
     // Safety timeout
     solverTimeout = setTimeout(function () {
       abortSolver();
-      solutions = [];
-      solIdx    = 0;
-      mode      = 'solution';
+      if (solutions.length === 0) mode = 'solution';
       solveBtn.textContent = 'Show Solutions';
       solveBtn.disabled    = false;
       renderBoard();
-    }, 120000);
+    }, 60000);
 
-    solverWorker.postMessage({ month: selMonth, day: selDay, weekday: selWeekday, maxSols: 500 });
+    solverWorker.postMessage({ month: selMonth, day: selDay, weekday: selWeekday, maxSols: 100 });
   }
 
   // ── Drag & Drop ───────────────────────────────────────────────────────────────
@@ -149,6 +158,11 @@
     anchorC:  0,
     ghostEl:  null,
   };
+
+  // Pending drag: tracks a mousedown/touchstart that hasn't moved far enough yet
+  let pendingDrag = null; // { pieceId, anchorR, anchorC, startX, startY }
+  // Suppress the cell click event that fires right after a pendingDrag mouseup pick-up
+  let suppressBoardClick = false;
 
   function getCellSize() {
     return parseInt(getComputedStyle(boardEl).getPropertyValue('--cal-cell'), 10) || 50;
@@ -242,17 +256,12 @@
         const placedMap = getPlacedCellMap();
         const orient       = PIECE_ORIENTATIONS[drag.pieceId][orientIdxs[drag.pieceId]];
         const placed       = orient.map(([pr, pc]) => ({ r: baseR + pr, c: baseC + pc }));
-        const conflictPids = new Set();
-        placed.forEach(({ r, c }) => {
-          const pid = placedMap[`${r},${c}`];
-          if (pid !== undefined) conflictPids.add(pid);
-        });
         const isValid = placed.every(({ r, c }) => {
           const pk = `${r},${c}`;
           return ALL_VALID.has(pk) && !PERM_BLOCKED.has(pk) && !targetRCs.has(pk);
         });
+        // Allow overlapping — pieces placed on top of others show as red conflicts
         if (isValid) {
-          conflictPids.forEach(cid => { delete placedPieces[cid]; });
           placedPieces[drag.pieceId] = placed;
         }
       }
@@ -268,6 +277,16 @@
 
   // Mouse drag events
   document.addEventListener('mousemove', e => {
+    if (pendingDrag) {
+      const dx = Math.abs(e.clientX - pendingDrag.startX);
+      const dy = Math.abs(e.clientY - pendingDrag.startY);
+      if (dx > 5 || dy > 5) {
+        const pd = pendingDrag;
+        pendingDrag = null;
+        startDrag(pd.pieceId, pd.anchorR, pd.anchorC, e.clientX, e.clientY);
+      }
+      return;
+    }
     if (!drag.active) return;
     moveGhost(e.clientX, e.clientY);
     const cell = getBoardCellAt(e.clientX, e.clientY);
@@ -276,11 +295,49 @@
   });
 
   document.addEventListener('mouseup', e => {
+    if (pendingDrag) {
+      const pd = pendingDrag;
+      pendingDrag = null;
+      if (pd.fromBoard) {
+        // Click on placed piece — pick it up; suppress the click event that follows
+        suppressBoardClick = true;
+        delete placedPieces[pd.pieceId];
+        selectedPiece   = pd.pieceId;
+        selectedAnchorR = pd.anchorR;
+        selectedAnchorC = pd.anchorC;
+        renderPieceTray();
+        renderBoard();
+      } else {
+        // Click on tray piece — toggle selection; store the clicked square as anchor
+        if (selectedPiece === pd.pieceId) {
+          selectedPiece = null;
+        } else {
+          selectedPiece   = pd.pieceId;
+          selectedAnchorR = pd.anchorR;
+          selectedAnchorC = pd.anchorC;
+        }
+        renderPieceTray();
+        renderBoard();
+      }
+      return;
+    }
     if (drag.active) endDrag(e.clientX, e.clientY);
   });
 
   // Touch drag events
   document.addEventListener('touchmove', e => {
+    if (pendingDrag) {
+      const t  = e.touches[0];
+      const dx = Math.abs(t.clientX - pendingDrag.startX);
+      const dy = Math.abs(t.clientY - pendingDrag.startY);
+      if (dx > 5 || dy > 5) {
+        e.preventDefault();
+        const pd = pendingDrag;
+        pendingDrag = null;
+        startDrag(pd.pieceId, pd.anchorR, pd.anchorC, t.clientX, t.clientY);
+      }
+      return;
+    }
     if (!drag.active) return;
     e.preventDefault();
     const t = e.touches[0];
@@ -291,6 +348,29 @@
   }, { passive: false });
 
   document.addEventListener('touchend', e => {
+    if (pendingDrag) {
+      const pd = pendingDrag;
+      pendingDrag = null;
+      if (pd.fromBoard) {
+        delete placedPieces[pd.pieceId];
+        selectedPiece   = pd.pieceId;
+        selectedAnchorR = pd.anchorR;
+        selectedAnchorC = pd.anchorC;
+        renderPieceTray();
+        renderBoard();
+      } else {
+        if (selectedPiece === pd.pieceId) {
+          selectedPiece = null;
+        } else {
+          selectedPiece   = pd.pieceId;
+          selectedAnchorR = pd.anchorR;
+          selectedAnchorC = pd.anchorC;
+        }
+        renderPieceTray();
+        renderBoard();
+      }
+      return;
+    }
     if (!drag.active) return;
     const t = e.changedTouches[0];
     endDrag(t.clientX, t.clientY);
@@ -299,6 +379,7 @@
   // Escape cancels drag or deselects; arrow keys / R rotate selected piece
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
+      if (pendingDrag) { pendingDrag = null; return; }
       if (drag.active) { endDrag(); }
       else { selectedPiece = null; renderBoard(); renderPieceTray(); }
       return;
@@ -308,11 +389,13 @@
       if (e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === 'r' || e.key === 'R') {
         e.preventDefault();
         orientIdxs[selectedPiece] = (orientIdxs[selectedPiece] + 1) % len;
+        selectedAnchorR = 0; selectedAnchorC = 0;
         renderPieceTray();
         renderBoard();
       } else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
         e.preventDefault();
         orientIdxs[selectedPiece] = (orientIdxs[selectedPiece] - 1 + len) % len;
+        selectedAnchorR = 0; selectedAnchorC = 0;
         renderPieceTray();
         renderBoard();
       }
@@ -364,6 +447,19 @@
     return map;
   }
 
+  function getConflictCells() {
+    const counts = {};
+    Object.values(placedPieces).forEach(sqs => {
+      sqs.forEach(({ r, c }) => {
+        const k = `${r},${c}`;
+        counts[k] = (counts[k] || 0) + 1;
+      });
+    });
+    const conflicts = new Set();
+    Object.entries(counts).forEach(([k, n]) => { if (n > 1) conflicts.add(k); });
+    return conflicts;
+  }
+
   function getDisplayBoard() {
     if (mode === 'solution' && solutions.length > 0) return solutions[solIdx];
     return getPlacedCellMap();
@@ -374,8 +470,9 @@
     const targetRCs    = getTargetRCs();
     const displayBoard = getDisplayBoard();
     const placedMap    = getPlacedCellMap();
+    const conflictCells = mode === 'play' ? getConflictCells() : new Set();
     const usedIds      = new Set(Object.keys(placedPieces).map(Number));
-    const isWin        = mode === 'play' && usedIds.size === 10;
+    const isWin        = mode === 'play' && usedIds.size === 10 && conflictCells.size === 0;
 
     // Placement preview (works for both click-select and drag)
     const validPrev   = new Set();
@@ -427,6 +524,10 @@
         } else if (inInvalid) {
           cell.classList.add('cal-cell--preview-invalid');
           lbl.textContent = '';
+        } else if (conflictCells.has(k)) {
+          cell.classList.add('cal-cell--conflict');
+          lbl.textContent = '';
+          cell.style.cursor = 'grab';
         } else if (pid !== undefined) {
           cell.classList.add('cal-cell--placed');
           cell.style.background = PIECE_DEFS[pid].color;
@@ -445,8 +546,8 @@
 
     if (mode === 'solution' && solutions.length > 0) {
       solPanel.hidden = false;
-      const more      = solutions.length >= 500 ? '+' : ` of ${solutions.length}`;
-      solCount.textContent = `Solution ${solIdx + 1}${more}`;
+      const total     = solutions.length >= 100 ? '100+' : String(solutions.length);
+      solCount.textContent = `Solution ${solIdx + 1} of ${total}`;
       prevSolBtn.disabled  = solIdx === 0;
       nextSolBtn.disabled  = solIdx === solutions.length - 1;
     } else {
@@ -475,7 +576,7 @@
         if (!isBlocked) {
           cell.addEventListener('mouseenter', () => {
             if (drag.active) return; // drag handles its own hover
-            hoverCell = selectedPiece !== null ? [r, c] : null;
+            hoverCell = selectedPiece !== null ? [r - selectedAnchorR, c - selectedAnchorC] : null;
             renderBoard();
           });
           cell.addEventListener('mouseleave', () => {
@@ -484,18 +585,17 @@
             renderBoard();
           });
           cell.addEventListener('click', () => handleCellClick(r, c));
-          // Board pieces can be dragged off the board
+          // Board pieces: set pendingDrag on mousedown; actual drag starts after movement threshold
           cell.addEventListener('mousedown', e => {
             if (mode !== 'play') return;
             const pid = getPlacedCellMap()[`${r},${c}`];
             if (pid === undefined) return;
             e.preventDefault();
-            // Compute anchor: which square of the orient is at (r,c)?
             const orient = PIECE_ORIENTATIONS[pid][orientIdxs[pid]];
             const base0  = placedPieces[pid][0];
             const baseR  = base0.r - orient[0][0];
             const baseC  = base0.c - orient[0][1];
-            startDrag(pid, r - baseR, c - baseC, e.clientX, e.clientY);
+            pendingDrag = { pieceId: pid, anchorR: r - baseR, anchorC: c - baseC, startX: e.clientX, startY: e.clientY, fromBoard: true };
           });
           cell.addEventListener('touchstart', e => {
             if (mode !== 'play') return;
@@ -507,7 +607,7 @@
             const base0  = placedPieces[pid][0];
             const baseR  = base0.r - orient[0][0];
             const baseC  = base0.c - orient[0][1];
-            startDrag(pid, r - baseR, c - baseC, t.clientX, t.clientY);
+            pendingDrag = { pieceId: pid, anchorR: r - baseR, anchorC: c - baseC, startX: t.clientX, startY: t.clientY, fromBoard: true };
           }, { passive: false });
         }
         boardEl.appendChild(cell);
@@ -562,16 +662,8 @@
         canvas.appendChild(sq);
       });
 
-      // Click to select (alternative to drag)
+      // Mousedown/touchstart: set pendingDrag — actual drag starts after movement threshold
       if (!isUsed) {
-        canvas.addEventListener('click', e => {
-          if (drag.active) return;
-          selectedPiece = (selectedPiece === p.id) ? null : p.id;
-          renderPieceTray();
-          renderBoard();
-        });
-
-        // Drag from tray
         canvas.addEventListener('mousedown', e => {
           if (mode !== 'play') return;
           e.preventDefault();
@@ -579,7 +671,7 @@
           const mx   = e.clientX - rect.left - 2;
           const my   = e.clientY - rect.top  - 2;
           const anchorSq = findClosestSquare(orient, Math.floor(my / SQ), Math.floor(mx / SQ));
-          startDrag(p.id, anchorSq[0], anchorSq[1], e.clientX, e.clientY);
+          pendingDrag = { pieceId: p.id, anchorR: anchorSq[0], anchorC: anchorSq[1], startX: e.clientX, startY: e.clientY };
         });
 
         canvas.addEventListener('touchstart', e => {
@@ -590,7 +682,7 @@
           const mx   = t.clientX - rect.left - 2;
           const my   = t.clientY - rect.top  - 2;
           const anchorSq = findClosestSquare(orient, Math.floor(my / SQ), Math.floor(mx / SQ));
-          startDrag(p.id, anchorSq[0], anchorSq[1], t.clientX, t.clientY);
+          pendingDrag = { pieceId: p.id, anchorR: anchorSq[0], anchorC: anchorSq[1], startX: t.clientX, startY: t.clientY };
         }, { passive: false });
       }
 
@@ -600,11 +692,14 @@
       rotBtn.title       = 'Rotate (→ or R key when piece is selected)';
       rotBtn.disabled    = isUsed;
       rotBtn.setAttribute('aria-label', `Rotate piece ${p.id + 1}`);
+      // Prevent mousedown bubbling so it never triggers pendingDrag on the canvas
+      rotBtn.addEventListener('mousedown', e => e.stopPropagation());
+      rotBtn.addEventListener('touchstart', e => e.stopPropagation(), { passive: true });
       rotBtn.addEventListener('click', e => {
         e.stopPropagation();
-        if (isUsed || drag.active) return;
+        if (isUsed || drag.active || pendingDrag) return;
         orientIdxs[p.id] = (orientIdxs[p.id] + 1) % PIECE_ORIENTATIONS[p.id].length;
-        // Rebuild ghost if currently dragging this piece
+        if (selectedPiece === p.id) { selectedAnchorR = 0; selectedAnchorC = 0; }
         renderPieceTray();
         renderBoard();
       });
@@ -617,6 +712,7 @@
 
   // ── Click-to-place handler ────────────────────────────────────────────────────
   function handleCellClick(r, c) {
+    if (suppressBoardClick) { suppressBoardClick = false; return; }
     if (mode !== 'play' || drag.active) return;
     const k         = `${r},${c}`;
     const targetRCs = getTargetRCs();
@@ -624,21 +720,17 @@
 
     const placedMap = getPlacedCellMap();
 
-    // Piece selected — place it, displacing any pieces already in the way
+    // Piece selected — place it (overlapping allowed, conflicts shown in red)
     if (selectedPiece !== null) {
-      const orient       = PIECE_ORIENTATIONS[selectedPiece][orientIdxs[selectedPiece]];
-      const placed       = orient.map(([pr, pc]) => ({ r: r + pr, c: c + pc }));
-      const conflictPids = new Set();
-      placed.forEach(({ r: pr, c: pc }) => {
-        const pid = placedMap[`${pr},${pc}`];
-        if (pid !== undefined) conflictPids.add(pid);
-      });
+      const orient  = PIECE_ORIENTATIONS[selectedPiece][orientIdxs[selectedPiece]];
+      const baseR   = r - selectedAnchorR;
+      const baseC   = c - selectedAnchorC;
+      const placed  = orient.map(([pr, pc]) => ({ r: baseR + pr, c: baseC + pc }));
       const isValid = placed.every(({ r: pr, c: pc }) => {
         const pk = `${pr},${pc}`;
         return ALL_VALID.has(pk) && !PERM_BLOCKED.has(pk) && !targetRCs.has(pk);
       });
       if (isValid) {
-        conflictPids.forEach(cid => { delete placedPieces[cid]; });
         placedPieces[selectedPiece] = placed;
         selectedPiece = null;
         renderBoard();
@@ -663,6 +755,8 @@
     if (drag.active) endDrag();
     placedPieces         = {};
     selectedPiece        = null;
+    selectedAnchorR      = 0;
+    selectedAnchorC      = 0;
     solutions            = [];
     solIdx               = 0;
     mode                 = 'play';
