@@ -1260,6 +1260,11 @@ ul {
   content: '↑';
 }
 
+.project-cards-grid--single {
+  grid-template-columns: minmax(0, 560px);
+  justify-content: center;
+}
+
 .project-card-link {
   font-size: 0.82rem;
   font-weight: 600;
