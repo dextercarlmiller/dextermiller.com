@@ -1260,6 +1260,18 @@ ul {
   content: '↑';
 }
 
+.project-card-link {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--blue);
+  text-decoration: none;
+  align-self: flex-start;
+}
+
+.project-card-link:hover {
+  text-decoration: underline;
+}
+
 .tech-tags {
   display: flex;
   gap: 5px;
