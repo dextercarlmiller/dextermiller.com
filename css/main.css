@@ -191,11 +191,6 @@ ul {
   opacity: 0.8;
 }
 
-/* Show light logo by default, dark logo in dark mode */
-.nav-logo-dark { display: none; }
-.nav-logo-light { display: block; }
-[data-theme="dark"] .nav-logo-dark { display: block; }
-[data-theme="dark"] .nav-logo-light { display: none; }
 
 .nav-links {
   display: flex;
